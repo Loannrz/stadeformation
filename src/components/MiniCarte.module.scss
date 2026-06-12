@@ -1,0 +1,25 @@
+@use '../styles/variables' as *;
+
+.wrap {
+  width: 100%;
+  max-width: 280px;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.active {
+  fill: $color-primary;
+  stroke: $color-bg;
+  stroke-width: 1.5;
+  opacity: 0.9;
+}
+
+.inactive {
+  fill: $color-surface-2;
+  stroke: $color-bg;
+  stroke-width: 1.5;
+}

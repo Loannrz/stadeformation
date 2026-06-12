@@ -1,0 +1,116 @@
+@use '../styles/variables' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $color-nav-bg;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid $color-border;
+  box-shadow: $color-nav-shadow;
+
+  @media (min-width: $bp-md) {
+    padding: 16px 40px;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  img {
+    filter: $color-logo-filter;
+    opacity: $color-logo-opacity;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+}
+
+.formationContext {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+  padding: 0 12px;
+
+  @media (min-width: $bp-md) {
+    align-items: center;
+    text-align: center;
+    gap: 2px;
+    padding: 0 16px;
+  }
+}
+
+.formationCert {
+  display: none;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-primary;
+
+  @media (min-width: $bp-md) {
+    display: block;
+  }
+}
+
+.formationName {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: $color-text;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+
+  @media (min-width: $bp-md) {
+    font-size: 0.875rem;
+  }
+}
+
+.formationLieux {
+  font-size: 0.68rem;
+  color: $color-text-muted;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+
+  @media (min-width: $bp-md) {
+    font-size: 0.72rem;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cta {
+  display: none;
+  padding: 8px 20px;
+  white-space: nowrap;
+  background: $color-primary;
+  color: $color-on-primary;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.2s;
+
+  @media (min-width: $bp-md) {
+    display: block;
+  }
+
+  &:hover {
+    background: $color-secondary;
+  }
+}

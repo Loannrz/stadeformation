@@ -1,0 +1,313 @@
+[
+  {
+    "id": "bpjeps-mapst",
+    "nom": "BPJEPS Activités Physiques pour Tous (MAPST)",
+    "certification": "BPJEPS — Brevet Professionnel de la Jeunesse, de l'Éducation Populaire et du Sport — Niveau 4",
+    "regions": [
+      "Nouvelle-Aquitaine (Bordeaux, Pont-Du-Casse/Agen)",
+      "Île-de-France (Cergy, Courbevoie, Drancy, Nanterre, Paris 7ème, Arpajon/Égly)",
+      "Corse (Ajaccio)",
+      "Normandie (Mortagne-Au-Perche)"
+    ],
+    "dates_inscription": "Sessions septembre 2026",
+    "date_limite_inscription": "11/08/2026",
+    "date_debut": "11/09/2026",
+    "duree": "1 an",
+    "rythme": "Alternance",
+    "prerequis": [
+      "Être majeur",
+      "Brevet de secourisme (PSC, SST ou équivalent)",
+      "Certificat médical de moins d'un an",
+      "TEP BPJEPS MAPST validés",
+      "Attestation JDC (ressortissants français)"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/bpjeps-educateur-sportif-activites-physiques-pour-tous/bordeaux",
+    "description": "Formation pour devenir éducateur ou éducatrice sportif(ve) professionnel(le) diplômé(e). La mention MAPST (Multi-Activités Physiques et Sportives pour Tous) permet d'encadrer des activités physiques et sportives variées. Accessible en alternance ou en formation initiale."
+  },
+  {
+    "id": "bpjeps-mapst-siblu",
+    "nom": "BPJEPS MAPST en partenariat avec SIBLU",
+    "certification": "BPJEPS — Niveau 4",
+    "regions": [
+      "Nouvelle-Aquitaine (Bordeaux)"
+    ],
+    "dates_inscription": "Janvier 2027",
+    "date_limite_inscription": "03/11/2026",
+    "date_debut": "05/01/2027",
+    "duree": "13 mois",
+    "rythme": "Alternance",
+    "prerequis": [
+      "Être majeur",
+      "Brevet de secourisme (PSC, SST ou équivalent)",
+      "Certificat médical de moins d'un an",
+      "TEP BPJEPS MAPST validés",
+      "Attestation JDC (ressortissants français)"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/bpjeps-MAPS-avec-siblu/bordeaux",
+    "description": "Formation BPJEPS en partenariat avec les villages vacances SIBLU. Permet d'intégrer directement un réseau de villages vacances comme animateur sportif diplômé. Formation en alternance avec mise en situation professionnelle garantie."
+  },
+  {
+    "id": "bpjeps-aquatique",
+    "nom": "BPJEPS Activités Aquatiques et de la Natation",
+    "certification": "BPJEPS — Niveau 4",
+    "regions": [
+      "Nouvelle-Aquitaine (Bordeaux)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": null,
+    "date_debut": null,
+    "duree": "12 mois",
+    "rythme": "Alternance",
+    "prerequis": [
+      "Être majeur",
+      "Brevet de secourisme (PSC, SST ou équivalent)",
+      "Admission BNSSA (sauveteur nageur)",
+      "400m natation libre en ≤ 7min 40s",
+      "Certificat médical de moins d'un an",
+      "Contrat d'apprentissage SIBLU + mobilité géographique"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/bpjeps-educateur-sportif-activites-aquatiques-et-de-la-natation/bordeaux",
+    "description": "Formation spécialisée pour encadrer les activités aquatiques et la natation. Prépare au métier de maître-nageur sauveteur et éducateur sportif en milieu aquatique. Diplôme reconnu d'État de niveau 4."
+  },
+  {
+    "id": "bpjeps-forme",
+    "nom": "BPJEPS Activités de la Forme",
+    "certification": "BPJEPS — Niveau 4",
+    "regions": [
+      "Île-de-France (Courbevoie)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": "12/09/2026",
+    "date_debut": "12/10/2026",
+    "duree": "1 an",
+    "rythme": "Alternance (jeudis et vendredis)",
+    "prerequis": [
+      "Être majeur",
+      "Brevet de secourisme (PSC, SST ou équivalent)",
+      "TEP BPJEPS validés",
+      "Certificat médical de moins d'un an",
+      "Attestation JDC (ressortissants français)"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/bpjeps-activites-de-la-forme/courbevoie",
+    "description": "Formation pour encadrer des activités de fitness, musculation et bien-être en salle de sport. Diplôme d'État permettant d'exercer en tant que coach sportif ou animateur en club de forme."
+  },
+  {
+    "id": "bpjeps-basket",
+    "nom": "BPJEPS Éducateur Sportif — Mention Basket-ball",
+    "certification": "BPJEPS — Niveau 4",
+    "regions": [
+      "Île-de-France (Cergy, Courbevoie, Nanterre)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": "21/08/2026",
+    "date_debut": "21/09/2026",
+    "duree": "12 mois",
+    "rythme": "Alternance",
+    "prerequis": [
+      "Être majeur",
+      "Brevet de secourisme (PSC, SST ou équivalent)",
+      "Certificat médical de moins d'un an",
+      "Pratique basket-ball au moins une saison",
+      "Attestation JDC (ressortissants français)"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/bpjeps-educateur-sportif-mention-basket-ball/cergy",
+    "description": "Formation spécialisée pour encadrer et entraîner des équipes de basket-ball. Prépare au métier d'éducateur sportif en club ou association. Disponible sur trois sites en Île-de-France."
+  },
+  {
+    "id": "bpjeps-rugby",
+    "nom": "BPJEPS Éducateur Sportif — Rugby à XV",
+    "certification": "BPJEPS — Niveau 4",
+    "regions": [
+      "Île-de-France (Courbevoie)",
+      "PACA (Toulon)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": "21/08/2026",
+    "date_debut": "21/09/2026",
+    "duree": "12 mois",
+    "rythme": "Alternance",
+    "prerequis": [
+      "Être majeur",
+      "Brevet de secourisme (PSC, SST ou équivalent)",
+      "Certificat médical de moins d'un an",
+      "80h animation rugby XV ou une saison en compétition",
+      "Attestation JDC (ressortissants français)"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/bpjeps-educateur-sportif-rugby-a-xv/courbevoie",
+    "description": "Formation pour devenir éducateur sportif spécialisé dans le rugby à XV. Permet d'encadrer des équipes en club ou en structure associative. Formation disponible à Courbevoie et Toulon."
+  },
+  {
+    "id": "tfp-cdssa",
+    "nom": "TFP Chargé de Développement d'une Structure Sportive Associative (CDSSA)",
+    "certification": "Titre à Finalité Professionnelle (TFP) — Niveau 5",
+    "regions": [
+      "Corse (Ajaccio)",
+      "Nouvelle-Aquitaine (Bordeaux, Pont-Du-Casse/Agen)",
+      "PACA (Toulon)"
+    ],
+    "dates_inscription": "Septembre et octobre 2026",
+    "date_limite_inscription": "05/09/2026",
+    "date_debut": "05/10/2026",
+    "duree": "12 mois",
+    "rythme": "Alternance (+ 60% du temps en entreprise)",
+    "prerequis": [
+      "Être majeur (18 ans)",
+      "Diplôme niveau 4 (BAC, BPJEPS…)",
+      "1 an d'expérience en association sportive",
+      "Brevet de secourisme valide",
+      "Pièce d'identité en cours de validité"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/charge-de-developpement-dune-structure-sportive-associative/bordeaux",
+    "description": "Formation orientée management sportif : gestion de clubs et structures sportives, élaboration d'événements, gestion budgétaire. Idéale pour gérer une association ou un club sportif en tant que professionnel."
+  },
+  {
+    "id": "tp-animateur-siblu",
+    "nom": "Titre Pro Animateur Loisirs Tourisme — partenariat SIBLU",
+    "certification": "Titre Professionnel Animateur — Niveau 4",
+    "regions": [
+      "Nouvelle-Aquitaine (Bordeaux)"
+    ],
+    "dates_inscription": "Février 2027",
+    "date_limite_inscription": null,
+    "date_debut": "Février 2027",
+    "duree": "6 mois",
+    "rythme": "Alternance (Villages Vacances SIBLU)",
+    "prerequis": [
+      "Être majeur",
+      "Brevet de secourisme (PSC, SST ou équivalent)",
+      "Certificat médical de moins d'un an",
+      "Casier judiciaire B3 vierge",
+      "Réussite aux tests de sélection",
+      "Mobilité géographique requise"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/cpjeps-animateur-d-activites-et-de-vie-quotidienne-avec-siblu/bordeaux",
+    "description": "Formation en partenariat avec les villages vacances SIBLU pour devenir animateur loisirs et tourisme. Formation en alternance avec intégration directe dans le réseau de camping et villages vacances."
+  },
+  {
+    "id": "bpjeps-animation-socio",
+    "nom": "BPJEPS Animation Socio-Éducative ou Culturelle",
+    "certification": "BPJEPS — Niveau 4",
+    "regions": [
+      "Île-de-France (Courbevoie)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": null,
+    "date_debut": null,
+    "duree": "1 an",
+    "rythme": "Alternance",
+    "prerequis": [
+      "Être majeur",
+      "Brevet de secourisme (PSC, SST ou équivalent)",
+      "Certificat médical de moins d'un an",
+      "Attestation JDC (ressortissants français)"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/bpjeps-animateur-loisirs-tout-puublic/courbevoie",
+    "description": "Formation pour animer des activités socio-éducatives ou culturelles auprès de tous publics. Prépare au métier d'animateur polyvalent en centre socioculturel, MJC ou collectivité."
+  },
+  {
+    "id": "dejeps-animation",
+    "nom": "DEJEPS Spécialité Animation Socio-Éducative ou Culturelle — Coordination de Projets",
+    "certification": "DEJEPS — Diplôme d'État de la Jeunesse, de l'Éducation Populaire et du Sport — Niveau 5",
+    "regions": [
+      "Île-de-France (Cergy, Paris 7ème)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": "19/09/2026",
+    "date_debut": "19/10/2026",
+    "duree": "12 mois",
+    "rythme": "Alternance (700h en organisme)",
+    "prerequis": [
+      "Diplôme niveau 4 en animation, sport ou intervention sociale",
+      "ou diplôme niveau 5 minimum",
+      "ou niveau 4 + 6 mois d'expérience en animation",
+      "ou 24 mois d'activités professionnelles/bénévoles (≥ 1600h)"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/dejeps-specialite-animation-socio-educative-ou-culturelle/cergy",
+    "description": "Formation de niveau 5 pour coordonner et piloter des projets d'animation socio-éducative. Permet d'accéder à des postes de direction ou de coordination dans le secteur socioculturel et sportif."
+  },
+  {
+    "id": "tp-animateur-jet-tours-fitness",
+    "nom": "Titre Pro Animateur Loisirs Tourisme Fitness — Jet Tours & Club Eldorador",
+    "certification": "Titre Professionnel Animateur — Niveau 4",
+    "regions": [
+      "Nouvelle-Aquitaine (Dax)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": null,
+    "date_debut": "Rentrée 2026",
+    "duree": "9 mois",
+    "rythme": "Alternance (clubs hôtels Jet Tours)",
+    "prerequis": [
+      "Aucun diplôme minimum requis",
+      "Être majeur (18 ans)",
+      "Passeport valide",
+      "Certificat médical",
+      "Casier judiciaire B3 vierge",
+      "Sélection NG TRAVEL (tests + entretien)",
+      "Mobilité géographique requise"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/titre-pro-animateur-loisirs-tourisme-fitness-avec-jet-tours-club-eldorador/dax",
+    "description": "Formation animateur spécialisée fitness en partenariat avec Jet Tours et Club Eldorador. Prépare à encadrer des activités de remise en forme dans les clubs de vacances du groupe."
+  },
+  {
+    "id": "tp-animateur-jet-tours-polyvalence",
+    "nom": "Titre Pro Animateur Loisirs Tourisme Polyvalence — Jet Tours & Club Eldorador",
+    "certification": "Titre Professionnel Animateur — Niveau 4",
+    "regions": [
+      "Nouvelle-Aquitaine (Dax)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": null,
+    "date_debut": "Rentrée 2026",
+    "duree": "9 mois",
+    "rythme": "Alternance (clubs hôtels Jet Tours)",
+    "prerequis": [
+      "Moins de 29 ans (contrat d'apprentissage)",
+      "Passeport valide",
+      "Certificat médical",
+      "Casier judiciaire B3 vierge",
+      "Mobilité géographique requise"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/titre-pro-animateur-loisirs-tourisme-polyvalence-polyvalence/dax",
+    "description": "Formation animateur polyvalent en partenariat avec Jet Tours et Club Eldorador. Permet d'animer des activités variées (sportives, culturelles, récréatives) dans les clubs de vacances du groupe."
+  },
+  {
+    "id": "cert-directeur-acm",
+    "nom": "Certificat Complémentaire Directeur d'Accueil Collectif de Mineurs (ACM)",
+    "certification": "Certificat Complémentaire — BAFA/BAFD",
+    "regions": [
+      "Nouvelle-Aquitaine (Bordeaux)"
+    ],
+    "dates_inscription": null,
+    "date_limite_inscription": "28/08/2026",
+    "date_debut": "14/09/2026",
+    "duree": "105h + 18 jours de stage",
+    "rythme": "Formation courte (théorie + terrain)",
+    "prerequis": [
+      "BPJEPS ou DEJEPS (toute spécialité sauf loisirs tous publics)",
+      "28 jours d'expérience animation en ACM (5 dernières années)",
+      "PSC1 ou AFPS (premiers secours)"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/certificat-complementaire-directeur-d-un-accueil-collectif-de-mineurs/bordeaux",
+    "description": "Certificat complémentaire permettant d'assumer la direction d'un accueil collectif de mineurs (colonies, centres de loisirs). Formation courte accessible aux titulaires d'un diplôme professionnel animation ou sport."
+  },
+  {
+    "id": "tep-bpjeps-mapst",
+    "nom": "TEP — Tests d'Exigences Préalables BPJEPS MAPST",
+    "certification": "Épreuves préalables (non diplômantes)",
+    "regions": [
+      "Nouvelle-Aquitaine (Bordeaux)"
+    ],
+    "dates_inscription": "10 septembre 2026 et 12 novembre 2026",
+    "date_limite_inscription": "11/08/2026",
+    "date_debut": "10/09/2026",
+    "duree": "1 journée",
+    "rythme": "Épreuves de sélection",
+    "prerequis": [
+      "Certificat médical de moins d'un an",
+      "Pièce d'identité valide"
+    ],
+    "url_inscription": "https://stadeformation.fr/formations/tep-bpjeps-apt/bordeaux",
+    "description": "Épreuves obligatoires à valider avant l'entrée en formation BPJEPS MAPST. Comprend des tests physiques et des épreuves de sélection. Deux sessions disponibles à Bordeaux en 2026."
+  }
+]

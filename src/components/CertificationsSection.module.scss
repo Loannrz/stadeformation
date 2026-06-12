@@ -1,0 +1,82 @@
+@use '../styles/variables' as *;
+
+.section {
+  @include section-padding;
+  max-width: $max-width;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $color-primary;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 64px;
+  line-height: 1.15;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  @media (min-width: $bp-sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: $bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.badge {
+  padding: 28px 20px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 16px;
+  box-shadow: $color-card-shadow;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: rgba(255, 107, 0, 0.35);
+  }
+}
+
+.level {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(255, 107, 0, 0.15);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $color-primary;
+}
+
+.name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.desc {
+  font-size: 0.75rem;
+  color: $color-text-muted;
+  line-height: 1.5;
+}

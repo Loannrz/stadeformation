@@ -1,0 +1,222 @@
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+import franceMap from '@svg-maps/france.regions';
+import { Formation, formations, getFormationsByRegion } from '@/lib/formations';
+import FormationCard from './FormationCard';
+import styles from './CarteRegions.module.scss';
+
+/** Clé de recherche pour getFormationsByRegion (doit matcher le début des chaînes dans formations.json) */
+const REGION_SEARCH_KEYS: Record<string, string> = {
+  naq: 'Nouvelle-Aquitaine',
+  idf: 'Île-de-France',
+  cor: 'Corse',
+  nor: 'Normandie',
+  pac: 'PACA',
+};
+
+/** Préfixes pour détecter si une région a des formations */
+const REGION_PREFIXES: Record<string, string[]> = {
+  naq: ['nouvelle-aquitaine'],
+  idf: ['île-de-france', 'ile-de-france'],
+  cor: ['corse'],
+  nor: ['normandie'],
+  pac: ['paca', 'provence'],
+};
+
+function regionHasFormations(regionId: string): boolean {
+  const prefixes = REGION_PREFIXES[regionId];
+  if (!prefixes) return false;
+  return formations.some((f) =>
+    f.regions.some((r) => {
+      const lower = r.toLowerCase();
+      return prefixes.some((p) => lower.startsWith(p));
+    })
+  );
+}
+
+function filterFormations(items: Formation[], query: string): Formation[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return items;
+
+  return items.filter((f) => {
+    const diploma = f.certification.split('—')[0].trim().toLowerCase();
+    return (
+      f.nom.toLowerCase().includes(q) ||
+      f.certification.toLowerCase().includes(q) ||
+      diploma.includes(q)
+    );
+  });
+}
+
+export default function CarteRegions() {
+  const [activeRegion, setActiveRegion] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const activeLocation = franceMap.locations.find((l) => l.id === activeRegion);
+  const searchKey = activeRegion ? REGION_SEARCH_KEYS[activeRegion] : null;
+  const panelFormations = searchKey ? getFormationsByRegion(searchKey) : [];
+  const filteredFormations = useMemo(
+    () => filterFormations(panelFormations, searchQuery),
+    [panelFormations, searchQuery]
+  );
+  const showSearch = panelFormations.length > 2;
+
+  useEffect(() => {
+    setSearchQuery('');
+  }, [activeRegion]);
+
+  return (
+    <section className={styles.section} id="carte">
+      <div className={styles.inner}>
+        <p className={styles.label}>Carte des formations</p>
+        <h2 className={styles.title}>Où vous former ?</h2>
+        <p className={styles.hint}>Cliquez sur une région pour voir les formations disponibles</p>
+
+        <div className={styles.layoutCard}>
+          <div className={styles.mapWrap}>
+            <div className={styles.mapGlow} aria-hidden="true" />
+            <div className={styles.mapCanvas}>
+              <svg
+                viewBox={franceMap.viewBox}
+                className={styles.svg}
+                role="img"
+                aria-label="Carte des régions de France"
+              >
+                <defs>
+                  <linearGradient id="regionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#E65C23" />
+                    <stop offset="50%" stopColor="#FF6B00" />
+                    <stop offset="100%" stopColor="#FFD700" />
+                  </linearGradient>
+                  <linearGradient id="regionGradientHover" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#F58220" />
+                    <stop offset="50%" stopColor="#FF8C00" />
+                    <stop offset="100%" stopColor="#FFDB15" />
+                  </linearGradient>
+                  <linearGradient id="regionGradientActive" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#FF6B00" />
+                    <stop offset="100%" stopColor="#FFDB15" />
+                  </linearGradient>
+                </defs>
+                {franceMap.locations.map((location) => {
+                  const hasF = regionHasFormations(location.id);
+                  const isActive = activeRegion === location.id;
+                  return (
+                    <path
+                      key={location.id}
+                      id={location.id}
+                      d={location.path}
+                      className={[
+                        styles.region,
+                        hasF ? styles.hasFormations : styles.noFormations,
+                        isActive ? styles.active : '',
+                      ].join(' ')}
+                      onClick={() =>
+                        setActiveRegion(isActive ? null : location.id)
+                      }
+                      role="button"
+                      aria-label={`${location.name}${hasF ? ' — formations disponibles' : ''}`}
+                      aria-pressed={isActive}
+                    />
+                  );
+                })}
+              </svg>
+            </div>
+            <div className={styles.mapLegend}>
+              <span className={styles.legendItem}>
+                <span className={`${styles.legendDot} ${styles.legendDotActive}`} />
+                Régions avec formations
+              </span>
+              <span className={styles.legendItem}>
+                <span className={`${styles.legendDot} ${styles.legendDotInactive}`} />
+                Autres régions
+              </span>
+            </div>
+          </div>
+
+          <div className={styles.panel}>
+            {!activeLocation ? (
+              <div className={styles.panelEmpty}>
+                <span className={styles.panelEmptyIcon} aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M12 21s7-4.5 7-11a7 7 0 10-14 0c0 6.5 7 11 7 11z"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinejoin="round"
+                    />
+                    <circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+                  </svg>
+                </span>
+                <p className={styles.panelEmptyTitle}>Choisis une région</p>
+                <p className={styles.panelEmptyHint}>
+                  Clique sur une zone orange de la carte pour découvrir les formations disponibles.
+                </p>
+              </div>
+            ) : (
+              <>
+                <div className={styles.panelHead}>
+                  <div>
+                    <p className={styles.panelLabel}>Région sélectionnée</p>
+                    <h3 className={styles.panelTitle}>{activeLocation.name}</h3>
+                  </div>
+                  {panelFormations.length > 0 && (
+                    <span className={styles.panelCount}>
+                      {panelFormations.length} formation{panelFormations.length > 1 ? 's' : ''}
+                    </span>
+                  )}
+                </div>
+                {panelFormations.length === 0 && (
+                  <p className={styles.panelNoFormations}>Aucune formation disponible dans cette région.</p>
+                )}
+                {showSearch && (
+                  <div className={styles.panelSearch}>
+                    <label className={styles.searchLabel} htmlFor="formation-search">
+                      Rechercher
+                    </label>
+                    <div className={styles.searchField}>
+                      <svg
+                        className={styles.searchIcon}
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
+                        <path d="M20 20L16.5 16.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                      <input
+                        id="formation-search"
+                        type="search"
+                        className={styles.searchInput}
+                        placeholder="Formation ou diplôme (BPJEPS, DEJEPS…)"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        aria-label="Rechercher une formation ou un diplôme"
+                      />
+                    </div>
+                  </div>
+                )}
+                {panelFormations.length > 0 && (
+                  <div className={styles.cards}>
+                    {filteredFormations.length > 0 ? (
+                      filteredFormations.map((f) => (
+                        <FormationCard key={f.id} formation={f} />
+                      ))
+                    ) : (
+                      <p className={styles.noResults}>
+                        Aucune formation ne correspond à « {searchQuery} »
+                      </p>
+                    )}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
