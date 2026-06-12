@@ -39,7 +39,7 @@ export default function MentionsLegalesPage() {
                 Le site <a href="https://stadeformation.fr">http://stadeformation.fr</a> est la
                 propriété de la SARL Stade Formation au Capital Social de 1500&nbsp;€. Stade Formation
                 CFA (Centre de Formation d&apos;apprentis) et OF (Organisme de Formation)
-                27 avenue Virecourt 33370 ARTIGUES-PRÈS-BORDEAUX — 09 88 08 53 78
+                27 avenue Virecourt 33370 ARTIGUES-PRÈS-BORDEAUX - 09 88 08 53 78
               </p>
               <p>La directrice de la publication du présent site internet est Madame Alexia BODIN.</p>
               <p>
@@ -67,7 +67,7 @@ export default function MentionsLegalesPage() {
                 ))}
               </ul>
 
-              <h3>1 — Acceptation</h3>
+              <h3>1 - Acceptation</h3>
               <p>
                 Les présentes Conditions Générales d&apos;Utilisation du site{' '}
                 <a href="https://stadeformation.fr">https://stadeformation.fr</a> déterminent les
@@ -76,7 +76,7 @@ export default function MentionsLegalesPage() {
                 Site et s&apos;engage à les respecter.
               </p>
 
-              <h3>2 — Contenu du site</h3>
+              <h3>2 - Contenu du site</h3>
               <p>
                 On entend par Contenu du site&nbsp;: la structure générale du site, la charte
                 graphique, l&apos;ensemble des contenus diffusés sur ce Site (images, articles,
@@ -99,7 +99,7 @@ export default function MentionsLegalesPage() {
                 responsabilité des personnes qui s&apos;y sont livrées.
               </p>
 
-              <h3>3 — Licence d&apos;utilisation du contenu du site</h3>
+              <h3>3 - Licence d&apos;utilisation du contenu du site</h3>
               <p>
                 Du seul fait de sa connexion au Site, l&apos;utilisateur reconnaît accepter de Stade
                 Formation une licence d&apos;usage du Contenu du site strictement limitée aux
@@ -134,14 +134,14 @@ export default function MentionsLegalesPage() {
                 </li>
               </ul>
 
-              <h3>4 — Accès gratuit à l&apos;espace personnalisable</h3>
+              <h3>4 - Accès gratuit à l&apos;espace personnalisable</h3>
               <p>
                 Mon espace perso est un espace faisant partie de l&apos;écosystème{' '}
                 <a href="https://stadeformation.fr">https://stadeformation.fr</a>, et est réservé
                 aux internautes.
               </p>
 
-              <h4>4.1 — Dispositions générales</h4>
+              <h4>4.1 - Dispositions générales</h4>
               <p>
                 Toute personne qui souhaite s&apos;inscrire à Mon espace doit remplir un formulaire
                 d&apos;inscription. Au moment de son inscription, l&apos;utilisateur s&apos;engage
@@ -155,7 +155,7 @@ export default function MentionsLegalesPage() {
                 tout moment, notamment en cas d&apos;arrêt de l&apos;espace Mon Espace.
               </p>
 
-              <h4>4.2 — Dispositions spécifiques aux mineurs</h4>
+              <h4>4.2 - Dispositions spécifiques aux mineurs</h4>
               <p>
                 Toute utilisation de Mon Espace par une personne mineure est effectuée sous
                 l&apos;entière responsabilité des titulaires de l&apos;autorité parentale sur les
@@ -166,17 +166,17 @@ export default function MentionsLegalesPage() {
                 convient pour son enfant.
               </p>
 
-              <h3>5 — Droit d&apos;accès et de rectification</h3>
+              <h3>5 - Droit d&apos;accès et de rectification</h3>
               <p>Consulter la Politique de confidentialité.</p>
 
-              <h3>6 — Cookies</h3>
+              <h3>6 - Cookies</h3>
               <p>
                 Des cookies sont intégrés au site pour réaliser des statistiques de visite et
                 permettre l&apos;analyse d&apos;erreur applicatives. Pour plus de renseignements,
                 lire la politique de cookies.
               </p>
 
-              <h3>7 — Liens hypertextes</h3>
+              <h3>7 - Liens hypertextes</h3>
               <p>
                 Les liens hypertextes mis en place dans le cadre du présent Site Web en direction
                 d&apos;autres sites présents sur le réseau Internet, ne sauraient engager la
@@ -187,13 +187,13 @@ export default function MentionsLegalesPage() {
                 <a href="mailto:contact@stadeformation.fr">contact@stadeformation.fr</a>
               </p>
 
-              <h3>8 — Demande d&apos;autorisation de reproduction de tout ou partie du contenu du site</h3>
+              <h3>8 - Demande d&apos;autorisation de reproduction de tout ou partie du contenu du site</h3>
               <p>
                 Pour toute reproduction totale ou partielle du Contenu (images, articles, photos,
                 logos, marques, vidéos, interview, sons, textes, bases de données…) sur support
                 électronique (Web, intranet, CD-ROM…) ou sur support papier, une demande doit être
                 adressée par courrier ou e-mail à&nbsp;: STADE FORMATION, 27 avenue Virecourt,
-                33370 Artigues-Près-Bordeaux — E-mail&nbsp;:{' '}
+                33370 Artigues-Près-Bordeaux - E-mail&nbsp;:{' '}
                 <a href="mailto:contact@stadeformation.fr">contact@stadeformation.fr</a>
               </p>
               <p>
@@ -203,7 +203,7 @@ export default function MentionsLegalesPage() {
                 l&apos;adresse URL du site concerné, ainsi que ses coordonnées incluant son e-mail.
               </p>
 
-              <h3>9 — Virus, piratage et autres infractions</h3>
+              <h3>9 - Virus, piratage et autres infractions</h3>
               <p>
                 L&apos;utilisateur du site s&apos;interdit d&apos;introduire sciemment sur ce dernier
                 des virus, des chevaux de Troie, des bombes logiques ou tout autre élément de
@@ -218,7 +218,7 @@ export default function MentionsLegalesPage() {
                 lui est relié.
               </p>
 
-              <h3>10 — Responsabilité</h3>
+              <h3>10 - Responsabilité</h3>
               <p>
                 Dans la mesure de ce que la loi permet et des engagements expressément pris par Stade
                 Formation, sur le Site <a href="https://stadeformation.fr">https://stadeformation.fr</a>,

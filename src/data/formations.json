@@ -2,7 +2,7 @@
   {
     "id": "bpjeps-mapst",
     "nom": "BPJEPS Activités Physiques pour Tous (MAPST)",
-    "certification": "BPJEPS — Brevet Professionnel de la Jeunesse, de l'Éducation Populaire et du Sport — Niveau 4",
+    "certification": "BPJEPS - Brevet Professionnel de la Jeunesse, de l'Éducation Populaire et du Sport - Niveau 4",
     "regions": [
       "Nouvelle-Aquitaine (Bordeaux, Pont-Du-Casse/Agen)",
       "Île-de-France (Cergy, Courbevoie, Drancy, Nanterre, Paris 7ème, Arpajon/Égly)",
@@ -22,12 +22,122 @@
       "Attestation JDC (ressortissants français)"
     ],
     "url_inscription": "https://stadeformation.fr/formations/bpjeps-educateur-sportif-activites-physiques-pour-tous/bordeaux",
-    "description": "Formation pour devenir éducateur ou éducatrice sportif(ve) professionnel(le) diplômé(e). La mention MAPST (Multi-Activités Physiques et Sportives pour Tous) permet d'encadrer des activités physiques et sportives variées. Accessible en alternance ou en formation initiale."
+    "description": "Le BPJEPS « Multi-Activités Physiques ou Sportives pour Tous » forme des éducateurs sportifs capables d'animer des activités variées auprès de tous publics : sports collectifs, pleine nature, entretien corporel et jeux ludiques. Diplôme de niveau 4 reconnu par l'État, inscrit au RNCP.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "553h en centre",
+      "Alternance 35h",
+      "RNCP niveau 4",
+      "94 % de réussite"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Mettre en œuvre un projet d'animation s'inscrivant dans le projet de la structure"
+          },
+          {
+            "id": "2",
+            "value": "Encadrer tous publics, dans tous types de lieux"
+          },
+          {
+            "id": "3",
+            "value": "Concevoir une séance ou un cycle pédagogique adapté"
+          },
+          {
+            "id": "4",
+            "value": "Conduire des actions de découverte et d'initiation"
+          },
+          {
+            "id": "5",
+            "value": "Assurer la sécurité des pratiquants et des lieux"
+          },
+          {
+            "id": "6",
+            "value": "Participer au fonctionnement quotidien de la structure"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "12 mois en alternance — 553 heures en organisme de formation. Contrat d'apprentissage 35h, alternance centre / structure employeuse. Ruban pédagogique : entretien corporel, sports collectifs, tir à l'arc, course d'orientation, pleine nature."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Pédagogie active et expérientielle : pratiques sur le terrain, études de cas, jeux de rôles et accompagnement individualisé. Évaluation organisée par blocs de compétences."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Éducateur sportif en association, club, collectivité, structure de loisirs ou établissement scolaire. Poursuites possibles : DEJEPS, TFP CDSSA ou concours ETAPS. Taux d'obtention : 94 % (session 2024-2025)."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier en ligne + sélection sur dossier et entretien"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage avec un employeur"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours en centre + pratique en structure employeuse"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Évaluation par blocs de compétences et certification"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "bpjeps-mapst-siblu",
     "nom": "BPJEPS MAPST en partenariat avec SIBLU",
-    "certification": "BPJEPS — Niveau 4",
+    "certification": "BPJEPS - Niveau 4",
     "regions": [
       "Nouvelle-Aquitaine (Bordeaux)"
     ],
@@ -44,12 +154,118 @@
       "Attestation JDC (ressortissants français)"
     ],
     "url_inscription": "https://stadeformation.fr/formations/bpjeps-MAPS-avec-siblu/bordeaux",
-    "description": "Formation BPJEPS en partenariat avec les villages vacances SIBLU. Permet d'intégrer directement un réseau de villages vacances comme animateur sportif diplômé. Formation en alternance avec mise en situation professionnelle garantie."
+    "description": "Devenez éducateur sportif diplômé tout en intégrant le réseau de villages vacances SIBLU. Une formation MAPST en alternance avec une mise en situation professionnelle garantie dans l'univers du tourisme sportif.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Partenariat SIBLU",
+      "13 mois",
+      "Emploi en village vacances",
+      "Alternance"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Mettre en œuvre un projet d'animation s'inscrivant dans le projet de la structure"
+          },
+          {
+            "id": "2",
+            "value": "Encadrer tous publics, dans tous types de lieux"
+          },
+          {
+            "id": "3",
+            "value": "Concevoir une séance ou un cycle pédagogique adapté"
+          },
+          {
+            "id": "4",
+            "value": "Assurer la sécurité des pratiquants et des lieux"
+          },
+          {
+            "id": "5",
+            "value": "Intégrer la culture vacances et tourisme du réseau SIBLU"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "13 mois en alternance en partenariat avec les villages vacances SIBLU. Formation rémunérée en contrat d'apprentissage 35h. Mise en situation professionnelle garantie dans le réseau SIBLU dès le début du parcours."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Pédagogie active et expérientielle : pratiques sur le terrain, études de cas, jeux de rôles et accompagnement individualisé. Évaluation organisée par blocs de compétences."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Animateur sportif dans les villages vacances SIBLU. Poursuite possible vers DEJEPS ou TFP CDSSA. Réseau employeur intégré dès la signature du contrat."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier en ligne + sélection SIBLU"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage avec SIBLU"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours en centre + immersion village vacances"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Évaluation par blocs de compétences et certification"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "bpjeps-aquatique",
     "nom": "BPJEPS Activités Aquatiques et de la Natation",
-    "certification": "BPJEPS — Niveau 4",
+    "certification": "BPJEPS - Niveau 4",
     "regions": [
       "Nouvelle-Aquitaine (Bordeaux)"
     ],
@@ -67,12 +283,118 @@
       "Contrat d'apprentissage SIBLU + mobilité géographique"
     ],
     "url_inscription": "https://stadeformation.fr/formations/bpjeps-educateur-sportif-activites-aquatiques-et-de-la-natation/bordeaux",
-    "description": "Formation spécialisée pour encadrer les activités aquatiques et la natation. Prépare au métier de maître-nageur sauveteur et éducateur sportif en milieu aquatique. Diplôme reconnu d'État de niveau 4."
+    "description": "Spécialisez-vous dans l'encadrement des activités aquatiques et de la natation. Ce BPJEPS prépare au métier de maître-nageur sauveteur et éducateur sportif en milieu aquatique, en partenariat SIBLU.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Milieu aquatique",
+      "BNSSA requis",
+      "Partenariat SIBLU",
+      "Niveau 4"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Encadrer des activités aquatiques et la natation en toute sécurité"
+          },
+          {
+            "id": "2",
+            "value": "Assurer la surveillance et le sauvetage en milieu aquatique"
+          },
+          {
+            "id": "3",
+            "value": "Concevoir des séances de natation adaptées à tous les publics"
+          },
+          {
+            "id": "4",
+            "value": "Enseigner les gestes de premiers secours aquatiques"
+          },
+          {
+            "id": "5",
+            "value": "Intégrer un réseau professionnel aquatique (SIBLU)"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "12 mois en alternance — 608 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat avec les villages vacances SIBLU. Mobilité géographique requise."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Formation en milieu professionnel avec pratique intensive en piscine et espaces aquatiques. Évaluation par blocs de compétences incluant le BNSSA."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Maître-nageur sauveteur, éducateur sportif aquatique en piscine municipale, club sportif ou village vacances. Poursuite possible vers BEESAN ou DEJEPS."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Prérequis",
+            "sub": "Validation du BNSSA et des tests de natation"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage avec SIBLU"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours en centre + pratique en piscine"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification BPJEPS niveau 4"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "bpjeps-forme",
     "nom": "BPJEPS Activités de la Forme",
-    "certification": "BPJEPS — Niveau 4",
+    "certification": "BPJEPS - Niveau 4",
     "regions": [
       "Île-de-France (Courbevoie)"
     ],
@@ -89,12 +411,118 @@
       "Attestation JDC (ressortissants français)"
     ],
     "url_inscription": "https://stadeformation.fr/formations/bpjeps-activites-de-la-forme/courbevoie",
-    "description": "Formation pour encadrer des activités de fitness, musculation et bien-être en salle de sport. Diplôme d'État permettant d'exercer en tant que coach sportif ou animateur en club de forme."
+    "description": "Formez-vous au métier de coach sportif et animateur en salle de forme. Fitness, musculation, bien-être : encadrez des activités de la forme en club ou en centre de remise en forme.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Fitness & musculation",
+      "Rythme jeudi-vendredi",
+      "Courbevoie",
+      "Niveau 4"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Encadrer des activités de fitness, musculation et bien-être"
+          },
+          {
+            "id": "2",
+            "value": "Concevoir des programmes d'entraînement personnalisés"
+          },
+          {
+            "id": "3",
+            "value": "Gérer la sécurité et la prévention des blessures en salle"
+          },
+          {
+            "id": "4",
+            "value": "Animer des cours collectifs (zumba, pilates, HIIT...)"
+          },
+          {
+            "id": "5",
+            "value": "Accompagner la clientèle dans ses objectifs de santé"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "1 an en alternance — 553 heures en organisme de formation. Rythme jeudis et vendredis en centre, reste du temps en structure employeuse. Contrat d'apprentissage 35h."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Formation pratique intensive en salle de sport et plateau technique. Études de cas, coaching en situation réelle et évaluation par blocs de compétences."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Coach sportif, animateur forme en salle de sport, club fitness, spa ou collectivité. Poursuite possible vers DEJEPS ou spécialisations coach personnel."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier en ligne + TEP validés"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours jeudi-vendredi + pratique en salle"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification BPJEPS niveau 4"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "bpjeps-basket",
-    "nom": "BPJEPS Éducateur Sportif — Mention Basket-ball",
-    "certification": "BPJEPS — Niveau 4",
+    "nom": "BPJEPS Éducateur Sportif - Mention Basket-ball",
+    "certification": "BPJEPS - Niveau 4",
     "regions": [
       "Île-de-France (Cergy, Courbevoie, Nanterre)"
     ],
@@ -111,12 +539,118 @@
       "Attestation JDC (ressortissants français)"
     ],
     "url_inscription": "https://stadeformation.fr/formations/bpjeps-educateur-sportif-mention-basket-ball/cergy",
-    "description": "Formation spécialisée pour encadrer et entraîner des équipes de basket-ball. Prépare au métier d'éducateur sportif en club ou association. Disponible sur trois sites en Île-de-France."
+    "description": "Devenez éducateur sportif spécialisé basket-ball. Encadrez et entraînez des équipes en club ou en association sur trois sites en Île-de-France : Cergy, Courbevoie et Nanterre.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Mention basket",
+      "3 sites IDF",
+      "Entraînement club",
+      "Niveau 4"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Encadrer et entraîner des équipes de basket-ball"
+          },
+          {
+            "id": "2",
+            "value": "Concevoir des séances techniques et tactiques adaptées"
+          },
+          {
+            "id": "3",
+            "value": "Animer et gérer un groupe de pratiquants de tous niveaux"
+          },
+          {
+            "id": "4",
+            "value": "Assurer la sécurité et la prévention des blessures"
+          },
+          {
+            "id": "5",
+            "value": "Participer à la vie associative du club"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "12 mois en alternance — 610 heures en organisme de formation. Contrat d'apprentissage 35h, 70 % du temps en structure employeuse. Trois sites disponibles : Cergy, Courbevoie et Nanterre."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Pratique sur le terrain, analyse vidéo, entraînements supervisés et modules tactiques spécifiques au basket-ball. Évaluation par blocs de compétences."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Éducateur sportif, entraîneur ou animateur basket en club associatif, collectivité ou structure privée. Poursuite possible vers DEJEPS Perfectionnement Sportif basket."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier + expérience basket (une saison)"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours en centre + entraînements en club"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification BPJEPS mention basket"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "bpjeps-rugby",
-    "nom": "BPJEPS Éducateur Sportif — Rugby à XV",
-    "certification": "BPJEPS — Niveau 4",
+    "nom": "BPJEPS Éducateur Sportif - Rugby à XV",
+    "certification": "BPJEPS - Niveau 4",
     "regions": [
       "Île-de-France (Courbevoie)",
       "PACA (Toulon)"
@@ -134,12 +668,118 @@
       "Attestation JDC (ressortissants français)"
     ],
     "url_inscription": "https://stadeformation.fr/formations/bpjeps-educateur-sportif-rugby-a-xv/courbevoie",
-    "description": "Formation pour devenir éducateur sportif spécialisé dans le rugby à XV. Permet d'encadrer des équipes en club ou en structure associative. Formation disponible à Courbevoie et Toulon."
+    "description": "Spécialisez-vous dans l'encadrement du rugby à XV. Formation complète pour devenir éducateur sportif en club, disponible à Courbevoie et Toulon.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Mention rugby XV",
+      "Courbevoie & Toulon",
+      "Encadrement club",
+      "Niveau 4"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Encadrer et entraîner des équipes de rugby à XV"
+          },
+          {
+            "id": "2",
+            "value": "Concevoir des séances techniques, physiques et tactiques"
+          },
+          {
+            "id": "3",
+            "value": "Gérer la sécurité et la prévention des traumatismes"
+          },
+          {
+            "id": "4",
+            "value": "Animer un groupe de pratiquants de tous niveaux"
+          },
+          {
+            "id": "5",
+            "value": "Participer à la vie d'un club associatif"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "12 mois en alternance — 585 heures en organisme de formation. Contrat d'apprentissage 35h, plus de 70 % du temps en structure employeuse. Deux sites : Courbevoie (Île-de-France) et Toulon (PACA)."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Pratique terrain, analyses tactiques vidéo, entraînements supervisés et modules spécifiques rugby. Évaluation par blocs de compétences."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Éducateur sportif, entraîneur ou animateur rugby en club, comité ou structure associative. Poursuite possible vers DEJEPS Perfectionnement Sportif rugby."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier + expérience rugby (80h ou une saison)"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours en centre + entraînements en club"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification BPJEPS mention rugby"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "tfp-cdssa",
     "nom": "TFP Chargé de Développement d'une Structure Sportive Associative (CDSSA)",
-    "certification": "Titre à Finalité Professionnelle (TFP) — Niveau 5",
+    "certification": "Titre à Finalité Professionnelle (TFP) - Niveau 5",
     "regions": [
       "Corse (Ajaccio)",
       "Nouvelle-Aquitaine (Bordeaux, Pont-Du-Casse/Agen)",
@@ -158,12 +798,118 @@
       "Pièce d'identité en cours de validité"
     ],
     "url_inscription": "https://stadeformation.fr/formations/charge-de-developpement-dune-structure-sportive-associative/bordeaux",
-    "description": "Formation orientée management sportif : gestion de clubs et structures sportives, élaboration d'événements, gestion budgétaire. Idéale pour gérer une association ou un club sportif en tant que professionnel."
+    "description": "Devenez le pilier d'une structure sportive associative : développement, gestion, événementiel et administration. Le TFP CDSSA forme les futurs responsables de clubs et associations.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Management sportif",
+      "60 % en entreprise",
+      "3 régions",
+      "Niveau 5"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Développer une structure sportive associative"
+          },
+          {
+            "id": "2",
+            "value": "Élaborer et piloter des événements sportifs"
+          },
+          {
+            "id": "3",
+            "value": "Maîtriser la gestion administrative et budgétaire"
+          },
+          {
+            "id": "4",
+            "value": "Animer un réseau de partenaires et bénévoles"
+          },
+          {
+            "id": "5",
+            "value": "Mettre en place une stratégie de développement RSE/RSO"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "12 mois en alternance avec plus de 60 % du temps en entreprise — 612 heures en organisme de formation. Contrat d'apprentissage 35h. Trois régions : Bordeaux, Toulon, Ajaccio."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Études de cas réels, projets tutorés en structure sportive et modules de gestion appliquée. Évaluation par situations professionnelles complexes."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Chargé de développement, secrétaire général, directeur de club ou responsable de projet en association sportive. Taux de réussite : 100 % (session 2025)."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier + niveau 4 + expérience associative"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours en centre + projets en structure"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification TFP CDSSA niveau 5"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "tp-animateur-siblu",
-    "nom": "Titre Pro Animateur Loisirs Tourisme — partenariat SIBLU",
-    "certification": "Titre Professionnel Animateur — Niveau 4",
+    "nom": "Titre Pro Animateur Loisirs Tourisme - partenariat SIBLU",
+    "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
       "Nouvelle-Aquitaine (Bordeaux)"
     ],
@@ -181,12 +927,118 @@
       "Mobilité géographique requise"
     ],
     "url_inscription": "https://stadeformation.fr/formations/cpjeps-animateur-d-activites-et-de-vie-quotidienne-avec-siblu/bordeaux",
-    "description": "Formation en partenariat avec les villages vacances SIBLU pour devenir animateur loisirs et tourisme. Formation en alternance avec intégration directe dans le réseau de camping et villages vacances."
+    "description": "Intégrez les villages vacances SIBLU comme animateur loisirs tourisme diplômé. Formation courte et intensive en alternance avec emploi dans le réseau SIBLU.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "6 mois",
+      "Villages SIBLU",
+      "Animation vacances",
+      "Mobilité"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Animer des activités de loisirs pour tous publics"
+          },
+          {
+            "id": "2",
+            "value": "Concevoir et mener des programmes d'animation variés"
+          },
+          {
+            "id": "3",
+            "value": "Garantir la sécurité et le bien-être des vacanciers"
+          },
+          {
+            "id": "4",
+            "value": "Travailler en équipe dans un environnement touristique"
+          },
+          {
+            "id": "5",
+            "value": "Intégrer rapidement un réseau professionnel SIBLU"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "6 mois en alternance — 270 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat direct avec les Villages Vacances SIBLU. Mobilité géographique requise."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Formation pratique intensive, mises en situation réelles en village vacances et modules spécialisés animation loisirs et tourisme."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Animateur loisirs tourisme dans les villages vacances et campings SIBLU. Poursuite possible vers BPJEPS ou spécialisations animation tourisme."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Tests de sélection SIBLU + dossier"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage SIBLU"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours en centre + immersion village vacances"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification Titre Pro niveau 4"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "bpjeps-animation-socio",
     "nom": "BPJEPS Animation Socio-Éducative ou Culturelle",
-    "certification": "BPJEPS — Niveau 4",
+    "certification": "BPJEPS - Niveau 4",
     "regions": [
       "Île-de-France (Courbevoie)"
     ],
@@ -202,12 +1054,118 @@
       "Attestation JDC (ressortissants français)"
     ],
     "url_inscription": "https://stadeformation.fr/formations/bpjeps-animateur-loisirs-tout-puublic/courbevoie",
-    "description": "Formation pour animer des activités socio-éducatives ou culturelles auprès de tous publics. Prépare au métier d'animateur polyvalent en centre socioculturel, MJC ou collectivité."
+    "description": "Animez des activités socio-éducatives et culturelles auprès de tous publics. Devenez animateur polyvalent en MJC, centre socioculturel ou collectivité territoriale.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Animation socio-culturelle",
+      "Tous publics",
+      "Courbevoie",
+      "Niveau 4"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Concevoir et animer des projets d'animation socio-éducative"
+          },
+          {
+            "id": "2",
+            "value": "Encadrer des groupes de tous publics (enfants, ados, adultes)"
+          },
+          {
+            "id": "3",
+            "value": "Mettre en œuvre des actions culturelles et éducatives"
+          },
+          {
+            "id": "4",
+            "value": "Développer des partenariats avec les acteurs locaux"
+          },
+          {
+            "id": "5",
+            "value": "Participer au fonctionnement d'une structure animation"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "1 an en alternance. Contrat d'apprentissage 35h, alternance centre / structure employeuse (MJC, centre socioculturel, collectivité). Courbevoie, Île-de-France."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Pédagogie active par projets, ateliers pratiques et accompagnement individualisé. Évaluation par blocs de compétences."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Animateur en MJC, centre socioculturel, collectivité ou association culturelle. Poursuite possible vers DEJEPS Animation Socio-Éducative."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier en ligne + entretien"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours en centre + pratique en structure"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification BPJEPS niveau 4"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "dejeps-animation",
-    "nom": "DEJEPS Spécialité Animation Socio-Éducative ou Culturelle — Coordination de Projets",
-    "certification": "DEJEPS — Diplôme d'État de la Jeunesse, de l'Éducation Populaire et du Sport — Niveau 5",
+    "nom": "DEJEPS Spécialité Animation Socio-Éducative ou Culturelle - Coordination de Projets",
+    "certification": "DEJEPS - Diplôme d'État de la Jeunesse, de l'Éducation Populaire et du Sport - Niveau 5",
     "regions": [
       "Île-de-France (Cergy, Paris 7ème)"
     ],
@@ -223,12 +1181,118 @@
       "ou 24 mois d'activités professionnelles/bénévoles (≥ 1600h)"
     ],
     "url_inscription": "https://stadeformation.fr/formations/dejeps-specialite-animation-socio-educative-ou-culturelle/cergy",
-    "description": "Formation de niveau 5 pour coordonner et piloter des projets d'animation socio-éducative. Permet d'accéder à des postes de direction ou de coordination dans le secteur socioculturel et sportif."
+    "description": "Passez au niveau supérieur : coordonnez des projets d'animation socio-éducative à l'échelle d'une structure ou d'un territoire. Formation DEJEPS niveau 5 à Cergy et Paris 7ème.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Niveau 5",
+      "Coordination",
+      "Cergy & Paris",
+      "700h en centre"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Coordonner et piloter des projets d'animation socio-éducative"
+          },
+          {
+            "id": "2",
+            "value": "Encadrer une équipe d'animateurs et de professionnels"
+          },
+          {
+            "id": "3",
+            "value": "Concevoir des dispositifs adaptés aux publics et territoires"
+          },
+          {
+            "id": "4",
+            "value": "Évaluer et ajuster les actions menées"
+          },
+          {
+            "id": "5",
+            "value": "Représenter la structure auprès des partenaires"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "12 mois en alternance — 700 heures en organisme de formation. Contrat d'apprentissage 35h, prise en charge par l'OPCO. Deux sites : Cergy et Paris 7ème."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Approche par projets, analyse de pratiques professionnelles et accompagnement individualisé. Évaluation continue et certification par blocs."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Coordinateur de projets, responsable de secteur, directeur adjoint en structure socioculturelle, sportive ou de jeunesse. Poursuite possible vers DESJEPS."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier + niveau 4 validé ou expérience"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "700h en centre + coordination de projets"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification DEJEPS niveau 5"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "tp-animateur-jet-tours-fitness",
-    "nom": "Titre Pro Animateur Loisirs Tourisme Fitness — Jet Tours & Club Eldorador",
-    "certification": "Titre Professionnel Animateur — Niveau 4",
+    "nom": "Titre Pro Animateur Loisirs Tourisme Fitness - Jet Tours & Club Eldorador",
+    "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
       "Nouvelle-Aquitaine (Dax)"
     ],
@@ -247,12 +1311,118 @@
       "Mobilité géographique requise"
     ],
     "url_inscription": "https://stadeformation.fr/formations/titre-pro-animateur-loisirs-tourisme-fitness-avec-jet-tours-club-eldorador/dax",
-    "description": "Formation animateur spécialisée fitness en partenariat avec Jet Tours et Club Eldorador. Prépare à encadrer des activités de remise en forme dans les clubs de vacances du groupe."
+    "description": "Spécialisez-vous en animation fitness dans les clubs Jet Tours & Club Eldorador. Formation en alternance à Dax avec débouchés dans le tourisme international.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Fitness",
+      "Jet Tours",
+      "9 mois",
+      "International"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Animer des activités fitness en club hôtelier international"
+          },
+          {
+            "id": "2",
+            "value": "Concevoir et encadrer des cours collectifs (HIIT, Zumba, Pilates...)"
+          },
+          {
+            "id": "3",
+            "value": "Garantir la sécurité et l'accueil des clients"
+          },
+          {
+            "id": "4",
+            "value": "Travailler en environnement multiculturel et international"
+          },
+          {
+            "id": "5",
+            "value": "Intégrer le réseau Jet Tours / Club Eldorador"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "9 mois en alternance — 337 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat avec Jet Tours et Club Eldorador. Mobilité géographique requise."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Formation pratique intensive, mises en situation en club hôtelier et modules spécialisés fitness et animation vacances."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Animateur fitness dans les clubs Jet Tours, Club Eldorador et structures touristiques à l'international. Poursuite vers BPJEPS Activités de la Forme."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Tests + entretien de sélection NG TRAVEL"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours à Dax + stages en club hôtelier"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification Titre Pro niveau 4"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "tp-animateur-jet-tours-polyvalence",
-    "nom": "Titre Pro Animateur Loisirs Tourisme Polyvalence — Jet Tours & Club Eldorador",
-    "certification": "Titre Professionnel Animateur — Niveau 4",
+    "nom": "Titre Pro Animateur Loisirs Tourisme Polyvalence - Jet Tours & Club Eldorador",
+    "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
       "Nouvelle-Aquitaine (Dax)"
     ],
@@ -269,12 +1439,118 @@
       "Mobilité géographique requise"
     ],
     "url_inscription": "https://stadeformation.fr/formations/titre-pro-animateur-loisirs-tourisme-polyvalence-polyvalence/dax",
-    "description": "Formation animateur polyvalent en partenariat avec Jet Tours et Club Eldorador. Permet d'animer des activités variées (sportives, culturelles, récréatives) dans les clubs de vacances du groupe."
+    "description": "Devenez animateur polyvalent loisirs tourisme : sport, culture et récréation dans les clubs du groupe Jet Tours & Club Eldorador.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Polyvalence",
+      "Jet Tours",
+      "9 mois",
+      "Clubs vacances"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Animer des activités variées (sportives, culturelles, récréatives)"
+          },
+          {
+            "id": "2",
+            "value": "S'adapter à tous les publics en contexte touristique"
+          },
+          {
+            "id": "3",
+            "value": "Organiser et gérer un programme d'animation complet"
+          },
+          {
+            "id": "4",
+            "value": "Travailler en équipe dans un environnement hôtelier"
+          },
+          {
+            "id": "5",
+            "value": "Intégrer le réseau Jet Tours / Club Eldorador"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "9 mois en alternance — 337 heures en organisme de formation. Contrat d'apprentissage 35h. Mobilité géographique requise. Partenariat Jet Tours et Club Eldorador."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Formation polyvalente couvrant sport, culture et animation récréative. Immersion professionnelle en club hôtelier et évaluation continue."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Animateur polyvalent dans les clubs Jet Tours, Club Eldorador et le secteur du tourisme. Poursuite vers BPJEPS ou spécialisations animation."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Candidature",
+            "sub": "Dossier + sélection Jet Tours"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Contrat",
+            "sub": "Signature du contrat d'apprentissage"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Formation",
+            "sub": "Cours à Dax + immersion club hôtelier"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Diplôme",
+            "sub": "Certification Titre Pro niveau 4"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "cert-directeur-acm",
     "nom": "Certificat Complémentaire Directeur d'Accueil Collectif de Mineurs (ACM)",
-    "certification": "Certificat Complémentaire — BAFA/BAFD",
+    "certification": "Certificat Complémentaire - BAFA/BAFD",
     "regions": [
       "Nouvelle-Aquitaine (Bordeaux)"
     ],
@@ -289,11 +1565,113 @@
       "PSC1 ou AFPS (premiers secours)"
     ],
     "url_inscription": "https://stadeformation.fr/formations/certificat-complementaire-directeur-d-un-accueil-collectif-de-mineurs/bordeaux",
-    "description": "Certificat complémentaire permettant d'assumer la direction d'un accueil collectif de mineurs (colonies, centres de loisirs). Formation courte accessible aux titulaires d'un diplôme professionnel animation ou sport."
+    "description": "Direction d'accueils collectifs de mineurs : colonies, centres de loisirs, séjours jeunes. Certificat complémentaire accessible aux titulaires BPJEPS ou DEJEPS.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Direction ACM",
+      "105h + stage",
+      "Réglementaire",
+      "Bordeaux"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs de la formation",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Assurer la direction d'un accueil collectif de mineurs"
+          },
+          {
+            "id": "2",
+            "value": "Garantir la sécurité physique et affective des mineurs"
+          },
+          {
+            "id": "3",
+            "value": "Encadrer et coordonner l'équipe d'animation"
+          },
+          {
+            "id": "4",
+            "value": "Respecter le cadre réglementaire des ACM"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "105 heures de formation théorique en centre complétées par 18 jours de stage en situation réelle de direction d'ACM. Formation courte accessible rapidement."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Pédagogie & évaluation",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Alternance théorie / terrain, études de cas réglementaires et accompagnement de stage. Validation des compétences de direction en situation réelle."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Débouchés & poursuites",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "Directeur ou directeur adjoint de centre de loisirs, colonie de vacances ou accueil de jeunes. Complément idéal pour évoluer vers la direction de structure."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Prérequis",
+            "sub": "BPJEPS/DEJEPS + 28j expérience ACM"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Formation",
+            "sub": "105 heures théoriques en centre"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Stage",
+            "sub": "18 jours de direction en ACM"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "Certificat",
+            "sub": "Validation du certificat complémentaire"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "tep-bpjeps-mapst",
-    "nom": "TEP — Tests d'Exigences Préalables BPJEPS MAPST",
+    "nom": "TEP - Tests d'Exigences Préalables BPJEPS MAPST",
     "certification": "Épreuves préalables (non diplômantes)",
     "regions": [
       "Nouvelle-Aquitaine (Bordeaux)"
@@ -308,6 +1686,104 @@
       "Pièce d'identité valide"
     ],
     "url_inscription": "https://stadeformation.fr/formations/tep-bpjeps-apt/bordeaux",
-    "description": "Épreuves obligatoires à valider avant l'entrée en formation BPJEPS MAPST. Comprend des tests physiques et des épreuves de sélection. Deux sessions disponibles à Bordeaux en 2026."
+    "description": "Les Tests d'Exigences Préalables (TEP) sont obligatoires avant toute inscription au BPJEPS MAPST. Validez votre niveau physique et technique lors d'une journée d'épreuves à Bordeaux.",
+    "inscription_active": true,
+    "date_cloture_inscription": null,
+    "highlights": [
+      "Prérequis BPJEPS",
+      "1 journée",
+      "Sept. & nov. 2026",
+      "Bordeaux"
+    ],
+    "blocks": [
+      {
+        "id": "objectifs",
+        "type": "list",
+        "title": "Objectifs des TEP",
+        "color": "#3B82F6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Valider les exigences physiques et techniques du BPJEPS MAPST"
+          },
+          {
+            "id": "2",
+            "value": "Démontrer son aptitude à suivre la formation"
+          },
+          {
+            "id": "3",
+            "value": "Obtenir l'autorisation d'inscription au diplôme"
+          }
+        ]
+      },
+      {
+        "id": "organisation",
+        "type": "text",
+        "title": "Organisation",
+        "color": "#FF6B00",
+        "items": [
+          {
+            "id": "1",
+            "value": "Épreuves organisées sur une journée en centre de formation à Bordeaux. Deux sessions disponibles : 10 septembre 2026 et 12 novembre 2026."
+          }
+        ]
+      },
+      {
+        "id": "pedagogie",
+        "type": "text",
+        "title": "Déroulement",
+        "color": "#8B5CF6",
+        "items": [
+          {
+            "id": "1",
+            "value": "Tests standardisés conformes au référentiel BPJEPS MAPST. Briefing d'accueil, épreuves physiques et techniques, débriefing individuel avec résultats le jour même."
+          }
+        ]
+      },
+      {
+        "id": "debouches",
+        "type": "text",
+        "title": "Et ensuite ?",
+        "color": "#10B981",
+        "items": [
+          {
+            "id": "1",
+            "value": "En cas de réussite, accès à la formation BPJEPS MAPST et à l'ensemble des parcours éducateur sportif proposés par Stade Formation."
+          }
+        ]
+      },
+      {
+        "id": "parcours",
+        "type": "steps",
+        "title": "Votre parcours",
+        "color": "#F59E0B",
+        "items": [
+          {
+            "id": "1",
+            "label": "1",
+            "value": "Inscription",
+            "sub": "Réservation de votre session TEP en ligne"
+          },
+          {
+            "id": "2",
+            "label": "2",
+            "value": "Épreuves",
+            "sub": "Tests physiques et techniques de sélection"
+          },
+          {
+            "id": "3",
+            "label": "3",
+            "value": "Résultats",
+            "sub": "Validation des exigences préalables"
+          },
+          {
+            "id": "4",
+            "label": "4",
+            "value": "BPJEPS",
+            "sub": "Inscription à la formation diplômante MAPST"
+          }
+        ]
+      }
+    ]
   }
 ]

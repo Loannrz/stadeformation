@@ -1,28 +1,17 @@
 import Link from 'next/link';
-import { Formation } from '@/lib/formations';
-import { FormationContent, getNiveauLabel } from '@/lib/formation-content';
+import { Formation, FormationBlock, isInscriptionOpen } from '@/lib/formations';
 import { SITE } from '@/lib/site';
 import RegionMapCarousel from '@/components/RegionMapCarousel';
 import styles from './FormationDetail.module.scss';
 
 interface Props {
   formation: Formation;
-  content: FormationContent;
 }
 
 function IconCheck() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function IconClipboard() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="8" y="2" width="8" height="4" rx="1" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M6 6h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.8" />
     </svg>
   );
 }
@@ -36,6 +25,15 @@ function IconCalendar() {
   );
 }
 
+function IconClipboard() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="8" y="2" width="8" height="4" rx="1" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M6 6h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
 function IconShield() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -45,13 +43,68 @@ function IconShield() {
   );
 }
 
-export default function FormationDetail({ formation, content }: Props) {
-  const certShort = formation.certification.split('—')[0].trim();
-  const niveau = getNiveauLabel(formation.certification);
-  const isAlternance = formation.rythme.toLowerCase().includes('alternance');
+function BlockRenderer({ block }: { block: FormationBlock }) {
+  const hexToRgb = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
+  };
+
+  const rgb = block.color.startsWith('#') ? hexToRgb(block.color) : '255, 107, 0';
 
   return (
-    <div className={`${styles.page} ${styles[`theme_${content.categorie}`]}`}>
+    <section
+      className={styles.block}
+      style={{
+        background: `linear-gradient(to right, rgba(${rgb}, 0.1) 0%, transparent 70%)`,
+        borderLeft: `3px solid rgba(${rgb}, 0.7)`,
+      }}
+    >
+      <h2 className={styles.sectionTitle} style={{ color: block.color }}>{block.title}</h2>
+
+      {block.type === 'list' && (
+        <ul className={styles.objectifList}>
+          {block.items.map((item) => (
+            <li key={item.id} className={styles.objectifItem}>
+              <span className={styles.objectifIcon} style={{ color: block.color }}><IconCheck /></span>
+              {item.value}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {block.type === 'text' && (
+        <p className={styles.prose}>{block.items[0]?.value}</p>
+      )}
+
+      {block.type === 'steps' && (
+        <div className={styles.steps}>
+          {block.items.map((item, i) => (
+            <div key={item.id} className={styles.step}>
+              <div className={styles.stepLine}>
+                <span className={styles.stepNum} style={{ background: block.color }}>{item.label ?? String(i + 1)}</span>
+                {i < block.items.length - 1 && <span className={styles.stepConnector} />}
+              </div>
+              <div className={styles.stepBody}>
+                <h3>{item.value}</h3>
+                {item.sub && <p>{item.sub}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+export default function FormationDetail({ formation }: Props) {
+  const certShort = formation.certification.split('-')[0].trim();
+  const isAlternance = formation.rythme.toLowerCase().includes('alternance');
+  const open = isInscriptionOpen(formation);
+
+  return (
+    <div className={styles.page}>
       <div className={styles.bgDecor} aria-hidden="true">
         <div className={styles.blob1} />
         <div className={styles.blob2} />
@@ -71,18 +124,16 @@ export default function FormationDetail({ formation, content }: Props) {
           <div className={styles.heroMain}>
             <span className={styles.badge}>{certShort}</span>
             <h1 className={styles.title}>{formation.nom}</h1>
-            <p className={styles.intro}>{content.intro}</p>
-
+            <p className={styles.intro}>{formation.description}</p>
             <div className={styles.highlights}>
-              {content.highlights.map((h) => (
+              {formation.highlights.map((h) => (
                 <span key={h} className={styles.highlight}>{h}</span>
               ))}
             </div>
           </div>
-
           <aside className={styles.heroAside}>
             <div className={styles.mapCard}>
-              <RegionMapCarousel regions={formation.regions} />
+              <RegionMapCarousel regions={formation.regions} formationId={formation.id} />
             </div>
           </aside>
         </header>
@@ -106,7 +157,7 @@ export default function FormationDetail({ formation, content }: Props) {
             <span className={styles.statIcon}>🎓</span>
             <div>
               <span className={styles.statLabel}>Diplôme</span>
-              <span className={styles.statValue}>{niveau}</span>
+              <span className={styles.statValue}>{certShort}</span>
             </div>
           </div>
           {formation.date_debut && (
@@ -129,52 +180,11 @@ export default function FormationDetail({ formation, content }: Props) {
           )}
         </section>
 
-        <section className={styles.timeline}>
-          <h2 className={styles.sectionTitle}>Votre parcours</h2>
-          <div className={styles.steps}>
-            {content.etapes.map((etape, i) => (
-              <div key={etape.num} className={styles.step}>
-                <div className={styles.stepLine}>
-                  <span className={styles.stepNum}>{etape.num}</span>
-                  {i < content.etapes.length - 1 && <span className={styles.stepConnector} />}
-                </div>
-                <div className={styles.stepBody}>
-                  <h3>{etape.titre}</h3>
-                  <p>{etape.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         <div className={styles.contentGrid}>
           <div className={styles.mainCol}>
-            <section className={styles.block}>
-              <h2 className={styles.sectionTitle}>Objectifs de la formation</h2>
-              <ul className={styles.objectifList}>
-                {content.objectifs.map((obj) => (
-                  <li key={obj} className={styles.objectifItem}>
-                    <span className={styles.objectifIcon}><IconCheck /></span>
-                    {obj}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <section className={styles.block}>
-              <h2 className={styles.sectionTitle}>Organisation</h2>
-              <p className={styles.prose}>{content.organisation}</p>
-            </section>
-
-            <section className={styles.block}>
-              <h2 className={styles.sectionTitle}>Pédagogie & évaluation</h2>
-              <p className={styles.prose}>{content.pedagogie}</p>
-            </section>
-
-            <section className={`${styles.block} ${styles.debouchesBlock}`}>
-              <h2 className={styles.sectionTitle}>Débouchés & poursuites</h2>
-              <p className={styles.prose}>{content.debouches}</p>
-            </section>
+            {formation.blocks.map((block) => (
+              <BlockRenderer key={block.id} block={block} />
+            ))}
           </div>
 
           <aside className={styles.sideCol}>
@@ -195,10 +205,7 @@ export default function FormationDetail({ formation, content }: Props) {
                   </p>
                   <p className={styles.alternanceText}>
                     Les frais de formation sont pris en charge par l&apos;OPCO de l&apos;employeur.
-                    Votre rémunération dépend de votre âge et de votre niveau au moment de la signature.
-                  </p>
-                  <p className={styles.alternanceText}>
-                    Notre équipe vous accompagne pour trouver une structure d&apos;accueil si besoin.
+                    Votre rémunération dépend de votre âge et de votre niveau.
                   </p>
                 </section>
               )}
@@ -218,7 +225,7 @@ export default function FormationDetail({ formation, content }: Props) {
                 </ul>
               </section>
 
-              {formation.dates_inscription && (
+              {(formation.dates_inscription || formation.date_debut) && (
                 <section className={`${styles.sideBlock} ${styles.sideBlockHighlight}`}>
                   <div className={styles.sideBlockHead}>
                     <span className={`${styles.sideBlockIcon} ${styles.sideBlockIconAccent}`}>
@@ -226,7 +233,9 @@ export default function FormationDetail({ formation, content }: Props) {
                     </span>
                     <h3 className={styles.sideBlockTitle}>Prochaine session</h3>
                   </div>
-                  <p className={styles.sessionText}>{formation.dates_inscription}</p>
+                  <p className={styles.sessionText}>
+                    {formation.dates_inscription ?? `Début ${formation.date_debut}`}
+                  </p>
                   {formation.date_limite_inscription && (
                     <p className={styles.sessionDeadline}>
                       Inscription avant le <strong>{formation.date_limite_inscription}</strong>
@@ -239,32 +248,32 @@ export default function FormationDetail({ formation, content }: Props) {
                 <span className={styles.sideQualiopiIcon}><IconShield /></span>
                 <div>
                   <p className={styles.sideQualiopiTitle}>Certifié Qualiopi</p>
-                  <p className={styles.sideQualiopiDesc}>
-                    Formation et apprentissage reconnus par l&apos;État. Voir le certificat →
-                  </p>
+                  <p className={styles.sideQualiopiDesc}>Formation reconnue par l&apos;État →</p>
                 </div>
               </Link>
 
               <div className={styles.sideCta}>
-                <a
-                  href={formation.url_inscription}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.ctaPrimary}
-                >
-                  S&apos;inscrire →
-                </a>
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className={styles.ctaSecondary}
-                >
+                {open ? (
+                  <a
+                    href={formation.url_inscription}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.ctaPrimary}
+                  >
+                    S&apos;inscrire →
+                  </a>
+                ) : (
+                  <span className={styles.ctaDisabled}>
+                    {!formation.inscription_active ? 'Inscriptions fermées' : 'Session complète'}
+                  </span>
+                )}
+                <a href={`mailto:${SITE.email}`} className={styles.ctaSecondary}>
                   Nous contacter
                 </a>
               </div>
             </div>
           </aside>
         </div>
-
       </div>
     </div>
   );

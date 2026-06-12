@@ -12,7 +12,7 @@ export default function Hero() {
       </h1>
 
       <p className={styles.subtitle}>
-        BPJEPS, DEJEPS, Titre Pro — des formations de niveau 4 et 5 reconnues par l'État, en alternance, partout en France.
+        BPJEPS, DEJEPS, Titre Pro - des formations de niveau 4 et 5 reconnues par l'État, en alternance, partout en France.
       </p>
 
       <div className={styles.actions}>

@@ -2,6 +2,7 @@
 
 import { useId, useMemo, useState } from 'react';
 import franceMap from '@svg-maps/france.regions';
+import { isNewRegionForFormation } from '@/lib/formations';
 import {
   buildRegionSlides,
   getActiveRegionIds,
@@ -13,6 +14,7 @@ import styles from './RegionMapCarousel.module.scss';
 
 interface Props {
   regions: string[];
+  formationId?: string;
 }
 
 function IconArrow() {
@@ -23,12 +25,21 @@ function IconArrow() {
   );
 }
 
-export default function RegionMapCarousel({ regions }: Props) {
+export default function RegionMapCarousel({ regions, formationId }: Props) {
   const uid = useId().replace(/:/g, '');
   const gradientId = `regionMapGradient-${uid}`;
   const pinGlowId = `pinGlow-${uid}`;
 
-  const slides = useMemo(() => buildRegionSlides(regions), [regions]);
+  const slides = useMemo(
+    () =>
+      buildRegionSlides(regions, {
+        formationId,
+        isNewRegion: formationId
+          ? (regionName) => isNewRegionForFormation(regionName, formationId)
+          : undefined,
+      }),
+    [regions, formationId],
+  );
   const activeIds = useMemo(() => getActiveRegionIds(regions), [regions]);
   const allCities = useMemo(
     () => parseFormationRegions(regions).flatMap((r) => r.cities),
@@ -42,7 +53,7 @@ export default function RegionMapCarousel({ regions }: Props) {
     slide.type === 'overview' ? 'Vue nationale' : slide.regionName;
   const displayCities = slide.type === 'overview' ? allCities : slide.cities;
   const cityPins = useMemo(
-    () => (slide.type === 'region' ? layoutCityPins(slide.cities) : []),
+    () => (slide.type === 'region' ? layoutCityPins(slide.cities, slide.regionId) : []),
     [slide],
   );
 
@@ -54,6 +65,9 @@ export default function RegionMapCarousel({ regions }: Props) {
         <div className={styles.headerRow}>
           <span className={styles.headerTitle}>Sites de formation</span>
           <span className={styles.headerRegion}>{displayRegion}</span>
+          {slide.type === 'region' && slide.isNew && (
+            <span className={styles.newBadge}>Nouvelle région</span>
+          )}
           {hasMultiple && (
             <span className={styles.counter}>
               {index + 1} / {slides.length}

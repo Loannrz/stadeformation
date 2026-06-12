@@ -38,7 +38,7 @@ function filterFormations(items: Formation[], query: string): Formation[] {
   if (!q) return items;
 
   return items.filter((f) => {
-    const diploma = f.certification.split('—')[0].trim().toLowerCase();
+    const diploma = f.certification.split('-')[0].trim().toLowerCase();
     return (
       f.nom.toLowerCase().includes(q) ||
       f.certification.toLowerCase().includes(q) ||
@@ -127,7 +127,7 @@ export default function MapCentricHome() {
                     ].join(' ')}
                     onClick={() => setActiveRegion(isActive ? null : location.id)}
                     role="button"
-                    aria-label={`${location.name}${hasF ? ' — formations disponibles' : ''}`}
+                    aria-label={`${location.name}${hasF ? ' - formations disponibles' : ''}`}
                     aria-pressed={isActive}
                   />
                 );

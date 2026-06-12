@@ -56,7 +56,7 @@ export default function FAQSection() {
         <h2 className={styles.title}>Les réponses qu&apos;on nous pose le plus</h2>
         <p className={styles.intro}>
           Vous hésitez encore ? Voici ce que les candidats nous demandent
-          avant de se lancer — sans jargon inutile.
+          avant de se lancer - sans jargon inutile.
         </p>
 
         <div className={styles.list}>

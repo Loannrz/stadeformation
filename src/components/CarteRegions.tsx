@@ -2,45 +2,23 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import franceMap from '@svg-maps/france.regions';
-import { Formation, formations, getFormationsByRegion } from '@/lib/formations';
+import {
+  Formation,
+  formations,
+  getCitiesForRegionId,
+  getFormationCitiesInRegionId,
+  getFormationsByRegionId,
+  getRegionIdsWithFormations,
+} from '@/lib/formations';
 import FormationCard from './FormationCard';
 import styles from './CarteRegions.module.scss';
-
-/** Clé de recherche pour getFormationsByRegion (doit matcher le début des chaînes dans formations.json) */
-const REGION_SEARCH_KEYS: Record<string, string> = {
-  naq: 'Nouvelle-Aquitaine',
-  idf: 'Île-de-France',
-  cor: 'Corse',
-  nor: 'Normandie',
-  pac: 'PACA',
-};
-
-/** Préfixes pour détecter si une région a des formations */
-const REGION_PREFIXES: Record<string, string[]> = {
-  naq: ['nouvelle-aquitaine'],
-  idf: ['île-de-france', 'ile-de-france'],
-  cor: ['corse'],
-  nor: ['normandie'],
-  pac: ['paca', 'provence'],
-};
-
-function regionHasFormations(regionId: string): boolean {
-  const prefixes = REGION_PREFIXES[regionId];
-  if (!prefixes) return false;
-  return formations.some((f) =>
-    f.regions.some((r) => {
-      const lower = r.toLowerCase();
-      return prefixes.some((p) => lower.startsWith(p));
-    })
-  );
-}
 
 function filterFormations(items: Formation[], query: string): Formation[] {
   const q = query.trim().toLowerCase();
   if (!q) return items;
 
   return items.filter((f) => {
-    const diploma = f.certification.split('—')[0].trim().toLowerCase();
+    const diploma = f.certification.split('-')[0].trim().toLowerCase();
     return (
       f.nom.toLowerCase().includes(q) ||
       f.certification.toLowerCase().includes(q) ||
@@ -54,12 +32,14 @@ export default function CarteRegions() {
   const [searchQuery, setSearchQuery] = useState('');
   const panelRef = useRef<HTMLElement>(null);
 
+  const activeRegionIds = useMemo(() => getRegionIdsWithFormations(formations), []);
+
   const activeLocation = franceMap.locations.find((l) => l.id === activeRegion);
-  const searchKey = activeRegion ? REGION_SEARCH_KEYS[activeRegion] : null;
-  const panelFormations = searchKey ? getFormationsByRegion(searchKey) : [];
+  const panelFormations = activeRegion ? getFormationsByRegionId(activeRegion) : [];
+  const regionCities = activeRegion ? getCitiesForRegionId(activeRegion) : [];
   const filteredFormations = useMemo(
     () => filterFormations(panelFormations, searchQuery),
-    [panelFormations, searchQuery]
+    [panelFormations, searchQuery],
   );
   const showSearch = panelFormations.length > 2;
 
@@ -101,13 +81,9 @@ export default function CarteRegions() {
                 <stop offset="50%" stopColor="#FF8C00" />
                 <stop offset="100%" stopColor="#FFDB15" />
               </linearGradient>
-              <linearGradient id="regionGradientActive" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FF6B00" />
-                <stop offset="100%" stopColor="#FFDB15" />
-              </linearGradient>
             </defs>
             {franceMap.locations.map((location) => {
-              const hasF = regionHasFormations(location.id);
+              const hasF = activeRegionIds.has(location.id);
               const isActive = activeRegion === location.id;
               return (
                 <path
@@ -117,14 +93,22 @@ export default function CarteRegions() {
                   className={[
                     styles.region,
                     hasF ? styles.hasFormations : styles.noFormations,
-                    isActive ? styles.active : '',
                   ].join(' ')}
-                  onClick={() =>
-                    setActiveRegion(isActive ? null : location.id)
-                  }
-                  role="button"
-                  aria-label={`${location.name}${hasF ? ' — formations disponibles' : ''}`}
-                  aria-pressed={isActive}
+                  onClick={() => {
+                    if (!hasF) return;
+                    setActiveRegion(isActive ? null : location.id);
+                  }}
+                  role={hasF ? 'button' : undefined}
+                  tabIndex={hasF ? 0 : undefined}
+                  onKeyDown={(e) => {
+                    if (!hasF) return;
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveRegion(isActive ? null : location.id);
+                    }
+                  }}
+                  aria-label={`${location.name}${hasF ? ' - formations disponibles' : ''}`}
+                  aria-pressed={hasF ? isActive : undefined}
                 />
               );
             })}
@@ -172,6 +156,9 @@ export default function CarteRegions() {
                     <div className={styles.panelHeadMain}>
                       <p className={styles.panelLabel}>Formations disponibles</p>
                       <h3 className={styles.panelTitle}>{activeLocation.name}</h3>
+                      {regionCities.length > 0 && (
+                        <p className={styles.panelCities}>{regionCities.join(' · ')}</p>
+                      )}
                     </div>
                     <div className={styles.panelHeadActions}>
                       {panelFormations.length > 0 && (
@@ -232,7 +219,12 @@ export default function CarteRegions() {
                     <div className={styles.cards}>
                       {filteredFormations.length > 0 ? (
                         filteredFormations.map((f) => (
-                          <FormationCard key={f.id} formation={f} compact />
+                          <FormationCard
+                            key={f.id}
+                            formation={f}
+                            compact
+                            lieux={activeRegion ? getFormationCitiesInRegionId(f, activeRegion) : undefined}
+                          />
                         ))
                       ) : (
                         <p className={styles.noResults}>

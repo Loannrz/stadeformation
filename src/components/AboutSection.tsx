@@ -11,7 +11,7 @@ const diplomaGroups = [
   {
     level: 'Niveau 4',
     items: [
-      { name: 'BPJEPS', desc: 'Éducateur sportif — activités physiques et sportives' },
+      { name: 'BPJEPS', desc: 'Éducateur sportif - activités physiques et sportives' },
       { name: 'Titre Pro', desc: 'Animateur loisirs & tourisme' },
       { name: 'Certificat', desc: 'Directeur d\'accueil collectif de mineurs' },
       { name: 'TEP', desc: 'Tests d\'exigences préalables' },
@@ -65,7 +65,7 @@ export default function AboutSection() {
             </div>
 
             <Link href="/certification-qualiopi" className={styles.qualiopiLink}>
-              Certifié Qualiopi — voir le certificat →
+              Certifié Qualiopi - voir le certificat →
             </Link>
           </div>
 

@@ -87,6 +87,17 @@
   color: $color-text;
 }
 
+.lieux {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: $color-text-muted;
+  font-weight: 500;
+}
+
+.cardCompact .lieux {
+  font-size: 0.68rem;
+}
+
 .dates {
   display: inline-flex;
   align-items: center;

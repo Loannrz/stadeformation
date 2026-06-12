@@ -9,9 +9,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Stade Formation — Formations sportives diplômantes',
+  title: 'Stade Formation - Formations sportives diplômantes',
   description:
-    'Devenez éducateur sportif diplômé avec Stade Formation. BPJEPS, DEJEPS, Titre Pro — formations sportives de niveau 4 et 5 en France.',
+    'Devenez éducateur sportif diplômé avec Stade Formation. BPJEPS, DEJEPS, Titre Pro - formations sportives de niveau 4 et 5 en France.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

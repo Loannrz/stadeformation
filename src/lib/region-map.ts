@@ -7,6 +7,7 @@ export interface RegionSlide {
   regionName: string;
   cities: string[];
   viewBox: string;
+  isNew?: boolean;
 }
 
 export interface CityPin {
@@ -22,7 +23,7 @@ const CITY_POSITIONS: Record<string, { x: number; y: number }> = {
   bordeaux: { x: 198, y: 395 },
   'pont-du-casse': { x: 215, y: 418 },
   agen: { x: 218, y: 422 },
-  // Île-de-France — coordonnées réajustées
+  // Île-de-France - coordonnées réajustées
   cergy: { x: 288, y: 128 },
   courbevoie: { x: 296, y: 156 },
   drancy: { x: 348, y: 140 },
@@ -79,7 +80,20 @@ const REGION_PREFIX_TO_ID: [string, string][] = [
   ['corse', 'cor'],
   ['normandie', 'nor'],
   ['paca', 'pac'],
+  ['provence-alpes', 'pac'],
   ['provence', 'pac'],
+  ['occitanie', 'occ'],
+  ['bretagne', 'bre'],
+  ['pays de la loire', 'pdl'],
+  ['hauts-de-france', 'hdf'],
+  ['grand est', 'ges'],
+  ['auvergne-rhône-alpes', 'ara'],
+  ['auvergne-rhone-alpes', 'ara'],
+  ['bourgogne-franche-comté', 'bfc'],
+  ['bourgogne-franche-comte', 'bfc'],
+  ['bourgogne', 'bfc'],
+  ['centre-val de loire', 'cvl'],
+  ['centre', 'cvl'],
 ];
 
 function normalizeCityKey(city: string): string {
@@ -164,10 +178,32 @@ export interface PlacedCityPin {
   pin: CityPin;
 }
 
+function getRegionCenter(regionId: string): { x: number; y: number } {
+  const loc = franceMap.locations.find((l) => l.id === regionId);
+  if (!loc) return { x: 300, y: 300 };
+  const bbox = getPathBBox(loc.path);
+  return {
+    x: (bbox.minX + bbox.maxX) / 2,
+    y: (bbox.minY + bbox.maxY) / 2,
+  };
+}
+
+function buildFallbackPin(city: string, regionId: string, index: number): CityPin {
+  const center = getRegionCenter(regionId);
+  const angle = (index * 72 * Math.PI) / 180;
+  const radius = 18 + index * 6;
+  return {
+    x: center.x + Math.cos(angle) * radius,
+    y: center.y + Math.sin(angle) * radius,
+    ...DEFAULT_LABEL,
+  };
+}
+
 /** Résout les positions + libellés sans chevauchement pour un ensemble de villes */
-export function layoutCityPins(cities: string[]): PlacedCityPin[] {
+export function layoutCityPins(cities: string[], regionId?: string): PlacedCityPin[] {
   const placed: { pin: CityPin; label: string; box: ReturnType<typeof estimateLabelBox> }[] = [];
   const result: PlacedCityPin[] = [];
+  let fallbackIndex = 0;
 
   for (const city of cities) {
     const key = resolveCityKey(city);
@@ -197,6 +233,13 @@ export function layoutCityPins(cities: string[]): PlacedCityPin[] {
       }
     }
 
+    if (!chosen && regionId) {
+      const pin = buildFallbackPin(city, regionId, fallbackIndex);
+      fallbackIndex += 1;
+      chosen = pin;
+      chosenBox = estimateLabelBox(pin, city);
+    }
+
     if (chosen && chosenBox) {
       placed.push({ pin: chosen, label: city, box: chosenBox });
       result.push({ city, pin: chosen });
@@ -206,7 +249,7 @@ export function layoutCityPins(cities: string[]): PlacedCityPin[] {
   return result;
 }
 
-function regionNameToId(regionName: string): string | null {
+export function regionNameToId(regionName: string): string | null {
   const lower = regionName.toLowerCase();
   for (const [prefix, id] of REGION_PREFIX_TO_ID) {
     if (lower.startsWith(prefix)) return id;
@@ -290,7 +333,10 @@ export function getRegionViewBox(regionId: string, cities: string[] = []): strin
   return fitViewBox(bbox);
 }
 
-export function buildRegionSlides(regions: string[]): RegionSlide[] {
+export function buildRegionSlides(
+  regions: string[],
+  options?: { formationId?: string; isNewRegion?: (regionName: string) => boolean },
+): RegionSlide[] {
   const parsed = parseFormationRegions(regions);
   const slides: RegionSlide[] = [
     {
@@ -310,10 +356,15 @@ export function buildRegionSlides(regions: string[]): RegionSlide[] {
       regionName,
       cities,
       viewBox: getRegionViewBox(regionId, cities),
+      isNew: options?.isNewRegion?.(regionName) ?? false,
     });
   }
 
   return slides;
+}
+
+export function getRegionDisplayName(regionId: string): string {
+  return franceMap.locations.find((l) => l.id === regionId)?.name ?? regionId;
 }
 
 export function getActiveRegionIds(regions: string[]): Set<string> {

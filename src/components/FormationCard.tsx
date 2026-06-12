@@ -5,16 +5,21 @@ import styles from './FormationCard.module.scss';
 interface Props {
   formation: Formation;
   compact?: boolean;
+  lieux?: string[];
 }
 
-export default function FormationCard({ formation, compact }: Props) {
-  const certShort = formation.certification.split('—')[0].trim();
+export default function FormationCard({ formation, compact, lieux }: Props) {
+  const certShort = formation.certification.split('-')[0].trim();
 
   return (
     <div className={[styles.card, compact ? styles.cardCompact : ''].join(' ')}>
       <div className={styles.cardBody}>
         <span className={styles.cert}>{certShort}</span>
         <h3 className={styles.name}>{formation.nom}</h3>
+
+        {lieux && lieux.length > 0 && (
+          <span className={styles.lieux}>{lieux.join(' · ')}</span>
+        )}
 
         {formation.date_debut && (
           <span className={styles.dates}>

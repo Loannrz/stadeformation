@@ -91,7 +91,7 @@ const DEFAULTS: Record<FormationCategorie, Omit<FormationContent, 'categorie'>> 
       'Approche par projets, analyse de pratiques professionnelles et accompagnement individualisé. Évaluation continue et certification par blocs.',
     debouches:
       'Coordinateur de projets, responsable de secteur, directeur adjoint en structure socioculturelle, sportive ou de jeunesse.',
-    highlights: ['Niveau 5 — Bac+2', 'Coordination de projets', '700h en centre', 'Île-de-France'],
+    highlights: ['Niveau 5 - Bac+2', 'Coordination de projets', '700h en centre', 'Île-de-France'],
     etapes: ETAPES_ALTERNANCE,
   },
   management: {
@@ -109,7 +109,7 @@ const DEFAULTS: Record<FormationCategorie, Omit<FormationContent, 'categorie'>> 
       'Études de cas, projets tutorés en structure et modules de gestion appliquée. Évaluation par situations professionnelles.',
     debouches:
       'Chargé de développement, secrétaire général, directeur de club ou responsable de projet en association sportive.',
-    highlights: ['Niveau 5 — TFP', 'Gestion associative', '60 % en entreprise', 'Multi-régions'],
+    highlights: ['Niveau 5 - TFP', 'Gestion associative', '60 % en entreprise', 'Multi-régions'],
     etapes: ETAPES_ALTERNANCE,
   },
   animateur: {
@@ -175,7 +175,7 @@ const OVERRIDES: Partial<Record<string, Partial<FormationContent>>> = {
     intro:
       'Le BPJEPS « Multi-Activités Physiques ou Sportives pour Tous » forme des éducateurs sportifs capables d\'animer des activités variées auprès de tous publics : sports collectifs, pleine nature, entretien corporel et jeux ludiques. Diplôme de niveau 4 reconnu par l\'État, inscrit au RNCP.',
     organisation:
-      '12 mois en alternance — 553 heures en organisme de formation. Contrat d\'apprentissage 35h, alternance centre / structure employeuse. Ruban pédagogique : entretien corporel, sports collectifs, tir à l\'arc, course d\'orientation, pleine nature.',
+      '12 mois en alternance - 553 heures en organisme de formation. Contrat d\'apprentissage 35h, alternance centre / structure employeuse. Ruban pédagogique : entretien corporel, sports collectifs, tir à l\'arc, course d\'orientation, pleine nature.',
     debouches:
       'Éducateur sportif en association, collectivité, structure de loisirs, club sportif ou établissement scolaire. Poursuite vers DEJEPS, TFP CDSSA ou concours ETAPS. Taux d\'obtention : 94 % (session 2024-2025).',
     highlights: ['553h en centre', 'Alternance 35h', 'RNCP niveau 4', '94 % de réussite'],

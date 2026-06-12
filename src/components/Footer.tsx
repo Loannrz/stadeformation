@@ -23,7 +23,7 @@ export default function Footer() {
           <a href={`mailto:${SITE.email}`} className={styles.link}>{SITE.email}</a>
           <a href={SITE.phoneHref} className={styles.link}>{SITE.phone}</a>
           <a href={SITE.whatsappHref} target="_blank" rel="noopener noreferrer" className={styles.link}>
-            WhatsApp — {SITE.mobile}
+            WhatsApp - {SITE.mobile}
           </a>
         </div>
 

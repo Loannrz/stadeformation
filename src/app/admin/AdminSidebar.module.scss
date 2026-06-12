@@ -1,0 +1,214 @@
+@use '../../styles/variables' as *;
+
+.mobileToggle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  cursor: pointer;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: $color-text;
+    border-radius: 2px;
+  }
+
+  @media (min-width: $bp-lg) {
+    display: none;
+  }
+}
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background: $color-surface;
+  border-right: 1px solid $color-border;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+
+  @media (max-width: #{$bp-lg}) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100svh;
+    z-index: 150;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+}
+
+.sidebarOpen {
+  @media (max-width: #{$bp-lg}) {
+    transform: translateX(0);
+  }
+}
+
+.overlay {
+  display: none;
+
+  @media (max-width: #{$bp-lg}) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 140;
+  }
+}
+
+.top {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid $color-border;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoText {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: $color-text;
+}
+
+.logoBadge {
+  padding: 2px 8px;
+  background: rgba(255, 107, 0, 0.15);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  border-radius: 6px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-primary;
+}
+
+.newBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 16px 8px;
+  padding: 10px 16px;
+  background: $color-primary;
+  color: $color-on-primary;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: background 0.2s;
+  flex-shrink: 0;
+
+  &:hover { background: $color-secondary; }
+}
+
+.listLabel {
+  padding: 8px 20px 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  flex-shrink: 0;
+}
+
+.list {
+  list-style: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 8px 8px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 2px;
+  transition: background 0.15s;
+  position: relative;
+
+  &:hover { background: $color-surface-2; }
+}
+
+.itemActive {
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid rgba(255, 107, 0, 0.25);
+
+  .itemCert { color: $color-primary; }
+  .itemName { color: $color-text; }
+}
+
+.itemCert {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.itemName {
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: $color-text-soft;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.itemBadgeClosed {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #ef4444;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.bottom {
+  padding: 12px 16px 20px;
+  border-top: 1px solid $color-border;
+  flex-shrink: 0;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  color: $color-text-muted;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+  }
+}

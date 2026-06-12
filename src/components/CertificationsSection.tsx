@@ -19,7 +19,7 @@ const CERTS = [
   {
     level: 'Niveau 5',
     name: 'TFP CDSSA',
-    desc: 'Titre à Finalité Professionnelle — Développement Structure Sportive',
+    desc: 'Titre à Finalité Professionnelle - Développement Structure Sportive',
   },
   {
     level: 'Complément',
@@ -29,7 +29,7 @@ const CERTS = [
   {
     level: 'Préalable',
     name: 'TEP',
-    desc: 'Tests d\'Exigences Préalables — Épreuves de sélection',
+    desc: 'Tests d\'Exigences Préalables - Épreuves de sélection',
   },
 ];
 

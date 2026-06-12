@@ -10,7 +10,7 @@ interface Props {
 
 export default function Navbar({ formation }: Props) {
   const lieux = formation ? getFormationLieux(formation.regions) : [];
-  const certShort = formation?.certification.split('—')[0].trim();
+  const certShort = formation?.certification.split('-')[0].trim();
 
   return (
     <nav className={styles.nav}>
