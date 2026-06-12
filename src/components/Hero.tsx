@@ -17,7 +17,7 @@ export default function Hero() {
 
       <div className={styles.actions}>
         <a href="#carte" className={styles.btnPrimary}>
-          Voir les formations →
+          Trouver ma formation →
         </a>
       </div>
 

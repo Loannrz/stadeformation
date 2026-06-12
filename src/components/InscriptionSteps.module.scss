@@ -14,11 +14,6 @@
   }
 }
 
-.header {
-  max-width: 560px;
-  margin-bottom: 32px;
-}
-
 .label {
   font-size: 0.75rem;
   font-weight: 600;
@@ -37,62 +32,55 @@
 }
 
 .intro {
-  margin: 0;
+  margin: 0 0 36px;
+  max-width: 560px;
   font-size: 0.95rem;
   line-height: 1.7;
   color: $color-text-muted;
 }
 
-.cards {
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 16px;
 
   @media (min-width: $bp-md) {
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 20px;
   }
 }
 
-.card {
+.step {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  gap: 16px;
   padding: 22px 20px;
   border-radius: 16px;
   background: $color-surface;
   border: 1px solid $color-border;
-  transition: border-color 0.2s, transform 0.2s;
-
-  &:hover {
-    border-color: rgba(255, 107, 0, 0.35);
-    transform: translateY(-2px);
-
-    .cardValue {
-      color: $color-primary;
-    }
-  }
 }
 
-.cardLabel {
-  font-size: 0.68rem;
-  font-weight: 700;
+.num {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: $color-text-muted;
+  color: $color-primary;
+  padding-top: 3px;
 }
 
-.cardValue {
-  font-size: 0.95rem;
-  font-weight: 700;
+.stepTitle {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 800;
   color: $color-text;
-  transition: color 0.2s;
-  word-break: break-word;
 }
 
-.address {
-  margin: 20px 0 0;
-  font-size: 0.82rem;
-  line-height: 1.5;
+.stepDesc {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
   color: $color-text-muted;
 }

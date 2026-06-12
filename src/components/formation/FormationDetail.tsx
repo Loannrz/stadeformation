@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Formation } from '@/lib/formations';
 import { FormationContent, getNiveauLabel } from '@/lib/formation-content';
+import { SITE } from '@/lib/site';
 import RegionMapCarousel from '@/components/RegionMapCarousel';
 import styles from './FormationDetail.module.scss';
 
@@ -47,6 +48,7 @@ function IconShield() {
 export default function FormationDetail({ formation, content }: Props) {
   const certShort = formation.certification.split('—')[0].trim();
   const niveau = getNiveauLabel(formation.certification);
+  const isAlternance = formation.rythme.toLowerCase().includes('alternance');
 
   return (
     <div className={`${styles.page} ${styles[`theme_${content.categorie}`]}`}>
@@ -182,6 +184,25 @@ export default function FormationDetail({ formation, content }: Props) {
                 <p className={styles.sidePanelHeroText}>Tout ce qu&apos;il te faut pour te lancer</p>
               </div>
 
+              {isAlternance && (
+                <section className={`${styles.sideBlock} ${styles.sideBlockHighlight}`}>
+                  <div className={styles.sideBlockHead}>
+                    <h3 className={styles.sideBlockTitle}>Alternance & financement</h3>
+                  </div>
+                  <p className={styles.alternanceText}>
+                    Vous êtes salarié de votre employeur sur un contrat d&apos;apprentissage :
+                    cours au centre, pratique en structure.
+                  </p>
+                  <p className={styles.alternanceText}>
+                    Les frais de formation sont pris en charge par l&apos;OPCO de l&apos;employeur.
+                    Votre rémunération dépend de votre âge et de votre niveau au moment de la signature.
+                  </p>
+                  <p className={styles.alternanceText}>
+                    Notre équipe vous accompagne pour trouver une structure d&apos;accueil si besoin.
+                  </p>
+                </section>
+              )}
+
               <section className={styles.sideBlock}>
                 <div className={styles.sideBlockHead}>
                   <span className={styles.sideBlockIcon}><IconClipboard /></span>
@@ -234,7 +255,7 @@ export default function FormationDetail({ formation, content }: Props) {
                   S&apos;inscrire →
                 </a>
                 <a
-                  href="mailto:contact@stadeformation.fr"
+                  href={`mailto:${SITE.email}`}
                   className={styles.ctaSecondary}
                 >
                   Nous contacter

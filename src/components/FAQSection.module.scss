@@ -1,0 +1,116 @@
+@use '../styles/variables' as *;
+
+.section {
+  @include section-padding;
+  background: $color-surface;
+}
+
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $color-primary;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+
+.intro {
+  margin: 0 0 32px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: $color-text-muted;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  border: 1px solid $color-border;
+  border-radius: 14px;
+  background: $color-bg;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.itemOpen {
+  border-color: rgba(255, 107, 0, 0.3);
+}
+
+.question {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  text-align: left;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: $color-text;
+  background: transparent;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: $color-primary;
+    border-radius: 1px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    width: 12px;
+    height: 2px;
+  }
+
+  &::after {
+    width: 2px;
+    height: 12px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .itemOpen & {
+    &::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+  }
+}
+
+.answer {
+  padding: 0 18px 16px;
+
+  p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: $color-text-muted;
+  }
+}

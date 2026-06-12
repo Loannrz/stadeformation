@@ -39,7 +39,7 @@ export default function Navbar({ formation }: Props) {
           </a>
         ) : (
           <a href="#carte" className={styles.cta}>
-            Nos formations
+            Trouver ma formation
           </a>
         )}
       </div>

@@ -1,48 +1,40 @@
-'use client';
-
-import { useState, FormEvent } from 'react';
+import { SITE } from '@/lib/site';
 import styles from './ContactSection.module.scss';
 
 export default function ContactSection() {
-  const [sent, setSent] = useState(false);
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSent(true);
-  }
-
   return (
     <section className={styles.section} id="contact">
       <div className={styles.inner}>
-        <p className={styles.label}>Contact</p>
-        <h2 className={styles.title}>Une question ?</h2>
+        <div className={styles.header}>
+          <p className={styles.label}>Contact</p>
+          <h2 className={styles.title}>Une question sur votre projet ?</h2>
+          <p className={styles.intro}>
+            Appelez-nous, écrivez-nous ou contactez-nous sur WhatsApp.
+            L&apos;équipe répond en général sous 48 h ouvrées.
+          </p>
+        </div>
 
-        {sent ? (
-          <div className={styles.success}>
-            <strong>Message envoyé ✓</strong>
-            <p>On vous répond sous 48h.</p>
-          </div>
-        ) : (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.row}>
-              <div className={styles.field}>
-                <label htmlFor="nom">Nom</label>
-                <input id="nom" name="nom" type="text" placeholder="Votre nom" required />
-              </div>
-              <div className={styles.field}>
-                <label htmlFor="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="votre@email.com" required />
-              </div>
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" placeholder="Votre message..." required />
-            </div>
-            <button type="submit" className={styles.submit}>
-              Envoyer →
-            </button>
-          </form>
-        )}
+        <div className={styles.cards}>
+          <a href={SITE.phoneHref} className={styles.card}>
+            <span className={styles.cardLabel}>Téléphone</span>
+            <span className={styles.cardValue}>{SITE.phone}</span>
+          </a>
+          <a href={`mailto:${SITE.email}`} className={styles.card}>
+            <span className={styles.cardLabel}>Email</span>
+            <span className={styles.cardValue}>{SITE.email}</span>
+          </a>
+          <a
+            href={SITE.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.card}
+          >
+            <span className={styles.cardLabel}>WhatsApp</span>
+            <span className={styles.cardValue}>{SITE.mobile}</span>
+          </a>
+        </div>
+
+        <p className={styles.address}>{SITE.address}</p>
       </div>
     </section>
   );
