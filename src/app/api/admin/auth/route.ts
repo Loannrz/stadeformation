@@ -1,16 +1,25 @@
 import { NextResponse } from 'next/server';
-
-const PASSWORD = 'Stadeformation2000!';
+import { getAdminPassword, getAdminSessionToken } from '@/lib/admin-auth';
 
 export async function POST(request: Request) {
-  const body = await request.json() as { password?: string };
+  const password = getAdminPassword();
+  const sessionToken = getAdminSessionToken();
 
-  if (body.password !== PASSWORD) {
+  if (!password || !sessionToken) {
+    return NextResponse.json(
+      { error: 'Configuration serveur manquante (ADMIN_PASSWORD / ADMIN_SESSION_TOKEN)' },
+      { status: 500 },
+    );
+  }
+
+  const body = (await request.json()) as { password?: string };
+
+  if (body.password !== password) {
     return NextResponse.json({ error: 'Mot de passe incorrect' }, { status: 401 });
   }
 
   const res = NextResponse.json({ ok: true });
-  res.cookies.set('admin-token', 'sf-admin-ok', {
+  res.cookies.set('admin-token', sessionToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
