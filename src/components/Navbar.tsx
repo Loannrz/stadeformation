@@ -15,7 +15,23 @@ export default function Navbar({ formation }: Props) {
   return (
     <nav className={styles.nav}>
       <Link href={formation ? '/#carte' : '/'} className={styles.logo}>
-        <Image src="/logo-white.png" alt="Stade Formation" width={32} height={32} />
+        <span className={styles.logoGroup}>
+          <Image
+            src="/logo-unnamed-1.png"
+            alt="Stade Formation"
+            width={210}
+            height={320}
+            className={styles.logoStade}
+            priority
+          />
+          <Image
+            src="/logo-sporformation-grand.png"
+            alt="SporFormation"
+            width={48}
+            height={48}
+            className={styles.logoSporformation}
+          />
+        </span>
       </Link>
 
       {formation && (

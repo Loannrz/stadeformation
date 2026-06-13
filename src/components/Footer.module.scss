@@ -40,9 +40,27 @@
   color: $color-text;
   margin-bottom: 10px;
 
-  img {
-    filter: $color-logo-filter;
-    opacity: $color-logo-opacity;
+  .logoLight,
+  .logoDark {
+    transition: opacity 0.3s ease;
+  }
+
+  .logoLight {
+    display: block;
+  }
+
+  .logoDark {
+    display: none;
+  }
+}
+
+:global(html[data-theme='dark']) .logo {
+  .logoLight {
+    display: none;
+  }
+
+  .logoDark {
+    display: block;
   }
 }
 

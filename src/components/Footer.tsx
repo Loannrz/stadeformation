@@ -11,7 +11,22 @@ export default function Footer() {
       <div className={styles.inner}>
         <div className={styles.brand}>
           <Link href="/" className={styles.logo}>
-            <Image src="/logo-white.png" alt="" width={28} height={28} aria-hidden="true" />
+            <Image
+              src="/logo.png"
+              alt=""
+              width={28}
+              height={28}
+              className={styles.logoLight}
+              aria-hidden="true"
+            />
+            <Image
+              src="/logo-white.png"
+              alt=""
+              width={28}
+              height={28}
+              className={styles.logoDark}
+              aria-hidden="true"
+            />
             <span>{SITE.name}</span>
           </Link>
           <p className={styles.tagline}>{SITE.tagline}</p>
