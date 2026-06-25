@@ -46,6 +46,13 @@
   line-height: 1.45;
   color: $color-text-muted;
   font-weight: 500;
+  // Hauteur fixe (2 lignes) pour éviter que la mise en page bouge entre les slides
+  min-height: calc(0.72rem * 1.45 * 2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .newBadge {
@@ -64,16 +71,60 @@
 .mapWrap {
   position: relative;
   width: 100%;
+  // Hauteur fixe (ratio 4/3) identique pour la vue nationale et les vues régionales
   aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.mapClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
 }
 
 .svg {
+  // En absolu, le SVG ne peut plus modifier la hauteur du conteneur quel que soit son viewBox
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.svgSlideIn {
+  animation: mapSlideIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.fadeIn {
+  animation: mapFadeIn 0.5s ease;
+}
+
+@keyframes mapSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mapFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svgSlideIn,
+  .fadeIn {
+    animation: none;
+  }
 }
 
 .regionInactive {

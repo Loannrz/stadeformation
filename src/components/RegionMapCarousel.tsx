@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useId, useMemo, useState, type CSSProperties } from 'react';
 import franceMap from '@svg-maps/france.regions';
 import { BRAND_PALETTES, type Ecole, type MapEcole } from '@/lib/brand';
 import { useCityPositions } from '@/hooks/useCityPositions';
@@ -101,6 +101,7 @@ export default function RegionMapCarousel({
     [regions],
   );
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const slide = slides[index];
   const hasMultiple = slides.length > 1;
@@ -130,12 +131,26 @@ export default function RegionMapCarousel({
 
   const goNext = () => setIndex((i) => (i + 1) % slides.length);
 
+  useEffect(() => {
+    if (slides.length <= 1 || paused) return;
+    const timer = window.setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [slides.length, index, paused]);
+
   return (
-    <div className={styles.carousel}>
+    <div
+      className={styles.carousel}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className={styles.header}>
         <div className={styles.headerRow}>
           <span className={styles.headerTitle}>Sites de formation</span>
-          <span className={styles.headerRegion}>{displayRegion}</span>
+          <span key={index} className={`${styles.headerRegion} ${styles.fadeIn}`}>
+            {displayRegion}
+          </span>
           {slide.type === 'region' && slide.isNew && (
             <span className={styles.newBadge}>Nouvelle région</span>
           )}
@@ -145,16 +160,18 @@ export default function RegionMapCarousel({
             </span>
           )}
         </div>
-        {displayCities.length > 0 && (
-          <p className={styles.citiesList}>{displayCities.join(' · ')}</p>
-        )}
+        <p key={index} className={`${styles.citiesList} ${styles.fadeIn}`}>
+          {displayCities.join(' · ')}
+        </p>
       </div>
 
       <div className={styles.mapWrap}>
+        <div className={styles.mapClip}>
         <svg
+          key={index}
           viewBox={slide.viewBox}
           preserveAspectRatio="xMidYMid meet"
-          className={styles.svg}
+          className={`${styles.svg} ${styles.svgSlideIn}`}
           style={mapAccentStyle}
           role="img"
           aria-label={slide.regionName}
@@ -226,6 +243,7 @@ export default function RegionMapCarousel({
             </>
           )}
         </svg>
+        </div>
 
         {hasMultiple && (
           <button
