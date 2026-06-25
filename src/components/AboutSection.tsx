@@ -72,9 +72,8 @@ export default function AboutSection() {
               <p className={styles.bothEyebrow}>Nos écoles</p>
 
               <div className={styles.brandRow}>
-                <span className={styles.brandStade}>Stade Formation</span>
-                <span className={styles.brandDivider} aria-hidden="true" />
                 <span className={styles.brandSpor}>SporFormation</span>
+                <span className={styles.brandStade}>Stade Formation</span>
               </div>
 
               <div className={styles.mergedHeadline}>
