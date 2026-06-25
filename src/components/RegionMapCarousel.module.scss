@@ -83,15 +83,20 @@
 }
 
 .regionActive {
-  stroke: $color-primary;
   stroke-width: 1.5;
   opacity: 0.95;
 }
 
 .regionZoom {
-  stroke: $color-primary;
+  stroke: var(--map-accent, #{$color-primary});
   stroke-width: 2;
   opacity: 0.92;
+}
+
+.regionZoomDept {
+  stroke: var(--map-accent, #{$color-primary});
+  stroke-width: 0.8;
+  opacity: 0.95;
 }
 
 .pin {
@@ -99,12 +104,12 @@
 }
 
 .pinDot {
-  fill: $color-primary;
+  fill: var(--map-accent, #{$color-primary});
   opacity: 0.35;
 }
 
 .pinCore {
-  fill: $color-primary;
+  fill: var(--map-accent, #{$color-primary});
   stroke: $color-on-primary;
   stroke-width: 1.5;
 }

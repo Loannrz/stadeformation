@@ -6,6 +6,7 @@ import styles from './FormationDetail.module.scss';
 
 interface Props {
   formation: Formation;
+  adminPreview?: boolean;
 }
 
 function IconCheck() {
@@ -98,13 +99,18 @@ function BlockRenderer({ block }: { block: FormationBlock }) {
   );
 }
 
-export default function FormationDetail({ formation }: Props) {
+export default function FormationDetail({ formation, adminPreview = false }: Props) {
   const certShort = formation.certification.split('-')[0].trim();
   const isAlternance = formation.rythme.toLowerCase().includes('alternance');
   const open = isInscriptionOpen(formation);
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-brand={formation.ecole}>
+      {adminPreview && (
+        <div className={styles.previewBanner} role="status">
+          Aperçu administrateur - cette formation n&apos;est pas visible sur le site public.
+        </div>
+      )}
       <div className={styles.bgDecor} aria-hidden="true">
         <div className={styles.blob1} />
         <div className={styles.blob2} />
@@ -133,7 +139,11 @@ export default function FormationDetail({ formation }: Props) {
           </div>
           <aside className={styles.heroAside}>
             <div className={styles.mapCard}>
-              <RegionMapCarousel regions={formation.regions} formationId={formation.id} />
+              <RegionMapCarousel
+                regions={formation.regions}
+                formationId={formation.id}
+                formationEcole={formation.ecole}
+              />
             </div>
           </aside>
         </header>

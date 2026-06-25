@@ -1,0 +1,78 @@
+@use '../../styles/variables' as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 720px;
+  max-height: 90svh;
+  overflow-y: auto;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.help {
+  margin: 0;
+  font-size: 0.78rem;
+  color: $color-text-muted;
+  flex: 1;
+  min-width: 200px;
+}
+
+.actionBtns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.validateBtn {
+  padding: 9px 16px;
+  background: $color-primary;
+  color: $color-on-primary;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.skipBtn {
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  color: $color-text-muted;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+}

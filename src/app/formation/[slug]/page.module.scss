@@ -1,0 +1,102 @@
+@use '../../../styles/variables' as *;
+
+.page {
+  min-height: 100svh;
+  padding: 100px 24px 80px;
+
+  @media (min-width: $bp-md) {
+    padding: 120px 40px 100px;
+  }
+}
+
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: $color-text-muted;
+  margin-bottom: 40px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.cert {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-primary;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 32px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: $color-text-muted;
+}
+
+.dates {
+  border-color: rgba(255, 215, 0, 0.3);
+  color: $color-accent-soft;
+  background: rgba(255, 107, 0, 0.08);
+}
+
+.divider {
+  height: 1px;
+  background: $color-border;
+  margin: 32px 0;
+}
+
+.desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: $color-text-soft;
+  margin-bottom: 48px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  background: $color-primary;
+  color: $color-on-primary;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: background 0.2s, transform 0.2s;
+
+  &:hover {
+    background: $color-secondary;
+    transform: translateY(-2px);
+  }
+}

@@ -27,7 +27,7 @@ function regionHasFormations(regionId: string): boolean {
   if (!prefixes) return false;
   return formations.some((f) =>
     f.regions.some((r) => {
-      const lower = r.toLowerCase();
+      const lower = r.regionName.toLowerCase();
       return prefixes.some((p) => lower.startsWith(p));
     })
   );

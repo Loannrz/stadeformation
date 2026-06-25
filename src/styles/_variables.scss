@@ -1,6 +1,6 @@
-$color-primary: #FF6B00;
-$color-secondary: #E85D00;
-$color-accent: #E6A800;
+$color-primary: var(--color-primary);
+$color-secondary: var(--color-secondary);
+$color-accent: var(--color-accent);
 $color-on-primary: #FFFFFF;
 
 $color-bg: var(--color-bg);

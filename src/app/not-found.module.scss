@@ -1,0 +1,67 @@
+@use '../styles/variables' as *;
+
+.page {
+  min-height: 100svh;
+  padding: 100px 24px 80px;
+  background: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: $bp-md) {
+    padding: 110px 40px 100px;
+  }
+}
+
+.inner {
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+.code {
+  display: block;
+  font-size: clamp(4rem, 18vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, $color-primary, $color-secondary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: $color-text;
+}
+
+.text {
+  margin: 0 0 32px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: $color-text-soft;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, $color-primary, $color-secondary);
+  color: $color-on-primary;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(255, 107, 0, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 107, 0, 0.4);
+  }
+}

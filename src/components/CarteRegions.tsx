@@ -2,14 +2,17 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import franceMap from '@svg-maps/france.regions';
+import { BRAND_PALETTES, type MapEcole } from '@/lib/brand';
+import type { Formation } from '@/lib/formations';
 import {
-  Formation,
-  formations,
   getCitiesForRegionId,
   getFormationCitiesInRegionId,
   getFormationsByRegionId,
   getRegionIdsWithFormations,
+  getRegionMapEcole,
+  resolveEcole,
 } from '@/lib/formations';
+import { useSchoolFilter } from './SchoolFilterProvider';
 import FormationCard from './FormationCard';
 import styles from './CarteRegions.module.scss';
 
@@ -27,16 +30,60 @@ function filterFormations(items: Formation[], query: string): Formation[] {
   });
 }
 
-export default function CarteRegions() {
+function RegionGradients() {
+  const brands: MapEcole[] = ['stade-formation', 'sporformation', 'both'];
+  return (
+    <defs>
+      {brands.map((brand) => {
+        const p = BRAND_PALETTES[brand];
+        const id = brand === 'stade-formation' ? 'stade' : brand === 'sporformation' ? 'spor' : 'both';
+        return (
+          <g key={brand}>
+            <linearGradient id={`regionGradient-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor={p.gradientStart} />
+              <stop offset="50%" stopColor={p.gradientMid} />
+              <stop offset="100%" stopColor={p.gradientEnd} />
+            </linearGradient>
+            <linearGradient id={`regionGradientHover-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor={p.hoverStart} />
+              <stop offset="50%" stopColor={p.hoverMid} />
+              <stop offset="100%" stopColor={p.hoverEnd} />
+            </linearGradient>
+          </g>
+        );
+      })}
+    </defs>
+  );
+}
+
+function gradientUrl(ecole: MapEcole, hover = false): string {
+  const prefix = hover ? 'regionGradientHover' : 'regionGradient';
+  const id = ecole === 'stade-formation' ? 'stade' : ecole === 'sporformation' ? 'spor' : 'both';
+  return `url(#${prefix}-${id})`;
+}
+
+export default function CarteRegions({ formations: publicFormations }: { formations: Formation[] }) {
+  const { filter } = useSchoolFilter();
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const panelRef = useRef<HTMLElement>(null);
 
-  const activeRegionIds = useMemo(() => getRegionIdsWithFormations(formations), []);
+  const activeRegionIds = useMemo(
+    () => getRegionIdsWithFormations(publicFormations, filter),
+    [publicFormations, filter],
+  );
+
+  const regionEcoleMap = useMemo(() => {
+    const map = new Map<string, MapEcole>();
+    for (const loc of franceMap.locations) {
+      map.set(loc.id, getRegionMapEcole(loc.id, publicFormations, filter));
+    }
+    return map;
+  }, [publicFormations, filter]);
 
   const activeLocation = franceMap.locations.find((l) => l.id === activeRegion);
-  const panelFormations = activeRegion ? getFormationsByRegionId(activeRegion) : [];
-  const regionCities = activeRegion ? getCitiesForRegionId(activeRegion) : [];
+  const panelFormations = activeRegion ? getFormationsByRegionId(activeRegion, publicFormations, filter) : [];
+  const regionCities = activeRegion ? getCitiesForRegionId(activeRegion, publicFormations, filter) : [];
   const filteredFormations = useMemo(
     () => filterFormations(panelFormations, searchQuery),
     [panelFormations, searchQuery],
@@ -46,6 +93,12 @@ export default function CarteRegions() {
   useEffect(() => {
     setSearchQuery('');
   }, [activeRegion]);
+
+  useEffect(() => {
+    if (activeRegion && !activeRegionIds.has(activeRegion)) {
+      setActiveRegion(null);
+    }
+  }, [activeRegion, activeRegionIds]);
 
   useEffect(() => {
     if (!activeRegion || !panelRef.current) return;
@@ -70,21 +123,10 @@ export default function CarteRegions() {
             role="img"
             aria-label="Carte des régions de France"
           >
-            <defs>
-              <linearGradient id="regionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#E65C23" />
-                <stop offset="50%" stopColor="#FF6B00" />
-                <stop offset="100%" stopColor="#FFD700" />
-              </linearGradient>
-              <linearGradient id="regionGradientHover" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F58220" />
-                <stop offset="50%" stopColor="#FF8C00" />
-                <stop offset="100%" stopColor="#FFDB15" />
-              </linearGradient>
-            </defs>
+            <RegionGradients />
             {franceMap.locations.map((location) => {
               const hasF = activeRegionIds.has(location.id);
-              const isActive = activeRegion === location.id;
+              const mapEcole = regionEcoleMap.get(location.id) ?? 'stade-formation';
               return (
                 <path
                   key={location.id}
@@ -94,9 +136,24 @@ export default function CarteRegions() {
                     styles.region,
                     hasF ? styles.hasFormations : styles.noFormations,
                   ].join(' ')}
+                  style={
+                    hasF
+                      ? { fill: gradientUrl(mapEcole) }
+                      : undefined
+                  }
+                  onMouseEnter={(e) => {
+                    if (hasF) {
+                      (e.target as SVGPathElement).style.fill = gradientUrl(mapEcole, true);
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (hasF) {
+                      (e.target as SVGPathElement).style.fill = gradientUrl(mapEcole);
+                    }
+                  }}
                   onClick={() => {
                     if (!hasF) return;
-                    setActiveRegion(isActive ? null : location.id);
+                    setActiveRegion(activeRegion === location.id ? null : location.id);
                   }}
                   role={hasF ? 'button' : undefined}
                   tabIndex={hasF ? 0 : undefined}
@@ -104,11 +161,11 @@ export default function CarteRegions() {
                     if (!hasF) return;
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      setActiveRegion(isActive ? null : location.id);
+                      setActiveRegion(activeRegion === location.id ? null : location.id);
                     }
                   }}
                   aria-label={`${location.name}${hasF ? ' - formations disponibles' : ''}`}
-                  aria-pressed={hasF ? isActive : undefined}
+                  aria-pressed={hasF ? activeRegion === location.id : undefined}
                 />
               );
             })}
@@ -117,12 +174,16 @@ export default function CarteRegions() {
 
           <div className={styles.mapLegend}>
             <span className={styles.legendItem}>
-              <span className={`${styles.legendDot} ${styles.legendDotActive}`} />
-              Régions avec formations
+              <span className={`${styles.legendDot} ${styles.legendDotStade}`} />
+              Stade Formation
             </span>
             <span className={styles.legendItem}>
-              <span className={`${styles.legendDot} ${styles.legendDotInactive}`} />
-              Autres régions
+              <span className={`${styles.legendDot} ${styles.legendDotSpor}`} />
+              SporFormation
+            </span>
+            <span className={styles.legendItem}>
+              <span className={`${styles.legendDot} ${styles.legendDotBoth}`} />
+              Les deux écoles
             </span>
           </div>
         </div>
@@ -146,7 +207,7 @@ export default function CarteRegions() {
                 </span>
                 <p className={styles.panelEmptyTitle}>Choisis une région</p>
                 <p className={styles.panelEmptyHint}>
-                  Clique sur une zone orange de la carte pour découvrir les formations disponibles.
+                  Clique sur une zone colorée de la carte pour découvrir les formations disponibles.
                 </p>
               </div>
             ) : (
@@ -223,7 +284,15 @@ export default function CarteRegions() {
                             key={f.id}
                             formation={f}
                             compact
-                            lieux={activeRegion ? getFormationCitiesInRegionId(f, activeRegion) : undefined}
+                            ecole={resolveEcole(
+                              f,
+                              activeLocation.name,
+                            )}
+                            lieux={
+                              activeRegion
+                                ? getFormationCitiesInRegionId(f, activeRegion, filter)
+                                : undefined
+                            }
                           />
                         ))
                       ) : (

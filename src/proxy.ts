@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminSessionToken } from '@/lib/admin-auth';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/login')) {

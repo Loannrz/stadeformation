@@ -226,3 +226,247 @@
     gap: 4px;
   }
 }
+
+.dualHeader {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 40px;
+}
+
+.dualTitle {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+
+  span {
+    @include gradient-text;
+  }
+}
+
+.dualIntro {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: $color-text-muted;
+}
+
+/* ── Mode « Les deux écoles » ── */
+
+.panelBoth {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: $color-card-shadow;
+
+  @media (min-width: $bp-lg) {
+    grid-template-columns: 1.15fr 0.85fr;
+    min-height: 520px;
+  }
+}
+
+.bothMain {
+  padding: 36px 32px;
+
+  @media (min-width: $bp-lg) {
+    padding: 48px 44px;
+    border-right: 1px solid $color-border;
+  }
+}
+
+.bothEyebrow {
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.brandStade {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #FF6B00;
+}
+
+.brandSpor {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #DC2626;
+}
+
+.brandDivider {
+  width: 32px;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, #FF6B00, #DC2626);
+  flex-shrink: 0;
+}
+
+.mergedHeadline {
+  margin-bottom: 20px;
+}
+
+.headlineRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  &:first-child {
+    margin-bottom: 2px;
+  }
+
+  @media (min-width: $bp-md) {
+    flex-wrap: nowrap;
+  }
+}
+
+.headStade {
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: $color-text;
+}
+
+.headSpor {
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: $color-text;
+  text-align: right;
+
+  @media (min-width: $bp-md) {
+    margin-left: auto;
+  }
+}
+
+.headStadeAccent {
+  font-size: clamp(1.5rem, 3.2vw, 2.35rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  background: linear-gradient(135deg, #FF6B00, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.headSporAccent {
+  font-size: clamp(1.5rem, 3.2vw, 2.35rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  text-align: right;
+  background: linear-gradient(135deg, #DC2626, #FB7185);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @media (min-width: $bp-md) {
+    margin-left: auto;
+  }
+}
+
+.bothIntro {
+  margin: 0 0 28px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: $color-text-soft;
+  max-width: 56ch;
+}
+
+.bothColumns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+}
+
+.bothCol {
+  padding: 20px;
+  border-radius: 14px;
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+}
+
+.colIntro {
+  margin: 0 0 16px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: $color-text-soft;
+}
+
+.valuesStade li::before {
+  background: #FF6B00;
+}
+
+.valuesSpor li::before {
+  background: #DC2626;
+}
+
+.diplomasAside {
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 107, 0, 0.05) 0%,
+    rgba(220, 38, 38, 0.04) 50%,
+    transparent 100%
+  );
+
+  @media (min-width: $bp-lg) {
+    padding: 48px 36px;
+  }
+}
+
+.panelDual {
+  @media (min-width: $bp-lg) {
+    grid-template-columns: 1fr 1fr 0.9fr;
+  }
+}
+
+.schoolBlock {
+  .story {
+    @media (min-width: $bp-lg) {
+      border-right: 1px solid $color-border;
+    }
+  }
+}
+
+.schoolStade .label {
+  color: #FF6B00;
+}
+
+.schoolSpor .label {
+  color: #DC2626;
+}
+
+.schoolSpor .title span {
+  background: linear-gradient(135deg, #DC2626, #FB7185);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

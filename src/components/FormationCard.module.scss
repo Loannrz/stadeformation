@@ -152,3 +152,47 @@
     background: $color-secondary;
   }
 }
+
+.cardSpor {
+  .cert {
+    color: #DC2626;
+  }
+
+  .link {
+    background: #DC2626;
+  }
+
+  .link:hover {
+    background: #B91C1C;
+  }
+
+  &:hover {
+    border-color: rgba(220, 38, 38, 0.4);
+  }
+}
+
+.cardBoth {
+  .cert {
+    color: #FF6B00;
+  }
+
+  .link {
+    background: linear-gradient(135deg, #FF6B00, #DC2626);
+  }
+
+  .link:hover {
+    background: linear-gradient(135deg, #E85D00, #B91C1C);
+  }
+
+  &:hover {
+    border-color: rgba(255, 107, 0, 0.35);
+  }
+}
+
+.cardStade .link {
+  background: $color-primary;
+
+  &:hover {
+    background: $color-secondary;
+  }
+}

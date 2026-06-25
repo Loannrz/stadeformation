@@ -112,3 +112,31 @@
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(6px); }
 }
+
+.heroFilter_sporformation {
+  &::before {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(220, 38, 38, 0.12) 0%, transparent 70%);
+  }
+
+  .gradient {
+    background: linear-gradient(135deg, #DC2626, #FB7185);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.heroFilter_both {
+  &::before {
+    background:
+      radial-gradient(ellipse 50% 50% at 30% 0%, rgba(255, 107, 0, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 70% 0%, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+  }
+
+  .gradient {
+    background: linear-gradient(135deg, #FF6B00, #DC2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

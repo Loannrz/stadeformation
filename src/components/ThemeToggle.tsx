@@ -1,19 +1,34 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { SchoolFilter } from '@/lib/brand';
+import { useSchoolFilter } from './SchoolFilterProvider';
 import styles from './ThemeToggle.module.scss';
 
 type Theme = 'light' | 'dark';
 
-const STORAGE_KEY = 'sf-theme';
+const THEME_STORAGE_KEY = 'sf-theme';
+
+const SCHOOL_CYCLE: Record<SchoolFilter, SchoolFilter> = {
+  both: 'sporformation',
+  sporformation: 'stade-formation',
+  'stade-formation': 'both',
+};
+
+const SCHOOL_SWITCH_CLASS: Record<SchoolFilter, string> = {
+  'stade-formation': styles.switchTripleStade,
+  both: styles.switchTripleBoth,
+  sporformation: styles.switchTripleSpor,
+};
 
 function applyTheme(theme: Theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem(STORAGE_KEY, theme);
+  localStorage.setItem(THEME_STORAGE_KEY, theme);
 }
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>('light');
+  const { filter, setFilter } = useSchoolFilter();
 
   useEffect(() => {
     const current = document.documentElement.getAttribute('data-theme');
@@ -26,12 +41,16 @@ export default function ThemeToggle() {
     applyTheme(next);
   };
 
+  const cycleSchool = () => {
+    setFilter(SCHOOL_CYCLE[filter]);
+  };
+
   return (
     <div className={styles.widget}>
       <button
         type="button"
         className={styles.trigger}
-        aria-label="Choisir le thème du site"
+        aria-label="Choisir l'apparence et l'école"
         aria-expanded="false"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -45,7 +64,7 @@ export default function ThemeToggle() {
         </svg>
       </button>
 
-      <div className={styles.panel} role="region" aria-label="Sélection du thème">
+      <div className={styles.panel} role="region" aria-label="Sélection de l'apparence">
         <p className={styles.panelTitle}>Apparence</p>
         <div className={styles.toggleRow}>
           <span className={theme === 'light' ? styles.labelActive : styles.label}>
@@ -63,6 +82,45 @@ export default function ThemeToggle() {
           </button>
           <span className={theme === 'dark' ? styles.labelActive : styles.label}>
             Sombre
+          </span>
+        </div>
+
+        <p className={`${styles.panelTitle} ${styles.panelTitleSpaced}`}>École</p>
+        <div className={styles.schoolToggleRow}>
+          <span
+            className={
+              filter === 'stade-formation' ? styles.schoolLabelActive : styles.schoolLabel
+            }
+          >
+            Stade Formation
+          </span>
+          <div className={styles.schoolSwitchWrap}>
+            <span className={filter === 'both' ? styles.schoolCenterActive : styles.schoolCenter}>
+              Les deux
+            </span>
+            <button
+              type="button"
+              role="switch"
+              aria-label={`École : ${
+                filter === 'stade-formation'
+                  ? 'Stade Formation'
+                  : filter === 'sporformation'
+                    ? 'SporFormation'
+                    : 'Les deux'
+              }. Cliquer pour changer.`}
+              aria-checked={filter === 'both'}
+              className={`${styles.switchTriple} ${SCHOOL_SWITCH_CLASS[filter]}`}
+              onClick={cycleSchool}
+            >
+              <span className={styles.switchKnobTriple} />
+            </button>
+          </div>
+          <span
+            className={
+              filter === 'sporformation' ? styles.schoolLabelActive : styles.schoolLabel
+            }
+          >
+            SporFormation
           </span>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ECOLE_LABELS, type Ecole } from '@/lib/brand';
 import { Formation } from '@/lib/formations';
 import styles from './FormationCard.module.scss';
 
@@ -6,15 +7,25 @@ interface Props {
   formation: Formation;
   compact?: boolean;
   lieux?: string[];
+  ecole?: Ecole;
 }
 
-export default function FormationCard({ formation, compact, lieux }: Props) {
+function ecoleClass(ecole: Ecole): string {
+  if (ecole === 'sporformation') return styles.cardSpor;
+  if (ecole === 'both') return styles.cardBoth;
+  return styles.cardStade;
+}
+
+export default function FormationCard({ formation, compact, lieux, ecole }: Props) {
   const certShort = formation.certification.split('-')[0].trim();
+  const brandEcole = ecole ?? formation.ecole;
 
   return (
-    <div className={[styles.card, compact ? styles.cardCompact : ''].join(' ')}>
+    <div className={[styles.card, compact ? styles.cardCompact : '', ecoleClass(brandEcole)].join(' ')}>
       <div className={styles.cardBody}>
-        <span className={styles.cert}>{certShort}</span>
+        <span className={styles.cert}>
+          {certShort} - {ECOLE_LABELS[brandEcole]}
+        </span>
         <h3 className={styles.name}>{formation.nom}</h3>
 
         {lieux && lieux.length > 0 && (

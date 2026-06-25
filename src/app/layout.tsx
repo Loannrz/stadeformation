@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Footer from '@/components/Footer';
+import ConditionalFooter from '@/components/ConditionalFooter';
+import { SchoolFilterProvider } from '@/components/SchoolFilterProvider';
 import './globals.scss';
 
 const inter = Inter({
@@ -16,17 +17,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={inter.variable} data-theme="light" suppressHydrationWarning>
+    <html lang="fr" className={inter.variable} data-theme="light" data-brand="both" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('sf-theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('sf-theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');var s=localStorage.getItem('sf-school-filter');document.documentElement.setAttribute('data-brand',s==='stade-formation'||s==='sporformation'?s:'both');}catch(e){}})();`,
           }}
         />
       </head>
       <body>
-        {children}
-        <Footer />
+        <SchoolFilterProvider>
+          {children}
+          <ConditionalFooter />
+        </SchoolFilterProvider>
       </body>
     </html>
   );

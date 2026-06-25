@@ -8,6 +8,27 @@
 
 html {
   scroll-behavior: smooth;
+  --color-primary: #FF6B00;
+  --color-secondary: #E85D00;
+  --color-accent: #FFD700;
+}
+
+html[data-brand='stade-formation'] {
+  --color-primary: #FF6B00;
+  --color-secondary: #E85D00;
+  --color-accent: #FFD700;
+}
+
+html[data-brand='sporformation'] {
+  --color-primary: #DC2626;
+  --color-secondary: #B91C1C;
+  --color-accent: #FB7185;
+}
+
+html[data-brand='both'] {
+  --color-primary: #FF6B00;
+  --color-secondary: #DC2626;
+  --color-accent: #FB7185;
 }
 
 html[data-theme='light'] {

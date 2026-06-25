@@ -1,11 +1,43 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import type { Formation, FormationBlock, BlockItem } from '@/lib/formations';
+import CityPlacementModal from '@/components/admin/CityPlacementModal';
+import ConfirmDialog from '@/components/admin/ConfirmDialog';
+import type { Formation, FormationBlock, BlockItem, FormationRegion, FormationCity } from '@/lib/formations';
+import { normalizeFormation, getKnownCityNamesForRegion } from '@/lib/formations';
+import { hasCityPosition } from '@/lib/city-positions';
+import type { Ecole } from '@/lib/brand';
+import { ECOLE_LABELS } from '@/lib/brand';
 import styles from './FormationEditor.module.scss';
 
 type EditableFormation = Omit<Formation, 'id'> & { id: string };
+
+const ECOLE_OPTIONS: Ecole[] = ['stade-formation', 'sporformation', 'both'];
+
+function EcoleSelect({
+  value,
+  defaultEcole,
+  onChange,
+  className,
+}: {
+  value?: Ecole;
+  defaultEcole: Ecole;
+  onChange: (ecole: Ecole) => void;
+  className?: string;
+}) {
+  return (
+    <select
+      className={className ?? styles.select}
+      value={value ?? defaultEcole}
+      onChange={(e) => onChange(e.target.value as Ecole)}
+    >
+      {ECOLE_OPTIONS.map((opt) => (
+        <option key={opt} value={opt}>{ECOLE_LABELS[opt]}</option>
+      ))}
+    </select>
+  );
+}
 
 const PRESET_COLORS = [
   { label: 'Orange', value: '#FF6B00' },
@@ -44,6 +76,193 @@ function uid() {
   return Math.random().toString(36).slice(2, 9);
 }
 
+function slugify(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function generateFormationId(nom: string, certification: string): string {
+  const parts = [slugify(nom), slugify(certification)].filter(Boolean);
+  return parts.join('-').replace(/-+/g, '-');
+}
+
+function validateFormation(data: EditableFormation, isNew: boolean): string[] {
+  const errors: string[] = [];
+
+  if (isNew && !data.id.trim()) {
+    errors.push('L\'identifiant URL n\'a pas pu être généré : renseignez le nom et la certification.');
+  }
+  if (!data.nom.trim()) {
+    errors.push('Le nom de la formation est obligatoire.');
+  }
+  if (!data.certification.trim()) {
+    errors.push('La certification est obligatoire.');
+  }
+  if (!data.url_inscription.trim()) {
+    errors.push('L\'URL d\'inscription est obligatoire.');
+  }
+  if (!data.description.trim()) {
+    errors.push('La description (intro de la page) est obligatoire.');
+  }
+
+  if (data.regions.length === 0) {
+    errors.push('Ajoutez au moins une région.');
+  } else {
+    const regionsSansVille = data.regions.filter((r) => r.cities.length === 0);
+    if (regionsSansVille.length > 0) {
+      errors.push(
+        `Chaque région doit avoir au moins une ville (${regionsSansVille.map((r) => r.regionName).join(', ')} sans ville).`,
+      );
+    }
+  }
+
+  if (!data.date_debut?.trim()) {
+    errors.push('La date de début est obligatoire (section Inscription).');
+  }
+  if (!data.date_limite_inscription?.trim()) {
+    errors.push('La date « Inscription avant » est obligatoire (section Inscription).');
+  }
+  if (!data.date_cloture_inscription?.trim()) {
+    errors.push('La date de clôture auto est obligatoire (section Inscription).');
+  }
+  if (!data.dates_inscription?.trim()) {
+    errors.push('La session affichée sur la carte est obligatoire (section Inscription).');
+  }
+
+  if (!data.duree.trim()) {
+    errors.push('La durée est obligatoire (section Infos pratiques).');
+  }
+  if (!data.rythme.trim()) {
+    errors.push('Le rythme est obligatoire (section Infos pratiques).');
+  }
+
+  if (data.prerequis.filter((p) => p.trim()).length === 0) {
+    errors.push('Ajoutez au moins une condition d\'accès.');
+  }
+
+  if (data.blocks.length === 0) {
+    errors.push('Ajoutez au moins un bloc de contenu.');
+  }
+
+  return errors;
+}
+
+function getCityInputToken(value: string): string {
+  const parts = value.split(',');
+  return parts[parts.length - 1].trim();
+}
+
+function applyCitySelection(value: string, city: string): string {
+  const parts = value.split(',');
+  if (parts.length > 1) {
+    const prefix = parts.slice(0, -1).map((p) => p.trim()).filter(Boolean);
+    return [...prefix, city.trim()].join(', ');
+  }
+  return city.trim();
+}
+
+function CityAutocomplete({
+  regionName,
+  value,
+  onChange,
+  onSubmit,
+  placeholder,
+  className,
+}: {
+  regionName: string;
+  value: string;
+  onChange: (v: string) => void;
+  onSubmit?: (v: string) => void;
+  placeholder?: string;
+  className?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const known = regionName ? getKnownCityNamesForRegion(regionName) : [];
+  const token = getCityInputToken(value);
+  const q = token.toLowerCase();
+  const suggestions =
+    q.length >= 1 ? known.filter((c) => c.toLowerCase().includes(q)) : [];
+
+  function selectCity(city: string) {
+    if (!city.trim()) return;
+    if (onSubmit) {
+      onSubmit(city.trim());
+      onChange('');
+    } else {
+      onChange(applyCitySelection(value, city));
+    }
+    setOpen(false);
+  }
+
+  return (
+    <div className={styles.cityAutocomplete}>
+      <input
+        className={className ?? styles.input}
+        value={value}
+        autoComplete="off"
+        spellCheck={false}
+        onChange={(e) => {
+          onChange(e.target.value);
+          setOpen(e.target.value.trim().length > 0);
+        }}
+        onFocus={() => {
+          if (token.length >= 1) setOpen(true);
+        }}
+        onBlur={() => setTimeout(() => setOpen(false), 200)}
+        placeholder={placeholder}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && onSubmit) {
+            e.preventDefault();
+            selectCity(value);
+          }
+        }}
+      />
+      {open && regionName && token.length >= 1 && suggestions.length > 0 && (
+        <ul className={styles.citySuggestions}>
+          {suggestions.slice(0, 10).map((city) => (
+            <li key={city}>
+              <button
+                type="button"
+                className={styles.citySuggestionBtn}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  selectCity(city);
+                }}
+              >
+                {city}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function AddCityInput({
+  regionName,
+  onAdd,
+}: {
+  regionName: string;
+  onAdd: (name: string) => void;
+}) {
+  const [value, setValue] = useState('');
+  return (
+    <CityAutocomplete
+      regionName={regionName}
+      value={value}
+      onChange={setValue}
+      onSubmit={onAdd}
+      placeholder="Ajouter une ville…"
+    />
+  );
+}
+
 function createBlock(type: FormationBlock['type']): FormationBlock {
   const titles: Record<FormationBlock['type'], string> = {
     list: 'Nouveau bloc',
@@ -66,11 +285,22 @@ function createBlock(type: FormationBlock['type']): FormationBlock {
   return block;
 }
 
+function formationSnapshot(f: EditableFormation): string {
+  return JSON.stringify(f);
+}
+
+function toEditableFormation(formation: Formation | null): EditableFormation {
+  return formation
+    ? (normalizeFormation(formation as unknown as Record<string, unknown>) as EditableFormation)
+    : emptyFormation();
+}
+
 function emptyFormation(): EditableFormation {
   return {
     id: '',
     nom: '',
     certification: '',
+    ecole: 'stade-formation',
     regions: [],
     dates_inscription: null,
     date_limite_inscription: null,
@@ -82,8 +312,9 @@ function emptyFormation(): EditableFormation {
     description: '',
     inscription_active: true,
     date_cloture_inscription: null,
-    highlights: ['', '', '', ''],
+    highlights: [],
     blocks: [],
+    visible: false,
   };
 }
 
@@ -288,20 +519,58 @@ interface Props {
 
 export default function FormationEditor({ formation }: Props) {
   const router = useRouter();
-  const [data, setData] = useState<EditableFormation>(
-    formation ? { ...formation } : emptyFormation()
-  );
+  const [data, setData] = useState<EditableFormation>(() => toEditableFormation(formation));
+  const [baseline, setBaseline] = useState(() => formationSnapshot(toEditableFormation(formation)));
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [newRegion, setNewRegion] = useState('');
+  const [newRegionEcole, setNewRegionEcole] = useState<Ecole>('stade-formation');
   const [newVille, setNewVille] = useState('');
   const [newPrereq, setNewPrereq] = useState('');
+  const [placementQueue, setPlacementQueue] = useState<{ regionName: string; city: string }[]>([]);
+  const [visPulse, setVisPulse] = useState<'visible' | 'hidden' | null>(null);
+  const [confirm, setConfirm] = useState<{ message: string; onConfirm: () => void } | null>(null);
   const isNew = !formation;
+  const isDirty = formationSnapshot(data) !== baseline;
+
+  useEffect(() => {
+    const next = toEditableFormation(formation);
+    setData(next);
+    setBaseline(formationSnapshot(next));
+    setValidationErrors([]);
+  }, [formation?.id]);
+
+  useEffect(() => {
+    setNewRegionEcole(data.ecole);
+  }, [data.ecole]);
+
+  useEffect(() => {
+    if (!isNew) return;
+    const generated = generateFormationId(data.nom, data.certification);
+    setData((d) => (d.id === generated ? d : { ...d, id: generated }));
+  }, [isNew, data.nom, data.certification]);
 
   function set<K extends keyof EditableFormation>(key: K, value: EditableFormation[K]) {
     setData((d) => ({ ...d, [key]: value }));
-    setSaved(false);
+    setValidationErrors([]);
+  }
+
+  async function queueCityPlacement(regionName: string, cityNames: string[]) {
+    try {
+      const res = await fetch('/api/city-positions');
+      if (!res.ok) return;
+      const positions = await res.json();
+      const unpinned = cityNames.filter((name) => !hasCityPosition(name, positions));
+      if (unpinned.length > 0) {
+        setPlacementQueue((queue) => [
+          ...queue,
+          ...unpinned.map((city) => ({ regionName, city })),
+        ]);
+      }
+    } catch {
+      // ignore
+    }
   }
 
   function updateHighlight(idx: number, value: string) {
@@ -310,12 +579,86 @@ export default function FormationEditor({ formation }: Props) {
     set('highlights', h);
   }
 
+  function addHighlight() {
+    if (data.highlights.length >= 10) return;
+    set('highlights', [...data.highlights, '']);
+  }
+
+  function requestConfirm(message: string, action: () => void) {
+    setConfirm({
+      message,
+      onConfirm: () => {
+        action();
+        setConfirm(null);
+      },
+    });
+  }
+
+  function removeHighlight(idx: number) {
+    set('highlights', data.highlights.filter((_, i) => i !== idx));
+  }
+
+  function setVisibility(visible: boolean) {
+    set('visible', visible);
+    setVisPulse(visible ? 'visible' : 'hidden');
+    window.setTimeout(() => setVisPulse(null), 450);
+  }
+
   function addRegion() {
     if (!newRegion) return;
-    const entry = newVille.trim() ? `${newRegion} (${newVille.trim()})` : newRegion;
+    const regionName = newRegion;
+    const cities: FormationCity[] = newVille
+      .split(',')
+      .map((v) => v.trim())
+      .filter(Boolean)
+      .map((name) => ({ name }));
+    const entry: FormationRegion = {
+      regionName,
+      ecole: newRegionEcole,
+      cities,
+    };
     set('regions', [...data.regions, entry]);
     setNewRegion('');
     setNewVille('');
+    void queueCityPlacement(regionName, cities.map((c) => c.name));
+  }
+
+  function updateRegion(idx: number, patch: Partial<FormationRegion>) {
+    set(
+      'regions',
+      data.regions.map((r, i) => (i === idx ? { ...r, ...patch } : r)),
+    );
+  }
+
+  function updateCity(regionIdx: number, cityIdx: number, patch: Partial<FormationCity>) {
+    const regions = data.regions.map((r, i) => {
+      if (i !== regionIdx) return r;
+      return {
+        ...r,
+        cities: r.cities.map((c, j) => (j === cityIdx ? { ...c, ...patch } : c)),
+      };
+    });
+    set('regions', regions);
+  }
+
+  function addCityToRegion(regionIdx: number, cityName: string) {
+    if (!cityName.trim()) return;
+    const regionName = data.regions[regionIdx]?.regionName;
+    const trimmed = cityName.trim();
+    const regions = data.regions.map((r, i) => {
+      if (i !== regionIdx) return r;
+      return { ...r, cities: [...r.cities, { name: trimmed }] };
+    });
+    set('regions', regions);
+    if (regionName) void queueCityPlacement(regionName, [trimmed]);
+  }
+
+  function removeCity(regionIdx: number, cityIdx: number) {
+    const regions = data.regions.map((r, i) => {
+      if (i !== regionIdx) return r;
+      return { ...r, cities: r.cities.filter((_, j) => j !== cityIdx) };
+    });
+    set('regions', regions);
   }
 
   function removeRegion(idx: number) {
@@ -341,7 +684,7 @@ export default function FormationEditor({ formation }: Props) {
       ...d,
       blocks: d.blocks.map((b, i) => (i === idx ? block : b)),
     }));
-    setSaved(false);
+    setValidationErrors([]);
   }, []);
 
   function removeBlock(idx: number) {
@@ -349,6 +692,12 @@ export default function FormationEditor({ formation }: Props) {
   }
 
   async function handleSave() {
+    const errors = validateFormation(data, isNew);
+    if (errors.length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+    setValidationErrors([]);
     setSaving(true);
     const url = isNew ? '/api/formations' : `/api/formations/${formation!.id}`;
     const method = isNew ? 'POST' : 'PUT';
@@ -360,7 +709,7 @@ export default function FormationEditor({ formation }: Props) {
     });
 
     if (res.ok) {
-      setSaved(true);
+      setBaseline(formationSnapshot(data));
       if (isNew) {
         router.push(`/admin/formations/${data.id}`);
         router.refresh();
@@ -374,16 +723,20 @@ export default function FormationEditor({ formation }: Props) {
   }
 
   async function handleDelete() {
-    if (!window.confirm(`Supprimer "${data.nom}" définitivement ?`)) return;
-    setDeleting(true);
-    const res = await fetch(`/api/formations/${formation!.id}`, { method: 'DELETE' });
-    if (res.ok) {
-      router.push('/admin');
-      router.refresh();
-    } else {
-      alert('Erreur lors de la suppression');
-      setDeleting(false);
-    }
+    requestConfirm(
+      `Mettre « ${data.nom} » à la corbeille ? Vous pourrez la restaurer depuis la corbeille.`,
+      async () => {
+        setDeleting(true);
+        const res = await fetch(`/api/formations/${formation!.id}`, { method: 'DELETE' });
+        if (res.ok) {
+          router.push('/admin/trash');
+          router.refresh();
+        } else {
+          alert('Erreur lors de la suppression');
+          setDeleting(false);
+        }
+      },
+    );
   }
 
   return (
@@ -405,6 +758,32 @@ export default function FormationEditor({ formation }: Props) {
           )}
         </div>
         <div className={styles.toolbarActions}>
+          <div className={styles.visibilityGroup} role="group" aria-label="Visibilité sur le site">
+            <button
+              type="button"
+              className={[
+                styles.visBtn,
+                styles.visBtnOn,
+                data.visible ? styles.visBtnActive : '',
+                visPulse === 'visible' ? styles.visBtnPulse : '',
+              ].join(' ')}
+              onClick={() => setVisibility(true)}
+            >
+              Visible
+            </button>
+            <button
+              type="button"
+              className={[
+                styles.visBtn,
+                styles.visBtnOff,
+                !data.visible ? styles.visBtnActive : '',
+                visPulse === 'hidden' ? styles.visBtnPulse : '',
+              ].join(' ')}
+              onClick={() => setVisibility(false)}
+            >
+              Invisible
+            </button>
+          </div>
           {!isNew && (
             <button
               type="button"
@@ -415,31 +794,72 @@ export default function FormationEditor({ formation }: Props) {
               {deleting ? '…' : 'Supprimer'}
             </button>
           )}
-          <button
-            type="button"
-            className={`${styles.btnSave} ${saved ? styles.btnSaved : ''}`}
-            onClick={handleSave}
-            disabled={saving}
-          >
-            {saving ? 'Enregistrement…' : saved ? '✓ Enregistré' : 'Enregistrer'}
-          </button>
+          {isDirty && (
+            <button
+              type="button"
+              className={styles.btnSave}
+              onClick={handleSave}
+              disabled={saving}
+            >
+              {saving ? 'Enregistrement…' : 'Enregistrer'}
+            </button>
+          )}
         </div>
       </div>
 
       <div className={styles.body}>
+        {validationErrors.length > 0 && (
+          <div className={styles.errorBox} role="alert">
+            <p className={styles.errorTitle}>Impossible d&apos;enregistrer :</p>
+            <ul className={styles.errorList}>
+              {validationErrors.map((err) => (
+                <li key={err}>{err}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* ── École gestionnaire ── */}
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>École gestionnaire</h2>
+          <p className={styles.hint}>
+            Définit la couleur par défaut de la formation sur le site (orange Stade, rouge Spor).
+          </p>
+          <div className={styles.ecoleSegmented}>
+            {ECOLE_OPTIONS.map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                className={[
+                  styles.ecoleBtn,
+                  opt === 'stade-formation' ? styles.ecoleBtnStade : '',
+                  opt === 'sporformation' ? styles.ecoleBtnSpor : '',
+                  opt === 'both' ? styles.ecoleBtnBoth : '',
+                  data.ecole === opt ? styles.ecoleBtnActive : '',
+                ].join(' ')}
+                onClick={() => set('ecole', opt)}
+              >
+                {ECOLE_LABELS[opt]}
+              </button>
+            ))}
+          </div>
+        </section>
 
         {/* ── Identité ── */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Identité</h2>
           {isNew && (
             <div className={styles.field}>
-              <label className={styles.label}>ID (slug URL)</label>
+              <label className={styles.label}>ID (slug URL) - généré automatiquement</label>
               <input
-                className={styles.input}
+                className={`${styles.input} ${styles.inputReadonly}`}
                 value={data.id}
-                onChange={(e) => set('id', e.target.value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''))}
+                readOnly
                 placeholder="bpjeps-nom-formation"
               />
+              <p className={styles.hint}>
+                Basé sur le nom et la certification (espaces remplacés par des tirets).
+              </p>
             </div>
           )}
           <div className={styles.field}>
@@ -478,10 +898,31 @@ export default function FormationEditor({ formation }: Props) {
               rows={3}
             />
           </div>
-          <div className={styles.fieldGrid4}>
+          <div className={styles.chipSection}>
+            <label className={styles.label}>Cases d&apos;information</label>
+            <p className={styles.hint}>
+              Petits badges affichés sous la description sur la page de la formation (ex. : 1 an, Alternance, Qualiopi). Maximum 10.
+            </p>
+            <div className={styles.chipGrid}>
             {data.highlights.map((h, i) => (
-              <div key={i} className={styles.field}>
-                <label className={styles.label}>Chip {i + 1}</label>
+              <div key={i} className={styles.chipField}>
+                <button
+                  type="button"
+                  className={styles.chipRemove}
+                  onClick={() => {
+                    const label = h.trim();
+                    requestConfirm(
+                      label
+                        ? `Êtes-vous sûr de vouloir supprimer « ${label} » ?`
+                        : 'Êtes-vous sûr de vouloir supprimer cette case d\'information ?',
+                      () => removeHighlight(i),
+                    );
+                  }}
+                  aria-label={`Supprimer la case ${i + 1}`}
+                >
+                  ×
+                </button>
+                <label className={styles.label}>Case {i + 1}</label>
                 <input
                   className={styles.input}
                   value={h}
@@ -490,18 +931,71 @@ export default function FormationEditor({ formation }: Props) {
                 />
               </div>
             ))}
+            {data.highlights.length < 10 && (
+              <button
+                type="button"
+                className={styles.chipAdd}
+                onClick={addHighlight}
+                aria-label="Ajouter une case d'information"
+              >
+                <span className={styles.chipAddIcon}>+</span>
+                <span className={styles.chipAddLabel}>Ajouter une case</span>
+              </button>
+            )}
+            </div>
           </div>
         </section>
 
         {/* ── Régions ── */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Régions & lieux</h2>
-          <div className={styles.tagList}>
-            {data.regions.map((r, i) => (
-              <span key={i} className={styles.tag}>
-                {r}
-                <button type="button" className={styles.tagRemove} onClick={() => removeRegion(i)}>×</button>
-              </span>
+          <div className={styles.regionList}>
+            {data.regions.map((region, regionIdx) => (
+              <div key={`${region.regionName}-${regionIdx}`} className={styles.regionCard}>
+                <div className={styles.regionCardHead}>
+                  <strong className={styles.regionName}>{region.regionName}</strong>
+                  <EcoleSelect
+                    value={region.ecole}
+                    defaultEcole={data.ecole}
+                    onChange={(ecole) => updateRegion(regionIdx, { ecole })}
+                    className={styles.selectSmall}
+                  />
+                  <button
+                    type="button"
+                    className={styles.regionRemove}
+                    onClick={() => removeRegion(regionIdx)}
+                    aria-label={`Supprimer ${region.regionName}`}
+                  >
+                    ×
+                  </button>
+                </div>
+                <div className={styles.cityList}>
+                  {region.cities.map((city, cityIdx) => (
+                    <div key={`${city.name}-${cityIdx}`} className={styles.cityRow}>
+                      <span className={styles.cityName}>{city.name}</span>
+                      <EcoleSelect
+                        value={city.ecole}
+                        defaultEcole={region.ecole ?? data.ecole}
+                        onChange={(ecole) => updateCity(regionIdx, cityIdx, { ecole })}
+                        className={styles.selectSmall}
+                      />
+                      <button
+                        type="button"
+                        className={styles.cityRemove}
+                        onClick={() => removeCity(regionIdx, cityIdx)}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className={styles.addRow}>
+                  <AddCityInput
+                    regionName={region.regionName}
+                    onAdd={(cityName) => addCityToRegion(regionIdx, cityName)}
+                  />
+                </div>
+              </div>
             ))}
           </div>
           <div className={styles.addRow}>
@@ -515,19 +1009,24 @@ export default function FormationEditor({ formation }: Props) {
                 <option key={r} value={r}>{r}</option>
               ))}
             </select>
-            <input
-              className={styles.input}
+            <EcoleSelect
+              value={newRegionEcole}
+              defaultEcole={data.ecole}
+              onChange={setNewRegionEcole}
+              className={styles.select}
+            />
+            <CityAutocomplete
+              regionName={newRegion}
               value={newVille}
-              onChange={(e) => setNewVille(e.target.value)}
+              onChange={(v) => setNewVille(v)}
               placeholder="Villes (Bordeaux, Agen…)"
-              onKeyDown={(e) => e.key === 'Enter' && addRegion()}
             />
             <button type="button" className={styles.addBtn} onClick={addRegion} disabled={!newRegion}>
               + Ajouter
             </button>
           </div>
           <p className={styles.hint}>
-            Ajouter une région activera automatiquement son affichage sur la carte nationale.
+            Chaque région et ville peut être gérée par Stade Formation, SporFormation ou les deux.
           </p>
         </section>
 
@@ -686,6 +1185,23 @@ export default function FormationEditor({ formation }: Props) {
         </section>
 
       </div>
+
+      {placementQueue[0] && (
+        <CityPlacementModal
+          regionName={placementQueue[0].regionName}
+          cityName={placementQueue[0].city}
+          onComplete={() => setPlacementQueue((q) => q.slice(1))}
+          onSkip={() => setPlacementQueue((q) => q.slice(1))}
+        />
+      )}
+
+      {confirm && (
+        <ConfirmDialog
+          message={confirm.message}
+          onConfirm={confirm.onConfirm}
+          onCancel={() => setConfirm(null)}
+        />
+      )}
     </div>
   );
 }

@@ -1,0 +1,193 @@
+@use '../../styles/variables' as *;
+
+.overview,
+.regionPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.overviewHint,
+.regionHint {
+  font-size: 0.82rem;
+  color: $color-text-muted;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.regionHead {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.backBtn {
+  align-self: flex-start;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  color: $color-text-muted;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+}
+
+.regionTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: $color-text;
+}
+
+.unpinned {
+  margin: 0;
+  padding: 10px 14px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: #fbbf24;
+}
+
+.mapWrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.overviewPath {
+  fill: rgba(255, 255, 255, 0.04);
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 0.8;
+  transition: fill 0.2s, stroke 0.2s;
+
+  &.overviewPathActive {
+    fill: rgba(255, 107, 0, 0.12);
+    stroke: rgba(255, 107, 0, 0.35);
+    cursor: pointer;
+
+    &:hover {
+      fill: rgba(255, 107, 0, 0.22);
+      stroke: $color-primary;
+    }
+  }
+}
+
+.regionPath {
+  fill: rgba(255, 107, 0, 0.1);
+  stroke: rgba(255, 107, 0, 0.35);
+  stroke-width: 1;
+}
+
+.pin {
+  user-select: none;
+
+  &.pinFocus .pinDot {
+    fill: #f59e0b;
+    r: 7;
+  }
+
+  &.pinDragging {
+    cursor: grabbing !important;
+  }
+}
+
+.pinDot {
+  fill: $color-primary;
+  opacity: 0.85;
+}
+
+.pinCore {
+  fill: #fff;
+}
+
+.pinLabel {
+  font-size: 9px;
+  font-weight: 700;
+  fill: $color-text;
+  pointer-events: none;
+}
+
+.regionPickList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.regionPickBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 12px 14px;
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  border-radius: 10px;
+  color: $color-text;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s;
+
+  span {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: $color-text-muted;
+  }
+
+  &:hover {
+    border-color: rgba(255, 107, 0, 0.4);
+    background: rgba(255, 107, 0, 0.06);
+  }
+}
+
+.cityList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cityListItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  font-size: 0.75rem;
+}
+
+.badgeOk {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.badgeMissing {
+  color: #f59e0b;
+  font-weight: 700;
+}

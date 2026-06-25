@@ -4,10 +4,60 @@
     "nom": "BPJEPS Activités Physiques pour Tous (MAPST)",
     "certification": "BPJEPS - Brevet Professionnel de la Jeunesse, de l'Éducation Populaire et du Sport - Niveau 4",
     "regions": [
-      "Nouvelle-Aquitaine (Bordeaux, Pont-Du-Casse/Agen)",
-      "Île-de-France (Cergy, Courbevoie, Drancy, Nanterre, Paris 7ème, Arpajon/Égly)",
-      "Corse (Ajaccio)",
-      "Normandie (Mortagne-Au-Perche)"
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Bordeaux"
+          },
+          {
+            "name": "Pont-Du-Casse/Agen"
+          }
+        ],
+        "ecole": "stade-formation"
+      },
+      {
+        "regionName": "Île-de-France",
+        "cities": [
+          {
+            "name": "Cergy"
+          },
+          {
+            "name": "Courbevoie"
+          },
+          {
+            "name": "Drancy"
+          },
+          {
+            "name": "Nanterre"
+          },
+          {
+            "name": "Paris 7ème"
+          },
+          {
+            "name": "Arpajon/Égly"
+          }
+        ],
+        "ecole": "sporformation"
+      },
+      {
+        "regionName": "Corse",
+        "cities": [
+          {
+            "name": "Ajaccio"
+          }
+        ],
+        "ecole": "sporformation"
+      },
+      {
+        "regionName": "Normandie",
+        "cities": [
+          {
+            "name": "Mortagne-Au-Perche"
+          }
+        ],
+        "ecole": "sporformation"
+      }
     ],
     "dates_inscription": "Sessions septembre 2026",
     "date_limite_inscription": "11/08/2026",
@@ -72,7 +122,7 @@
         "items": [
           {
             "id": "1",
-            "value": "12 mois en alternance — 553 heures en organisme de formation. Contrat d'apprentissage 35h, alternance centre / structure employeuse. Ruban pédagogique : entretien corporel, sports collectifs, tir à l'arc, course d'orientation, pleine nature."
+            "value": "12 mois en alternance - 553 heures en organisme de formation. Contrat d'apprentissage 35h, alternance centre / structure employeuse. Ruban pédagogique : entretien corporel, sports collectifs, tir à l'arc, course d'orientation, pleine nature."
           }
         ]
       },
@@ -132,14 +182,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "both"
   },
   {
     "id": "bpjeps-mapst-siblu",
     "nom": "BPJEPS MAPST en partenariat avec SIBLU",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
-      "Nouvelle-Aquitaine (Bordeaux)"
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Bordeaux"
+          }
+        ]
+      }
     ],
     "dates_inscription": "Janvier 2027",
     "date_limite_inscription": "03/11/2026",
@@ -260,14 +318,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "stade-formation"
   },
   {
     "id": "bpjeps-aquatique",
     "nom": "BPJEPS Activités Aquatiques et de la Natation",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
-      "Nouvelle-Aquitaine (Bordeaux)"
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Bordeaux"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": null,
@@ -329,7 +395,7 @@
         "items": [
           {
             "id": "1",
-            "value": "12 mois en alternance — 608 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat avec les villages vacances SIBLU. Mobilité géographique requise."
+            "value": "12 mois en alternance - 608 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat avec les villages vacances SIBLU. Mobilité géographique requise."
           }
         ]
       },
@@ -389,14 +455,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "stade-formation"
   },
   {
     "id": "bpjeps-forme",
     "nom": "BPJEPS Activités de la Forme",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
-      "Île-de-France (Courbevoie)"
+      {
+        "regionName": "Île-de-France",
+        "cities": [
+          {
+            "name": "Courbevoie"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": "12/09/2026",
@@ -457,7 +531,7 @@
         "items": [
           {
             "id": "1",
-            "value": "1 an en alternance — 553 heures en organisme de formation. Rythme jeudis et vendredis en centre, reste du temps en structure employeuse. Contrat d'apprentissage 35h."
+            "value": "1 an en alternance - 553 heures en organisme de formation. Rythme jeudis et vendredis en centre, reste du temps en structure employeuse. Contrat d'apprentissage 35h."
           }
         ]
       },
@@ -517,14 +591,28 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "sporformation"
   },
   {
     "id": "bpjeps-basket",
     "nom": "BPJEPS Éducateur Sportif - Mention Basket-ball",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
-      "Île-de-France (Cergy, Courbevoie, Nanterre)"
+      {
+        "regionName": "Île-de-France",
+        "cities": [
+          {
+            "name": "Cergy"
+          },
+          {
+            "name": "Courbevoie"
+          },
+          {
+            "name": "Nanterre"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": "21/08/2026",
@@ -585,7 +673,7 @@
         "items": [
           {
             "id": "1",
-            "value": "12 mois en alternance — 610 heures en organisme de formation. Contrat d'apprentissage 35h, 70 % du temps en structure employeuse. Trois sites disponibles : Cergy, Courbevoie et Nanterre."
+            "value": "12 mois en alternance - 610 heures en organisme de formation. Contrat d'apprentissage 35h, 70 % du temps en structure employeuse. Trois sites disponibles : Cergy, Courbevoie et Nanterre."
           }
         ]
       },
@@ -645,15 +733,30 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "sporformation"
   },
   {
     "id": "bpjeps-rugby",
     "nom": "BPJEPS Éducateur Sportif - Rugby à XV",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
-      "Île-de-France (Courbevoie)",
-      "PACA (Toulon)"
+      {
+        "regionName": "Île-de-France",
+        "cities": [
+          {
+            "name": "Courbevoie"
+          }
+        ]
+      },
+      {
+        "regionName": "PACA",
+        "cities": [
+          {
+            "name": "Toulon"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": "21/08/2026",
@@ -714,7 +817,7 @@
         "items": [
           {
             "id": "1",
-            "value": "12 mois en alternance — 585 heures en organisme de formation. Contrat d'apprentissage 35h, plus de 70 % du temps en structure employeuse. Deux sites : Courbevoie (Île-de-France) et Toulon (PACA)."
+            "value": "12 mois en alternance - 585 heures en organisme de formation. Contrat d'apprentissage 35h, plus de 70 % du temps en structure employeuse. Deux sites : Courbevoie (Île-de-France) et Toulon (PACA)."
           }
         ]
       },
@@ -774,16 +877,44 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "sporformation"
   },
   {
     "id": "tfp-cdssa",
     "nom": "TFP Chargé de Développement d'une Structure Sportive Associative (CDSSA)",
     "certification": "Titre à Finalité Professionnelle (TFP) - Niveau 5",
     "regions": [
-      "Corse (Ajaccio)",
-      "Nouvelle-Aquitaine (Bordeaux, Pont-Du-Casse/Agen)",
-      "PACA (Toulon)"
+      {
+        "regionName": "Corse",
+        "cities": [
+          {
+            "name": "Ajaccio"
+          }
+        ],
+        "ecole": "sporformation"
+      },
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Bordeaux"
+          },
+          {
+            "name": "Pont-Du-Casse/Agen"
+          }
+        ],
+        "ecole": "stade-formation"
+      },
+      {
+        "regionName": "PACA",
+        "cities": [
+          {
+            "name": "Toulon"
+          }
+        ],
+        "ecole": "sporformation"
+      }
     ],
     "dates_inscription": "Septembre et octobre 2026",
     "date_limite_inscription": "05/09/2026",
@@ -844,7 +975,7 @@
         "items": [
           {
             "id": "1",
-            "value": "12 mois en alternance avec plus de 60 % du temps en entreprise — 612 heures en organisme de formation. Contrat d'apprentissage 35h. Trois régions : Bordeaux, Toulon, Ajaccio."
+            "value": "12 mois en alternance avec plus de 60 % du temps en entreprise - 612 heures en organisme de formation. Contrat d'apprentissage 35h. Trois régions : Bordeaux, Toulon, Ajaccio."
           }
         ]
       },
@@ -904,14 +1035,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "both"
   },
   {
     "id": "tp-animateur-siblu",
     "nom": "Titre Pro Animateur Loisirs Tourisme - partenariat SIBLU",
     "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
-      "Nouvelle-Aquitaine (Bordeaux)"
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Bordeaux"
+          }
+        ]
+      }
     ],
     "dates_inscription": "Février 2027",
     "date_limite_inscription": null,
@@ -973,7 +1112,7 @@
         "items": [
           {
             "id": "1",
-            "value": "6 mois en alternance — 270 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat direct avec les Villages Vacances SIBLU. Mobilité géographique requise."
+            "value": "6 mois en alternance - 270 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat direct avec les Villages Vacances SIBLU. Mobilité géographique requise."
           }
         ]
       },
@@ -1033,14 +1172,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "stade-formation"
   },
   {
     "id": "bpjeps-animation-socio",
     "nom": "BPJEPS Animation Socio-Éducative ou Culturelle",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
-      "Île-de-France (Courbevoie)"
+      {
+        "regionName": "Île-de-France",
+        "cities": [
+          {
+            "name": "Courbevoie"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": null,
@@ -1160,14 +1307,25 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "sporformation"
   },
   {
     "id": "dejeps-animation",
     "nom": "DEJEPS Spécialité Animation Socio-Éducative ou Culturelle - Coordination de Projets",
     "certification": "DEJEPS - Diplôme d'État de la Jeunesse, de l'Éducation Populaire et du Sport - Niveau 5",
     "regions": [
-      "Île-de-France (Cergy, Paris 7ème)"
+      {
+        "regionName": "Île-de-France",
+        "cities": [
+          {
+            "name": "Cergy"
+          },
+          {
+            "name": "Paris 7ème"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": "19/09/2026",
@@ -1227,7 +1385,7 @@
         "items": [
           {
             "id": "1",
-            "value": "12 mois en alternance — 700 heures en organisme de formation. Contrat d'apprentissage 35h, prise en charge par l'OPCO. Deux sites : Cergy et Paris 7ème."
+            "value": "12 mois en alternance - 700 heures en organisme de formation. Contrat d'apprentissage 35h, prise en charge par l'OPCO. Deux sites : Cergy et Paris 7ème."
           }
         ]
       },
@@ -1287,14 +1445,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "sporformation"
   },
   {
     "id": "tp-animateur-jet-tours-fitness",
     "nom": "Titre Pro Animateur Loisirs Tourisme Fitness - Jet Tours & Club Eldorador",
     "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
-      "Nouvelle-Aquitaine (Dax)"
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Dax"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": null,
@@ -1357,7 +1523,7 @@
         "items": [
           {
             "id": "1",
-            "value": "9 mois en alternance — 337 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat avec Jet Tours et Club Eldorador. Mobilité géographique requise."
+            "value": "9 mois en alternance - 337 heures en organisme de formation. Contrat d'apprentissage 35h en partenariat avec Jet Tours et Club Eldorador. Mobilité géographique requise."
           }
         ]
       },
@@ -1417,14 +1583,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "stade-formation"
   },
   {
     "id": "tp-animateur-jet-tours-polyvalence",
     "nom": "Titre Pro Animateur Loisirs Tourisme Polyvalence - Jet Tours & Club Eldorador",
     "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
-      "Nouvelle-Aquitaine (Dax)"
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Dax"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": null,
@@ -1485,7 +1659,7 @@
         "items": [
           {
             "id": "1",
-            "value": "9 mois en alternance — 337 heures en organisme de formation. Contrat d'apprentissage 35h. Mobilité géographique requise. Partenariat Jet Tours et Club Eldorador."
+            "value": "9 mois en alternance - 337 heures en organisme de formation. Contrat d'apprentissage 35h. Mobilité géographique requise. Partenariat Jet Tours et Club Eldorador."
           }
         ]
       },
@@ -1545,14 +1719,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "stade-formation"
   },
   {
     "id": "cert-directeur-acm",
     "nom": "Certificat Complémentaire Directeur d'Accueil Collectif de Mineurs (ACM)",
     "certification": "Certificat Complémentaire - BAFA/BAFD",
     "regions": [
-      "Nouvelle-Aquitaine (Bordeaux)"
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Bordeaux"
+          }
+        ]
+      }
     ],
     "dates_inscription": null,
     "date_limite_inscription": "28/08/2026",
@@ -1667,14 +1849,22 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "stade-formation"
   },
   {
     "id": "tep-bpjeps-mapst",
     "nom": "TEP - Tests d'Exigences Préalables BPJEPS MAPST",
     "certification": "Épreuves préalables (non diplômantes)",
     "regions": [
-      "Nouvelle-Aquitaine (Bordeaux)"
+      {
+        "regionName": "Nouvelle-Aquitaine",
+        "cities": [
+          {
+            "name": "Bordeaux"
+          }
+        ]
+      }
     ],
     "dates_inscription": "10 septembre 2026 et 12 novembre 2026",
     "date_limite_inscription": "11/08/2026",
@@ -1784,6 +1974,7 @@
           }
         ]
       }
-    ]
+    ],
+    "ecole": "stade-formation"
   }
 ]

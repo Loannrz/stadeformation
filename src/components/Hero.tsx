@@ -1,8 +1,13 @@
+'use client';
+
+import { useSchoolFilter } from './SchoolFilterProvider';
 import styles from './Hero.module.scss';
 
 export default function Hero() {
+  const { filter } = useSchoolFilter();
+
   return (
-    <section className={styles.hero} id="hero">
+    <section className={[styles.hero, styles[`heroFilter_${filter}`]].join(' ')} id="hero">
       <p className={styles.eyebrow}>Formations sportives diplômantes</p>
 
       <h1 className={styles.title}>
@@ -12,7 +17,22 @@ export default function Hero() {
       </h1>
 
       <p className={styles.subtitle}>
-        BPJEPS, DEJEPS, Titre Pro - des formations de niveau 4 et 5 reconnues par l'État, en alternance, partout en France.
+        {filter === 'both' ? (
+          <>
+            Stade Formation et SporFormation - BPJEPS, DEJEPS, Titre Pro : des formations
+            de niveau 4 et 5 reconnues par l&apos;État, en alternance, partout en France.
+          </>
+        ) : filter === 'sporformation' ? (
+          <>
+            SporFormation - BPJEPS, DEJEPS, Titre Pro : des formations de niveau 4 et 5
+            reconnues par l&apos;État, en alternance, partout en France.
+          </>
+        ) : (
+          <>
+            BPJEPS, DEJEPS, Titre Pro - des formations de niveau 4 et 5 reconnues par l&apos;État,
+            en alternance, partout en France.
+          </>
+        )}
       </p>
 
       <div className={styles.actions}>

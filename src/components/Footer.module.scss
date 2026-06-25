@@ -28,40 +28,50 @@
 }
 
 .brand {
-  max-width: 280px;
+  max-width: 320px;
 }
 
 .logo {
   display: inline-flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
-  font-size: 1rem;
-  font-weight: 800;
   color: $color-text;
-  margin-bottom: 10px;
-
-  .logoLight,
-  .logoDark {
-    transition: opacity 0.3s ease;
-  }
-
-  .logoLight {
-    display: block;
-  }
-
-  .logoDark {
-    display: none;
-  }
+  margin-bottom: 12px;
 }
 
-:global(html[data-theme='dark']) .logo {
-  .logoLight {
-    display: none;
-  }
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  .logoDark {
-    display: block;
-  }
+.logoStade {
+  width: auto;
+  height: 34px;
+  object-fit: contain;
+}
+
+.logoSporformation {
+  width: auto;
+  height: 40px;
+  object-fit: contain;
+}
+
+.logoNames {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.logoSep {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: $color-text-muted;
 }
 
 .tagline {
@@ -83,6 +93,18 @@
   gap: 8px;
 }
 
+.contactBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  & + & {
+    margin-top: 10px;
+    padding-top: 14px;
+    border-top: 1px solid $color-border;
+  }
+}
+
 .colTitle {
   margin: 0 0 4px;
   font-size: 0.68rem;
@@ -90,6 +112,21 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: $color-text-muted;
+}
+
+.colSchoolTitle {
+  margin: 0 0 2px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: $color-text;
+}
+
+.colDivider {
+  display: block;
+  height: 1px;
+  margin: 4px 0;
+  background: $color-border;
 }
 
 .link {

@@ -136,11 +136,10 @@
 }
 
 .hasFormations {
-  fill: string.unquote('url(#regionGradient)');
+  cursor: pointer;
 
   &:hover {
-    fill: string.unquote('url(#regionGradientHover)');
-    filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.45));
+    filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.35));
   }
 }
 
@@ -176,7 +175,19 @@
 }
 
 .legendDotActive {
-  background: linear-gradient(135deg, $color-primary, $color-accent);
+  background: linear-gradient(135deg, #FF6B00, #FFD700);
+}
+
+.legendDotStade {
+  background: linear-gradient(135deg, #FF6B00, #FFD700);
+}
+
+.legendDotSpor {
+  background: linear-gradient(135deg, #DC2626, #FB7185);
+}
+
+.legendDotBoth {
+  background: linear-gradient(135deg, #FF6B00, #DC2626);
 }
 
 .legendDotInactive {
