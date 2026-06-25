@@ -53,7 +53,7 @@ export default function FAQSection() {
     <section className={styles.section} id="faq">
       <div className={styles.inner}>
         <p className={styles.label}>Questions fréquentes</p>
-        <h2 className={styles.title}>Les réponses qu&apos;on nous pose le plus</h2>
+        <h2 className={styles.title}>Les questions qu&apos;on nous pose le plus</h2>
         <p className={styles.intro}>
           Vous hésitez encore ? Voici ce que les candidats nous demandent
           avant de se lancer - sans jargon inutile.

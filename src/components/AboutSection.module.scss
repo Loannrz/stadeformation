@@ -313,23 +313,26 @@
 }
 
 .mergedHeadline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
   margin-bottom: 20px;
 }
 
-.headlineRow {
+.headlineColStade {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
 
-  &:first-child {
-    margin-bottom: 2px;
-  }
-
-  @media (min-width: $bp-md) {
-    flex-wrap: nowrap;
-  }
+.headlineColSpor {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+  text-align: right;
+  min-width: 0;
 }
 
 .headStade {
@@ -346,11 +349,6 @@
   letter-spacing: -0.03em;
   line-height: 1.1;
   color: $color-text;
-  text-align: right;
-
-  @media (min-width: $bp-md) {
-    margin-left: auto;
-  }
 }
 
 .headStadeAccent {
@@ -369,15 +367,10 @@
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1.05;
-  text-align: right;
   background: linear-gradient(135deg, #DC2626, #FB7185);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-
-  @media (min-width: $bp-md) {
-    margin-left: auto;
-  }
 }
 
 .bothIntro {

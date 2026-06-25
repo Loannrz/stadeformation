@@ -77,12 +77,12 @@ export default function AboutSection() {
               </div>
 
               <div className={styles.mergedHeadline}>
-                <div className={styles.headlineRow}>
+                <div className={styles.headlineColStade}>
                   <span className={styles.headStade}>L&apos;école des métiers</span>
-                  <span className={styles.headSpor}>Former les talents</span>
-                </div>
-                <div className={styles.headlineRow}>
                   <span className={styles.headStadeAccent}>du sport</span>
+                </div>
+                <div className={styles.headlineColSpor}>
+                  <span className={styles.headSpor}>Former les talents</span>
                   <span className={styles.headSporAccent}>de demain</span>
                 </div>
               </div>
