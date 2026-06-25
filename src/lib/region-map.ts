@@ -384,11 +384,17 @@ export function isIdfRegion(regionId: string): boolean {
 }
 
 export function getIdfDepartmentPaths(): { id: string; name: string; path: string }[] {
-  return IDF_DEPARTMENT_IDS.map((id) => {
-    const loc = franceDepartments.locations.find((l) => l.id === id);
-    if (!loc) return null;
-    return { id, name: loc.name, path: loc.path };
-  }).filter((entry): entry is { id: string; name: string; path: string } => entry !== null);
+  const paths: { id: string; name: string; path: string }[] = [];
+
+  for (const id of IDF_DEPARTMENT_IDS) {
+    const loc = franceDepartments.locations.find(
+      (l: { id: string; name: string; path: string }) => l.id === id,
+    );
+    if (!loc) continue;
+    paths.push({ id, name: loc.name, path: loc.path });
+  }
+
+  return paths;
 }
 
 function getIdfCombinedBBox(): BBox {
