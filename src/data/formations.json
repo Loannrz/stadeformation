@@ -1,6 +1,24 @@
 [
   {
     "id": "bpjeps-mapst",
+    "motsCles": [
+      "éducateur sportif",
+      "multisport",
+      "polyvalent",
+      "sports collectifs",
+      "pleine nature",
+      "activités physiques",
+      "tous publics",
+      "animation sportive",
+      "remise en forme",
+      "sport",
+      "club",
+      "collectivité",
+      "encadrement",
+      "enfants",
+      "adultes",
+      "jeux sportifs"
+    ],
     "nom": "BPJEPS Activités Physiques pour Tous (MAPST)",
     "certification": "BPJEPS - Brevet Professionnel de la Jeunesse, de l'Éducation Populaire et du Sport - Niveau 4",
     "regions": [
@@ -187,6 +205,20 @@
   },
   {
     "id": "bpjeps-mapst-siblu",
+    "motsCles": [
+      "éducateur sportif",
+      "multisport",
+      "tourisme",
+      "village vacances",
+      "siblu",
+      "camping",
+      "vacances",
+      "animation sportive",
+      "tous publics",
+      "sport",
+      "alternance",
+      "emploi garanti"
+    ],
     "nom": "BPJEPS MAPST en partenariat avec SIBLU",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
@@ -323,6 +355,22 @@
   },
   {
     "id": "bpjeps-aquatique",
+    "motsCles": [
+      "natation",
+      "maître-nageur",
+      "sauveteur",
+      "aquatique",
+      "milieu aquatique",
+      "piscine",
+      "bnssa",
+      "sauvetage",
+      "eau",
+      "aquagym",
+      "nage",
+      "surveillant de baignade",
+      "éducateur sportif",
+      "sport"
+    ],
     "nom": "BPJEPS Activités Aquatiques et de la Natation",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
@@ -460,6 +508,24 @@
   },
   {
     "id": "bpjeps-forme",
+    "motsCles": [
+      "coach sportif",
+      "fitness",
+      "musculation",
+      "salle de sport",
+      "remise en forme",
+      "bien-être",
+      "cours collectifs",
+      "zumba",
+      "pilates",
+      "hiit",
+      "cardio",
+      "coaching",
+      "personal trainer",
+      "gym",
+      "santé",
+      "éducateur sportif"
+    ],
     "nom": "BPJEPS Activités de la Forme",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
@@ -596,6 +662,19 @@
   },
   {
     "id": "bpjeps-basket",
+    "motsCles": [
+      "basket",
+      "basket-ball",
+      "basketball",
+      "entraîneur",
+      "coach basket",
+      "éducateur sportif",
+      "sport collectif",
+      "équipe",
+      "club",
+      "ballon",
+      "sport"
+    ],
     "nom": "BPJEPS Éducateur Sportif - Mention Basket-ball",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
@@ -738,6 +817,18 @@
   },
   {
     "id": "bpjeps-rugby",
+    "motsCles": [
+      "rugby",
+      "rugby à xv",
+      "entraîneur",
+      "coach rugby",
+      "éducateur sportif",
+      "sport collectif",
+      "équipe",
+      "club",
+      "ballon ovale",
+      "sport"
+    ],
     "nom": "BPJEPS Éducateur Sportif - Rugby à XV",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
@@ -882,6 +973,22 @@
   },
   {
     "id": "tfp-cdssa",
+    "motsCles": [
+      "management sportif",
+      "gestion",
+      "développement",
+      "association sportive",
+      "club",
+      "événementiel",
+      "administration",
+      "directeur",
+      "responsable",
+      "dirigeant",
+      "gestion de projet",
+      "marketing sportif",
+      "comptabilité",
+      "bureau"
+    ],
     "nom": "TFP Chargé de Développement d'une Structure Sportive Associative (CDSSA)",
     "certification": "Titre à Finalité Professionnelle (TFP) - Niveau 5",
     "regions": [
@@ -931,7 +1038,7 @@
     "url_inscription": "https://stadeformation.fr/formations/charge-de-developpement-dune-structure-sportive-associative/bordeaux",
     "description": "Devenez le pilier d'une structure sportive associative : développement, gestion, événementiel et administration. Le TFP CDSSA forme les futurs responsables de clubs et associations.",
     "inscription_active": true,
-    "date_cloture_inscription": null,
+    "date_cloture_inscription": "22/07/2026",
     "highlights": [
       "Management sportif",
       "60 % en entreprise",
@@ -1036,10 +1143,25 @@
         ]
       }
     ],
-    "ecole": "both"
+    "ecole": "both",
+    "visible": true
   },
   {
     "id": "tp-animateur-siblu",
+    "motsCles": [
+      "animateur",
+      "loisirs",
+      "tourisme",
+      "village vacances",
+      "siblu",
+      "camping",
+      "vacances",
+      "club vacances",
+      "spectacle",
+      "accueil",
+      "animation",
+      "loisirs tourisme"
+    ],
     "nom": "Titre Pro Animateur Loisirs Tourisme - partenariat SIBLU",
     "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
@@ -1177,6 +1299,22 @@
   },
   {
     "id": "bpjeps-animation-socio",
+    "motsCles": [
+      "animateur",
+      "animation socioculturelle",
+      "socio-éducatif",
+      "mjc",
+      "centre social",
+      "centre socioculturel",
+      "jeunesse",
+      "enfants",
+      "ados",
+      "culturel",
+      "collectivité",
+      "éducation populaire",
+      "social",
+      "animation"
+    ],
     "nom": "BPJEPS Animation Socio-Éducative ou Culturelle",
     "certification": "BPJEPS - Niveau 4",
     "regions": [
@@ -1312,6 +1450,21 @@
   },
   {
     "id": "dejeps-animation",
+    "motsCles": [
+      "coordination",
+      "coordinateur",
+      "animation",
+      "gestion de projet",
+      "chef de projet",
+      "socio-éducatif",
+      "culturel",
+      "responsable",
+      "directeur adjoint",
+      "encadrement d'équipe",
+      "jeunesse",
+      "management",
+      "éducation populaire"
+    ],
     "nom": "DEJEPS Spécialité Animation Socio-Éducative ou Culturelle - Coordination de Projets",
     "certification": "DEJEPS - Diplôme d'État de la Jeunesse, de l'Éducation Populaire et du Sport - Niveau 5",
     "regions": [
@@ -1450,6 +1603,20 @@
   },
   {
     "id": "tp-animateur-jet-tours-fitness",
+    "motsCles": [
+      "animateur",
+      "fitness",
+      "jet tours",
+      "club eldorador",
+      "tourisme",
+      "international",
+      "vacances",
+      "cours collectifs",
+      "hôtel club",
+      "animation",
+      "sport",
+      "loisirs tourisme"
+    ],
     "nom": "Titre Pro Animateur Loisirs Tourisme Fitness - Jet Tours & Club Eldorador",
     "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
@@ -1588,6 +1755,22 @@
   },
   {
     "id": "tp-animateur-jet-tours-polyvalence",
+    "motsCles": [
+      "animateur",
+      "polyvalent",
+      "jet tours",
+      "club eldorador",
+      "tourisme",
+      "vacances",
+      "sport",
+      "culture",
+      "récréatif",
+      "spectacle",
+      "hôtel club",
+      "international",
+      "animation",
+      "loisirs tourisme"
+    ],
     "nom": "Titre Pro Animateur Loisirs Tourisme Polyvalence - Jet Tours & Club Eldorador",
     "certification": "Titre Professionnel Animateur - Niveau 4",
     "regions": [
@@ -1724,6 +1907,21 @@
   },
   {
     "id": "cert-directeur-acm",
+    "motsCles": [
+      "direction",
+      "directeur",
+      "accueil collectif de mineurs",
+      "acm",
+      "colonie",
+      "centre de loisirs",
+      "séjour",
+      "enfants",
+      "bafa",
+      "bafd",
+      "encadrement",
+      "jeunesse",
+      "animation"
+    ],
     "nom": "Certificat Complémentaire Directeur d'Accueil Collectif de Mineurs (ACM)",
     "certification": "Certificat Complémentaire - BAFA/BAFD",
     "regions": [
@@ -1854,6 +2052,17 @@
   },
   {
     "id": "tep-bpjeps-mapst",
+    "motsCles": [
+      "tep",
+      "tests d'exigences préalables",
+      "sélection",
+      "épreuves",
+      "prérequis",
+      "bpjeps",
+      "mapst",
+      "tests physiques",
+      "éducateur sportif"
+    ],
     "nom": "TEP - Tests d'Exigences Préalables BPJEPS MAPST",
     "certification": "Épreuves préalables (non diplômantes)",
     "regions": [

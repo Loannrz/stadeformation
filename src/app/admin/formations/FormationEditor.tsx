@@ -314,6 +314,7 @@ function emptyFormation(): EditableFormation {
     date_cloture_inscription: null,
     highlights: [],
     blocks: [],
+    motsCles: [],
     visible: false,
   };
 }
@@ -596,6 +597,21 @@ export default function FormationEditor({ formation }: Props) {
 
   function removeHighlight(idx: number) {
     set('highlights', data.highlights.filter((_, i) => i !== idx));
+  }
+
+  function updateMotCle(idx: number, value: string) {
+    const m = [...data.motsCles];
+    m[idx] = value;
+    set('motsCles', m);
+  }
+
+  function addMotCle() {
+    if (data.motsCles.length >= 40) return;
+    set('motsCles', [...data.motsCles, '']);
+  }
+
+  function removeMotCle(idx: number) {
+    set('motsCles', data.motsCles.filter((_, i) => i !== idx));
   }
 
   function setVisibility(visible: boolean) {
@@ -942,6 +958,59 @@ export default function FormationEditor({ formation }: Props) {
                 <span className={styles.chipAddLabel}>Ajouter une case</span>
               </button>
             )}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Mots-clés IA (chatbot) ── */}
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Mots-clés IA (assistant de discussion)</h2>
+          <div className={styles.chipSection}>
+            <p className={styles.hint}>
+              Ces mots-clés aident l&apos;assistant du site à recommander cette formation
+              quand un visiteur décrit ce qu&apos;il souhaite faire. Ajoutez des métiers,
+              activités, publics ou contextes (ex. : natation, coach sportif, animation,
+              village vacances). Maximum 40.
+            </p>
+            <div className={styles.chipGrid}>
+              {data.motsCles.map((m, i) => (
+                <div key={i} className={styles.chipField}>
+                  <button
+                    type="button"
+                    className={styles.chipRemove}
+                    onClick={() => {
+                      const label = m.trim();
+                      requestConfirm(
+                        label
+                          ? `Êtes-vous sûr de vouloir supprimer le mot-clé « ${label} » ?`
+                          : 'Êtes-vous sûr de vouloir supprimer ce mot-clé ?',
+                        () => removeMotCle(i),
+                      );
+                    }}
+                    aria-label={`Supprimer le mot-clé ${i + 1}`}
+                  >
+                    ×
+                  </button>
+                  <label className={styles.label}>Mot-clé {i + 1}</label>
+                  <input
+                    className={styles.input}
+                    value={m}
+                    onChange={(e) => updateMotCle(i, e.target.value)}
+                    placeholder="Ex: coach sportif"
+                  />
+                </div>
+              ))}
+              {data.motsCles.length < 40 && (
+                <button
+                  type="button"
+                  className={styles.chipAdd}
+                  onClick={addMotCle}
+                  aria-label="Ajouter un mot-clé"
+                >
+                  <span className={styles.chipAddIcon}>+</span>
+                  <span className={styles.chipAddLabel}>Ajouter un mot-clé</span>
+                </button>
+              )}
             </div>
           </div>
         </section>

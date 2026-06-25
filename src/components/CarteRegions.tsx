@@ -10,7 +10,7 @@ import {
   getFormationsByRegionId,
   getRegionIdsWithFormations,
   getRegionMapEcole,
-  resolveEcole,
+  resolveFormationEcoleInRegionId,
 } from '@/lib/formations';
 import { useSchoolFilter } from './SchoolFilterProvider';
 import FormationCard from './FormationCard';
@@ -284,10 +284,11 @@ export default function CarteRegions({ formations: publicFormations }: { formati
                             key={f.id}
                             formation={f}
                             compact
-                            ecole={resolveEcole(
-                              f,
-                              activeLocation.name,
-                            )}
+                            ecole={
+                              activeRegion
+                                ? resolveFormationEcoleInRegionId(f, activeRegion, filter)
+                                : f.ecole
+                            }
                             lieux={
                               activeRegion
                                 ? getFormationCitiesInRegionId(f, activeRegion, filter)

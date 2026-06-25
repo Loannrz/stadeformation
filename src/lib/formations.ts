@@ -47,6 +47,8 @@ export interface Formation {
   date_cloture_inscription: string | null;
   highlights: string[];
   blocks: FormationBlock[];
+  /** Mots-clés utilisés par l'assistant (chatbot) pour recommander la formation */
+  motsCles: string[];
   /** false = masquée du site public (visible uniquement en admin) */
   visible: boolean;
 }
@@ -80,9 +82,10 @@ export function normalizeFormation(raw: Record<string, unknown>): Formation {
   }
 
   return {
-    ...(raw as Omit<Formation, 'ecole' | 'regions' | 'visible'>),
+    ...(raw as Omit<Formation, 'ecole' | 'regions' | 'visible' | 'motsCles'>),
     ecole,
     regions,
+    motsCles: Array.isArray(raw.motsCles) ? (raw.motsCles as string[]) : [],
     visible: typeof raw.visible === 'boolean' ? raw.visible : true,
   };
 }
@@ -97,22 +100,58 @@ export function getPublicFormations(): Formation[] {
   return formations.filter(isFormationPubliclyVisible);
 }
 
+function findFormationRegion(formation: Formation, regionName: string) {
+  const targetId = regionNameToId(regionName);
+  return formation.regions.find((r) => {
+    if (r.regionName === regionName) return true;
+    if (targetId && regionNameToId(r.regionName) === targetId) return true;
+    return false;
+  });
+}
+
 export function resolveEcole(
   formation: Formation,
   regionName?: string,
   cityName?: string,
 ): Ecole {
   if (cityName && regionName) {
-    const region = formation.regions.find((r) => r.regionName === regionName);
+    const region = findFormationRegion(formation, regionName);
     const city = region?.cities.find((c) => c.name === cityName);
     if (city?.ecole) return city.ecole;
     if (region?.ecole) return region.ecole;
   }
   if (regionName) {
-    const region = formation.regions.find((r) => r.regionName === regionName);
+    const region = findFormationRegion(formation, regionName);
     if (region?.ecole) return region.ecole;
   }
   return formation.ecole;
+}
+
+/** École affichée pour une formation dans une région (carte / liste par région). */
+export function resolveFormationEcoleInRegionId(
+  formation: Formation,
+  regionId: string,
+  filter: SchoolFilter = 'both',
+): Ecole {
+  const ecoles: Ecole[] = [];
+
+  for (const entry of formation.regions) {
+    if (regionNameToId(entry.regionName) !== regionId) continue;
+    if (!regionEntryMatchesFilter(formation, entry, filter)) continue;
+
+    if (entry.cities.length > 0) {
+      for (const city of entry.cities) {
+        if (cityMatchesFilter(formation, entry, city, filter)) {
+          ecoles.push(resolveCityEcole(formation, entry, city));
+        }
+      }
+    } else {
+      ecoles.push(resolveEntryEcole(formation, entry));
+    }
+  }
+
+  if (ecoles.length === 0) return formation.ecole;
+  return mergeMapEcoles(ecoles);
 }
 
 export function resolveEntryEcole(formation: Formation, entry: FormationRegion): Ecole {
