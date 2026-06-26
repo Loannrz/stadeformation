@@ -20,6 +20,76 @@ export function normalizeText(text: string): string {
     .replace(/[\u0300-\u036f]/g, '');
 }
 
+/** Variante pour le matching : espaces uniformisés, tirets et apostrophes traités comme séparateurs. */
+export function normalizeForMatch(text: string): string {
+  return normalizeText(text)
+    .replace(/[-']/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+interface KeywordBranch {
+  keywords: string[];
+  targetNodeId: string | null;
+}
+
+function branchMatchesText<T extends KeywordBranch>(branch: T, normText: string): boolean {
+  if (!branch.targetNodeId) return false;
+  for (const keyword of branch.keywords) {
+    const normalizedKeyword = normalizeForMatch(keyword);
+    if (!normalizedKeyword) continue;
+    if (normText.includes(normalizedKeyword)) return true;
+  }
+  return false;
+}
+
+/**
+ * Compare un texte libre à une liste de branches (mots-clés -> nœud cible).
+ * Renvoie la première branche correspondante, ou null.
+ */
+export function matchKeywords<T extends KeywordBranch>(
+  text: string,
+  branches: T[],
+): T | null {
+  return matchAllKeywords(text, branches)[0] ?? null;
+}
+
+/**
+ * Renvoie toutes les branches dont au moins un mot-clé apparaît dans le texte.
+ */
+export function matchAllKeywords<T extends KeywordBranch>(
+  text: string,
+  branches: T[],
+): T[] {
+  const normText = normalizeForMatch(text);
+  if (!normText) return [];
+
+  const matched: T[] = [];
+  for (const branch of branches) {
+    if (branchMatchesText(branch, normText)) {
+      matched.push(branch);
+    }
+  }
+  return matched;
+}
+
+/** Nœuds cibles uniques correspondant au texte (ordre de première détection). */
+export function matchKeywordNodeIds<T extends KeywordBranch>(
+  text: string,
+  branches: T[],
+): string[] {
+  const seen = new Set<string>();
+  const nodeIds: string[] = [];
+  for (const branch of matchAllKeywords(text, branches)) {
+    const id = branch.targetNodeId;
+    if (id && !seen.has(id)) {
+      seen.add(id);
+      nodeIds.push(id);
+    }
+  }
+  return nodeIds;
+}
+
 function tokenize(text: string): string[] {
   return normalizeText(text)
     .split(/[^a-z0-9]+/)

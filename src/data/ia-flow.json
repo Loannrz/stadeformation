@@ -1,0 +1,8 @@
+{
+  "enabled": false,
+  "askButtonLabel": "Demander autre chose",
+  "introMessage": "Bien sûr ! Dites-moi ce que vous recherchez.",
+  "globalFallback": "Désolé, je n'ai pas bien compris votre demande. Pouvez-vous reformuler ?",
+  "triggers": [],
+  "nodes": []
+}

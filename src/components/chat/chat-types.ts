@@ -1,6 +1,6 @@
 import type { Ecole } from '@/lib/brand';
 
-export type ChatPhase = 'region' | 'alt_region' | 'describe';
+export type ChatPhase = 'region' | 'alt_region' | 'describe' | 'ia';
 
 export interface ChatResultItem {
   id: string;
@@ -12,12 +12,14 @@ export interface ChatResultItem {
 export interface ChatMessage {
   id: string;
   role: 'bot' | 'user';
-  kind: 'text' | 'results' | 'contact';
+  kind: 'text' | 'results' | 'contact' | 'link';
   text?: string;
   results?: ChatResultItem[];
   /** Pour les messages de repli "contact" : école dominante (null = aucune formation). */
   contactSchool?: Ecole | null;
   contactRegionName?: string;
+  /** Pour les messages "link" : bouton lien (nœud IA). */
+  link?: { label: string; url: string };
 }
 
 export interface Conversation {
@@ -27,6 +29,12 @@ export interface Conversation {
   regionId: string | null;
   regionName: string | null;
   phase: ChatPhase;
+  /** Nœud IA courant (phase 'ia'). null = à la racine (déclencheurs). */
+  iaNodeId: string | null;
+  /** Nœuds proposés quand plusieurs déclencheurs/branches correspondent. */
+  iaChoiceNodeIds?: string[] | null;
+  /** true quand la conversation IA est terminée (nœud 'stop' atteint). */
+  iaEnded?: boolean;
   messages: ChatMessage[];
 }
 
@@ -57,6 +65,8 @@ export function createConversation(): Conversation {
     regionId: null,
     regionName: null,
     phase: 'region',
+    iaNodeId: null,
+    iaChoiceNodeIds: null,
     messages: [
       {
         id: createId(),

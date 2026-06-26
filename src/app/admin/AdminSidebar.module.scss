@@ -136,6 +136,12 @@
   }
 }
 
+.mapBtnActive {
+  border-color: rgba(255, 107, 0, 0.45);
+  background: rgba(255, 107, 0, 0.1);
+  color: $color-primary;
+}
+
 .trashBtn {
   display: flex;
   align-items: center;

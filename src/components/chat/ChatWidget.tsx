@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ChatFormation, ChatRegion } from '@/lib/chat-index';
 import { getRegionsWithFormations, regionHasFormations } from '@/lib/chat-index';
-import { getRegionFallbackSchool, matchFormations } from '@/lib/chat-match';
+import { getRegionFallbackSchool, matchFormations, matchKeywordNodeIds } from '@/lib/chat-match';
+import type { IaButton, IaConfig } from '@/lib/ia-flow';
 import {
   type ChatMessage,
   type Conversation,
@@ -23,6 +24,7 @@ import styles from './ChatWidget.module.scss';
 interface Props {
   index: ChatFormation[];
   regions: ChatRegion[];
+  iaConfig: IaConfig;
 }
 
 const MAX_RESULTS = 6;
@@ -175,7 +177,7 @@ function TypewriterBubble({ text, onDone }: TypewriterBubbleProps) {
   );
 }
 
-export default function ChatWidget({ index, regions }: Props) {
+export default function ChatWidget({ index, regions, iaConfig }: Props) {
   const [open, setOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -227,12 +229,44 @@ export default function ChatWidget({ index, regions }: Props) {
   const pickerRegions =
     active?.phase === 'alt_region' ? regionsWithFormations : regions;
 
-  // Affiche les boutons de région 1 s après la fin de l'écriture du message.
+  const iaAvailable =
+    iaConfig.enabled && iaConfig.triggers.length > 0 && iaConfig.nodes.length > 0;
+
+  const iaNode = useMemo(() => {
+    if (active?.phase !== 'ia' || !active.iaNodeId) return null;
+    return iaConfig.nodes.find((n) => n.id === active.iaNodeId) ?? null;
+  }, [active?.phase, active?.iaNodeId, iaConfig.nodes]);
+
+  // En phase IA, on attend une saisie libre à la racine (déclencheurs)
+  // ou sur un nœud en mode "saisie libre" (sauf si choix multiples en attente).
+  const iaAwaitingText =
+    active?.phase === 'ia' &&
+    !active.iaEnded &&
+    !(active.iaChoiceNodeIds && active.iaChoiceNodeIds.length > 0) &&
+    (active.iaNodeId === null || iaNode?.mode === 'freetext');
+
+  const showIaChoiceButtons =
+    active?.phase === 'ia' &&
+    !active.iaEnded &&
+    Boolean(active.iaChoiceNodeIds?.length) &&
+    greetingRevealed &&
+    regionDelayDone;
+
+  const showIaButtons =
+    active?.phase === 'ia' &&
+    !active.iaEnded &&
+    iaNode?.mode === 'buttons' &&
+    iaNode.buttons.length > 0 &&
+    greetingRevealed &&
+    regionDelayDone;
+
+  // Affiche les boutons (région ou IA) 1 s après la fin de l'écriture du message.
   useEffect(() => {
-    if (
-      (active?.phase === 'region' || active?.phase === 'alt_region') &&
-      greetingRevealed
-    ) {
+    const waitsForButtons =
+      active?.phase === 'region' ||
+      active?.phase === 'alt_region' ||
+      active?.phase === 'ia';
+    if (waitsForButtons && greetingRevealed) {
       setRegionDelayDone(false);
       const timer = window.setTimeout(() => setRegionDelayDone(true), REGION_REVEAL_DELAY_MS);
       return () => window.clearTimeout(timer);
@@ -254,7 +288,7 @@ export default function ChatWidget({ index, regions }: Props) {
     if (!open) return;
     const el = messagesRef.current;
     if (el) el.scrollTop = el.scrollHeight;
-  }, [active?.messages, open, revealed, showRegionPicker]);
+  }, [active?.messages, open, revealed, showRegionPicker, showIaButtons, showIaChoiceButtons]);
 
   function startFreshConversation() {
     const fresh = createConversation();
@@ -397,9 +431,181 @@ export default function ChatWidget({ index, regions }: Props) {
     }));
   }
 
+  function buildIaNodeMessages(nodeId: string): ChatMessage[] {
+    const node = iaConfig.nodes.find((n) => n.id === nodeId);
+    if (!node) return [];
+    const out: ChatMessage[] = [];
+    if (node.message.trim()) {
+      out.push({ id: createId(), role: 'bot', kind: 'text', text: node.message });
+    }
+    if (node.showContacts) {
+      out.push({
+        id: createId(),
+        role: 'bot',
+        kind: 'contact',
+        contactSchool: node.showContacts,
+      });
+    }
+    if (node.link && node.link.url.trim()) {
+      out.push({ id: createId(), role: 'bot', kind: 'link', link: node.link });
+    }
+    return out;
+  }
+
+  function enterIaNode(nodeId: string, userText?: string) {
+    if (!active) return;
+    const node = iaConfig.nodes.find((n) => n.id === nodeId);
+    if (!node) return;
+    const botMessages = buildIaNodeMessages(nodeId);
+    updateActive((c) => ({
+      ...c,
+      phase: 'ia',
+      iaNodeId: node.id,
+      iaChoiceNodeIds: null,
+      iaEnded: node.mode === 'stop',
+      title: isConversationEmpty(c) && userText ? truncate(userText) : c.title,
+      messages: [
+        ...c.messages,
+        ...(userText
+          ? [{ id: createId(), role: 'user', kind: 'text', text: userText } as ChatMessage]
+          : []),
+        ...botMessages,
+      ],
+    }));
+  }
+
+  function enterIaNodeFromChoice(nodeId: string) {
+    if (!active) return;
+    const node = iaConfig.nodes.find((n) => n.id === nodeId);
+    if (!node) return;
+    const botMessages = buildIaNodeMessages(nodeId);
+    updateActive((c) => ({
+      ...c,
+      phase: 'ia',
+      iaNodeId: node.id,
+      iaChoiceNodeIds: null,
+      iaEnded: node.mode === 'stop',
+      messages: [
+        ...c.messages,
+        {
+          id: createId(),
+          role: 'user',
+          kind: 'text',
+          text: node.title,
+        },
+        ...botMessages,
+      ],
+    }));
+  }
+
+  function handleAskOther() {
+    if (!active) return;
+    updateActive((c) => ({
+      ...c,
+      phase: 'ia',
+      iaNodeId: null,
+      iaChoiceNodeIds: null,
+      iaEnded: false,
+      messages: [
+        ...c.messages,
+        { id: createId(), role: 'user', kind: 'text', text: iaConfig.askButtonLabel },
+        { id: createId(), role: 'bot', kind: 'text', text: iaConfig.introMessage },
+      ],
+    }));
+  }
+
+  function handleIaButton(button: IaButton) {
+    if (!active) return;
+    if (button.targetNodeId) {
+      enterIaNode(button.targetNodeId, button.label);
+      return;
+    }
+    // Bouton sans cible : on termine la conversation.
+    updateActive((c) => ({
+      ...c,
+      iaEnded: true,
+      messages: [
+        ...c.messages,
+        { id: createId(), role: 'user', kind: 'text', text: button.label },
+      ],
+    }));
+  }
+
+  function handleIaSend(text: string) {
+    if (!active) return;
+    const branches = active.iaNodeId ? iaNode?.branches ?? [] : iaConfig.triggers;
+    const nodeIds = matchKeywordNodeIds(text, branches);
+
+    if (nodeIds.length === 1) {
+      enterIaNode(nodeIds[0], text);
+      return;
+    }
+
+    if (nodeIds.length > 1) {
+      updateActive((c) => ({
+        ...c,
+        iaChoiceNodeIds: nodeIds,
+        title: isConversationEmpty(c) ? truncate(text) : c.title,
+        messages: [
+          ...c.messages,
+          { id: createId(), role: 'user', kind: 'text', text },
+          {
+            id: createId(),
+            role: 'bot',
+            kind: 'text',
+            text: 'Vous préférez quoi entre :',
+          },
+        ],
+      }));
+      return;
+    }
+
+    const fallback = active.iaNodeId
+      ? iaNode?.fallbackMessage || iaConfig.globalFallback
+      : iaConfig.globalFallback;
+
+    updateActive((c) => ({
+      ...c,
+      title: isConversationEmpty(c) ? truncate(text) : c.title,
+      messages: [
+        ...c.messages,
+        { id: createId(), role: 'user', kind: 'text', text },
+        { id: createId(), role: 'bot', kind: 'text', text: fallback || iaConfig.globalFallback },
+      ],
+    }));
+  }
+
+  function handleBackToRegions() {
+    if (!active) return;
+    updateActive((c) => ({
+      ...c,
+      phase: 'region',
+      iaNodeId: null,
+      iaChoiceNodeIds: null,
+      iaEnded: false,
+      messages: [
+        ...c.messages,
+        {
+          id: createId(),
+          role: 'bot',
+          kind: 'text',
+          text: 'Pas de problème, choisissez votre région :',
+        },
+      ],
+    }));
+  }
+
   function handleSend() {
     const text = input.trim();
-    if (!text || !active || active.phase !== 'describe' || !active.regionId) return;
+    if (!text || !active) return;
+
+    if (active.phase === 'ia' && iaAwaitingText) {
+      handleIaSend(text);
+      setInput('');
+      return;
+    }
+
+    if (active.phase !== 'describe' || !active.regionId) return;
     const regionId = active.regionId;
     const regionName = active.regionName ?? '';
 
@@ -483,7 +689,7 @@ export default function ChatWidget({ index, regions }: Props) {
     }
   }
 
-  const canType = !!active && active.phase === 'describe';
+  const canType = !!active && (active.phase === 'describe' || Boolean(iaAwaitingText));
 
   return (
     <>
@@ -631,6 +837,20 @@ export default function ChatWidget({ index, regions }: Props) {
                       {message.kind === 'contact' && (
                         <ContactCard school={message.contactSchool ?? null} />
                       )}
+
+                      {message.kind === 'link' && message.link && (
+                        <a
+                          className={styles.linkButton}
+                          href={message.link.url}
+                          target={message.link.url.startsWith('http') ? '_blank' : undefined}
+                          rel="noopener noreferrer"
+                          onClick={() => {
+                            if (!message.link?.url.startsWith('http')) setOpen(false);
+                          }}
+                        >
+                          {message.link.label || 'En savoir plus'}
+                        </a>
+                      )}
                     </div>
                   );
                 })}
@@ -660,6 +880,48 @@ export default function ChatWidget({ index, regions }: Props) {
                         Aucune région ne m&apos;intéresse
                       </button>
                     )}
+                    {active?.phase === 'region' && iaAvailable && (
+                      <button
+                        type="button"
+                        className={styles.askOtherButton}
+                        onClick={handleAskOther}
+                      >
+                        {iaConfig.askButtonLabel}
+                      </button>
+                    )}
+                  </div>
+                )}
+
+                {showIaButtons && iaNode && (
+                  <div className={styles.regionButtons}>
+                    {iaNode.buttons.map((button) => (
+                      <button
+                        type="button"
+                        key={button.id}
+                        className={styles.regionButton}
+                        onClick={() => handleIaButton(button)}
+                      >
+                        {button.label || '…'}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {showIaChoiceButtons && active?.iaChoiceNodeIds && (
+                  <div className={styles.regionButtons}>
+                    {active.iaChoiceNodeIds.map((nodeId) => {
+                      const node = iaConfig.nodes.find((n) => n.id === nodeId);
+                      return (
+                        <button
+                          type="button"
+                          key={nodeId}
+                          className={styles.regionButton}
+                          onClick={() => enterIaNodeFromChoice(nodeId)}
+                        >
+                          {node?.title || '…'}
+                        </button>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -674,6 +936,15 @@ export default function ChatWidget({ index, regions }: Props) {
                     {active.regionName} · changer de région
                   </button>
                 )}
+                {active && active.phase === 'ia' && (
+                  <button
+                    type="button"
+                    className={styles.changeRegion}
+                    onClick={handleBackToRegions}
+                  >
+                    ← Revenir aux régions
+                  </button>
+                )}
                 <div className={styles.composerRow}>
                   <textarea
                     className={styles.textarea}
@@ -681,9 +952,13 @@ export default function ChatWidget({ index, regions }: Props) {
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleInputKeyDown}
                     placeholder={
-                      canType
-                        ? 'Décrivez ce que vous aimeriez faire…'
-                        : 'Choisissez d’abord votre région ci-dessus'
+                      active?.phase === 'ia'
+                        ? canType
+                          ? 'Écrivez votre message…'
+                          : 'Choisissez une option ci-dessus'
+                        : canType
+                          ? 'Décrivez ce que vous aimeriez faire…'
+                          : 'Choisissez d’abord votre région ci-dessus'
                     }
                     rows={1}
                     disabled={!canType}
