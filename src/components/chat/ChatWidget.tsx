@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ChatFormation, ChatRegion } from '@/lib/chat-index';
+import { getRegionsWithFormations, regionHasFormations } from '@/lib/chat-index';
 import { getRegionFallbackSchool, matchFormations } from '@/lib/chat-match';
 import {
   type ChatMessage,
@@ -12,6 +13,7 @@ import {
   formatRelativeDate,
   isConversationEmpty,
   loadConversations,
+  NO_SCHOOL_IN_REGION_TEXT,
   saveConversations,
 } from './chat-types';
 import ContactCard from './ContactCard';
@@ -203,6 +205,11 @@ export default function ChatWidget({ index, regions }: Props) {
     [conversations, activeId],
   );
 
+  const regionsWithFormations = useMemo(
+    () => getRegionsWithFormations(index),
+    [index],
+  );
+
   const lastBotTextId = useMemo(() => {
     if (!active) return null;
     for (let i = active.messages.length - 1; i >= 0; i -= 1) {
@@ -213,11 +220,19 @@ export default function ChatWidget({ index, regions }: Props) {
   }, [active]);
 
   const greetingRevealed = lastBotTextId ? revealed.has(lastBotTextId) : false;
-  const showRegions = active?.phase === 'region' && greetingRevealed && regionDelayDone;
+  const showRegionPicker =
+    (active?.phase === 'region' || active?.phase === 'alt_region') &&
+    greetingRevealed &&
+    regionDelayDone;
+  const pickerRegions =
+    active?.phase === 'alt_region' ? regionsWithFormations : regions;
 
   // Affiche les boutons de région 1 s après la fin de l'écriture du message.
   useEffect(() => {
-    if (active?.phase === 'region' && greetingRevealed) {
+    if (
+      (active?.phase === 'region' || active?.phase === 'alt_region') &&
+      greetingRevealed
+    ) {
       setRegionDelayDone(false);
       const timer = window.setTimeout(() => setRegionDelayDone(true), REGION_REVEAL_DELAY_MS);
       return () => window.clearTimeout(timer);
@@ -239,7 +254,7 @@ export default function ChatWidget({ index, regions }: Props) {
     if (!open) return;
     const el = messagesRef.current;
     if (el) el.scrollTop = el.scrollHeight;
-  }, [active?.messages, open, revealed, showRegions]);
+  }, [active?.messages, open, revealed, showRegionPicker]);
 
   function startFreshConversation() {
     const fresh = createConversation();
@@ -279,6 +294,28 @@ export default function ChatWidget({ index, regions }: Props) {
 
   function handleSelectRegion(region: ChatRegion) {
     if (!active) return;
+
+    if (!regionHasFormations(region.id, index)) {
+      updateActive((c) => ({
+        ...c,
+        regionId: region.id,
+        regionName: region.name,
+        phase: 'alt_region',
+        title: region.name,
+        messages: [
+          ...c.messages,
+          { id: createId(), role: 'user', kind: 'text', text: region.name },
+          {
+            id: createId(),
+            role: 'bot',
+            kind: 'text',
+            text: NO_SCHOOL_IN_REGION_TEXT,
+          },
+        ],
+      }));
+      return;
+    }
+
     updateActive((c) => ({
       ...c,
       regionId: region.id,
@@ -289,6 +326,50 @@ export default function ChatWidget({ index, regions }: Props) {
         ...c.messages,
         { id: createId(), role: 'user', kind: 'text', text: region.name },
         { id: createId(), role: 'bot', kind: 'text', text: DESCRIBE_TEXT },
+      ],
+    }));
+  }
+
+  function handleSelectAltRegion(region: ChatRegion) {
+    if (!active) return;
+    updateActive((c) => ({
+      ...c,
+      regionId: region.id,
+      regionName: region.name,
+      phase: 'describe',
+      title: region.name,
+      messages: [
+        ...c.messages,
+        { id: createId(), role: 'user', kind: 'text', text: region.name },
+        { id: createId(), role: 'bot', kind: 'text', text: DESCRIBE_TEXT },
+      ],
+    }));
+  }
+
+  function handleNoRegionInterest() {
+    if (!active) return;
+    updateActive((c) => ({
+      ...c,
+      messages: [
+        ...c.messages,
+        {
+          id: createId(),
+          role: 'user',
+          kind: 'text',
+          text: "Aucune région ne m'intéresse",
+        },
+        {
+          id: createId(),
+          role: 'bot',
+          kind: 'text',
+          text: 'Pas de souci. Voici les coordonnées de nos deux écoles :',
+        },
+        {
+          id: createId(),
+          role: 'bot',
+          kind: 'contact',
+          contactSchool: null,
+        },
       ],
     }));
   }
@@ -554,18 +635,31 @@ export default function ChatWidget({ index, regions }: Props) {
                   );
                 })}
 
-                {showRegions && (
+                {showRegionPicker && (
                   <div className={styles.regionButtons}>
-                    {regions.map((region) => (
+                    {pickerRegions.map((region) => (
                       <button
                         type="button"
                         key={region.id}
                         className={styles.regionButton}
-                        onClick={() => handleSelectRegion(region)}
+                        onClick={() =>
+                          active?.phase === 'alt_region'
+                            ? handleSelectAltRegion(region)
+                            : handleSelectRegion(region)
+                        }
                       >
                         {region.name}
                       </button>
                     ))}
+                    {active?.phase === 'alt_region' && (
+                      <button
+                        type="button"
+                        className={styles.regionButtonMuted}
+                        onClick={handleNoRegionInterest}
+                      >
+                        Aucune région ne m&apos;intéresse
+                      </button>
+                    )}
                   </div>
                 )}
               </div>

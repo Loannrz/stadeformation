@@ -1,6 +1,6 @@
 import type { Ecole } from '@/lib/brand';
 
-export type ChatPhase = 'region' | 'describe';
+export type ChatPhase = 'region' | 'alt_region' | 'describe';
 
 export interface ChatResultItem {
   id: string;
@@ -44,6 +44,10 @@ export const DESCRIBE_TEXT =
   "Parfait. Décrivez maintenant, le plus précisément possible, ce que vous aimeriez " +
   "faire (métier visé, activité, public, centre d'intérêt…). Je vous proposerai les " +
   "formations les plus adaptées.";
+
+export const NO_SCHOOL_IN_REGION_TEXT =
+  "Aucune école n'est disponible dans cette région. Souhaitez-vous faire vos études " +
+  "ailleurs ? Quelle est votre région de prédilection ?";
 
 export function createConversation(): Conversation {
   return {

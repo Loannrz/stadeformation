@@ -66,3 +66,18 @@ export function getChatRegions(): ChatRegion[] {
     (a, b) => a.name.localeCompare(b.name, 'fr'),
   );
 }
+
+/** Régions où au moins une formation publique est disponible (se met à jour avec l'index). */
+export function getRegionsWithFormations(index: ChatFormation[]): ChatRegion[] {
+  const ids = new Set<string>();
+  for (const formation of index) {
+    for (const region of formation.regions) {
+      ids.add(region.regionId);
+    }
+  }
+  return getChatRegions().filter((r) => ids.has(r.id));
+}
+
+export function regionHasFormations(regionId: string, index: ChatFormation[]): boolean {
+  return index.some((f) => f.regions.some((r) => r.regionId === regionId));
+}
